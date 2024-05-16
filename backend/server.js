@@ -1,1 +1,19 @@
-const express = require('express')
+import express from 'express';
+import 'dotenv/config';
+// import connectToDb from './db/conn.js';
+
+//express app
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+//routes
+app.get('/', (req, res) => {
+    res.json({mssg: 'Welcome to the app'})
+}) 
+ 
+
+//lister for request
+app.listen(PORT, () => {
+    console.log('Listening on port '+ PORT)
+})
+
