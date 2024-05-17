@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const   addressSchema = new Schema ({
     address : { 
      street_address: String,
-     county:String,
+     county: String,
      postal_code: Number,
      state: String,
    }
@@ -36,9 +36,9 @@ const   addressSchema = new Schema ({
 // Main Document Schema for User Profile
 const usersProfilesSchema = new Schema({
     _id: {
-        type: String,
-        required: true
-      },
+      type: String,
+      required: true
+    },
     name: {
       type: String,
       required: true,

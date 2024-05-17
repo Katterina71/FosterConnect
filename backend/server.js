@@ -8,19 +8,16 @@ const PORT = process.env.PORT || 3000;
 
 connectToDb();
 
-// CHANGE
-// import users from "./routes/usersRoute.js";
-// import dailyHealth from "./routes/dailyHealthRoute.js";
-// import sleepLogs from "./routes/sleepLogsRoute.js";
+
+import usersProfiles from "./routes/users-profiles-routes.js";
+import petsProfiles from "./routes/pets-profiles-routes.js";
 
 app.use(express.json());
 
 // Use our Routes
-// app.use("/api/users", users);
-// app.use("/api/dailyhealth", dailyHealth);
-// app.use("/api/sleeplogs", sleepLogs);
 
-// END CHANGING
+app.use("/api/users", usersProfiles);
+app.use("/api/pets", petsProfiles);
 
 
 //middleware
