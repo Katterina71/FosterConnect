@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 // Main Document Schema for Pet Profile
 const petsProfilesSchema = new Schema ({
-    user_id: {
+    shelter_id: {
         type: Schema.Types.ObjectId, 
         ref: 'users-profiles',  
         required: true  

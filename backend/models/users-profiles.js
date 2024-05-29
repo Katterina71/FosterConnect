@@ -66,7 +66,7 @@ const   addressSchema = new Schema ({
 
 // Main Document Schema for User Profile
 const usersProfilesSchema = new Schema({
-    firebaseUid: {
+   firebaseUid: {
       type: String,
       required: true,
       unique: true
@@ -74,6 +74,9 @@ const usersProfilesSchema = new Schema({
     name: {
       type: String,
       required: true,
+    },
+    email: {
+      type:String
     },
     shelter : {
         type : Boolean,

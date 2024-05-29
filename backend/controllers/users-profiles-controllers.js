@@ -3,25 +3,25 @@ import UsersProfiles from "../models/users-profiles.js";
 
 
 const UserController = {
-    register: async(req,res) =>{
-        const { name, email, address, contact_info, fostering_preferences, shelter } = req.body;
+    register: async(req, res) => {
+        const { firebaseUid, name, email, address, contact_info, fostering_preferences, shelter, shelter_name } = req.body;
+        console.log(req.body); // Debugging
         try {
             const newUser = new UsersProfiles({
+                firebaseUid,
                 name,
-                email,
+                email, 
                 address,
-                shelter,
-                shelter_name,
                 contact_info,
-                address,
-                fostering_preferences
-            })
+                fostering_preferences,
+                shelter,
+                shelter_name 
+            });
             await newUser.save();
-           res.status(201).send('Uses registered successfully.') 
+            res.status(201).send('User registered successfully.');
         } catch (error) {
-            res.status(500).json({message: error.message})
+            res.status(500).json({message: error.message});
         }
-
     },
     login: async (req,res) => {
         const {email, password} = req.body;
