@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const   addressSchema = new Schema ({
     address : { 
      street_address: String,
+     town: String,
      county: String,
      postal_code: Number,
      state: String,
@@ -16,8 +17,26 @@ const   addressSchema = new Schema ({
  
  // contactInfo Schema
  const contactInfoSchema = new Schema ({
-    email: String,
-    phone: Number,
+  email: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      },
+      message: props => `${props.value} is not a valid email address!`
+    },
+    unique: true
+  },
+  phone: {
+    type: String,
+    validate: {
+      validator: function(v) {
+        return /\d{3}-\d{3}-\d{4}/.test(v);
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    }
+  },
  }, {
    _id: false 
  });
@@ -25,9 +44,21 @@ const   addressSchema = new Schema ({
  // fosteringPreferences Schema
  const fosteringPreferencesSchema = new Schema ({
     pet : {
-        pet_type: String,
-        life_stage: String,
-        size: String
+        pet_type: 
+        {
+          type: String,
+          default: 'none'
+        },
+        life_stage:
+        {
+          type: String,
+          default: 'none'
+        },
+        size: 
+        {
+          type: String,
+          default: 'none'
+        }
     }
   }, {
     _id: false 
@@ -35,9 +66,10 @@ const   addressSchema = new Schema ({
 
 // Main Document Schema for User Profile
 const usersProfilesSchema = new Schema({
-    _id: {
+    firebaseUid: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     name: {
       type: String,
@@ -45,8 +77,13 @@ const usersProfilesSchema = new Schema({
     },
     shelter : {
         type : Boolean,
+        default: false,
         required: true,
     },
+    shelter_name : {
+      type : String,
+      default: 'none',
+  },
     contact_info : [contactInfoSchema],
     address : [addressSchema],
     fostering_preferences: [fosteringPreferencesSchema],
@@ -60,7 +97,6 @@ const usersProfilesSchema = new Schema({
     }  
   }
   )
-  
   
   const UsersProfiles = mongoose.model('users-profiles',usersProfilesSchema)
   export default UsersProfiles;
