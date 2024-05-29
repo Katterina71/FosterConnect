@@ -3,14 +3,12 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // address Schema
-const   addressSchema = new Schema ({
-    address : { 
+const addressSchema = new Schema ({
      street_address: String,
      town: String,
      county: String,
      postal_code: Number,
-     state: String,
-   }
+     state: String,  
  }, {
    _id: false
  });
@@ -43,7 +41,6 @@ const   addressSchema = new Schema ({
 
  // fosteringPreferences Schema
  const fosteringPreferencesSchema = new Schema ({
-    pet : {
         pet_type: 
         {
           type: String,
@@ -59,7 +56,6 @@ const   addressSchema = new Schema ({
           type: String,
           default: 'none'
         }
-    }
   }, {
     _id: false 
   });
@@ -87,7 +83,7 @@ const usersProfilesSchema = new Schema({
       type : String,
       default: 'none',
   },
-    contact_info : [contactInfoSchema],
+    contact_info : contactInfoSchema,
     address : [addressSchema],
     fostering_preferences: [fosteringPreferencesSchema],
     status : {
