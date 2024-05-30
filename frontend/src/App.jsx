@@ -1,16 +1,15 @@
-import React from 'react'
-import './App.css'
-import SignUp from './components/register/SignUp'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import SignUp from './components/register/SignUp';
 
-function App() {
 
-
+const App = () => {
   return (
-    <>
-      {/* <p>Hello</p> */}
-       <SignUp/>
-    </>
-  )
-}
+    <AuthProvider>
+        <SignUp />
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;

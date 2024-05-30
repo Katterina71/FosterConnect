@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, createContext } from 'react';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { auth as firebaseAuth } from '../firebase/firebase'; 
+import { auth} from '../firebase/firebase'; // Ensure this path is correct
 
-
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -11,29 +10,32 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
-    const auth = getAuth(firebaseAuth);  // Get auth instance from Firebase initialization
+    const [loading, setLoading] = useState(true);
+
+    // Firebase authentication instance
 
     function signup(email, password) {
+        console.log('New user added')
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             setCurrentUser(user);
+            setLoading(false);
         });
-        return unsubscribe;  // This is the cleanup function
-    }, [auth]); 
+        return unsubscribe; // Cleanup subscription on unmount
+    }, []);
 
     const value = {
         currentUser,
-        signup
+        signup,
+        loading
     };
 
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 }
-
-  
