@@ -1,6 +1,5 @@
-
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import {Link} from 'react-router-dom'
 
 //MUI
@@ -28,10 +27,9 @@ const defaultTheme = createTheme({
 
 
 
-function SignUp() {
+function Login() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
-  const passwordConfirmRef = useRef(null)
   const {signup} = useAuth()
 
   const [agree, setAgree] = useState(false);
@@ -46,7 +44,7 @@ function SignUp() {
 
   // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
 
-  if (!emailRef.current || !passwordRef.current || !passwordConfirmRef.current) {
+  if (!emailRef.current || !passwordRef.current ) {
       console.error("One of the refs is null");  // Debugging
       return;
   }
@@ -56,10 +54,10 @@ function SignUp() {
     return;
   }
 
-  if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    console.log('Passwords do not match')  // Debugging
-    return setError('Passwords do not match');
-}
+//   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+//     console.log('Passwords do not match')  // Debugging
+//     return setError('Passwords do not match');
+// }
 
   // Send data to Firebase
   try {
@@ -93,7 +91,7 @@ function SignUp() {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Sign up
+            Log In
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
@@ -122,26 +120,15 @@ function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password-confirm"
-                placeholder="Password Confirmation"
-                type="password"
-                id="password-confirm"
-                inputRef = {passwordConfirmRef}
-               />
-            </Grid>
-            <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox checked={agree} onChange={() => setAgree(!agree)} value="allowExtraEmails" color="primary" required />}
                   label="I agree with Website's Policies"
                 />
               </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/login' variant="body2">Already have an account? Sign in</Link>
+                        <Link to='/signup' variant="body2">Need an account? Sign up</Link>
                   </Grid>
               </Grid>
          </Grid>
@@ -152,4 +139,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default Login
