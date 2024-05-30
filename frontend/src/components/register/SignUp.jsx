@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-
+import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -18,13 +18,33 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: { main: '#556cd6' },
+    secondary: { main: '#19857b' },
+  },
+  components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          height: '100vh', // Make container full height of the viewport
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center', // Center vertically
+          alignItems: 'center' // Center horizontally
+        }
+      }
+    }
+  }
+});
 
 function SignUp() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
   const {signup} = useAuth()
+
+  const [agree, setAgree] = useState(false);
 
   //Validation and Handle errors
   const [error, setError] = useState('');
@@ -39,6 +59,11 @@ function SignUp() {
   if (!emailRef.current || !passwordRef.current || !passwordConfirmRef.current) {
       console.error("One of the refs is null");  // Debugging
       return;
+  }
+
+  if (!agree) {
+    setError('You must agree to the website\'s policies to sign up.');
+    return;
   }
 
   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -59,10 +84,12 @@ function SignUp() {
 
   return (
    <ThemeProvider theme={defaultTheme}>
-     <Container component="main" maxWidth="xs">
+     <Container component="main">
      <CssBaseline />
      <Box
           sx={{
+            width: '100%',
+            maxWidth: 360,
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
@@ -75,7 +102,8 @@ function SignUp() {
         <Typography component="h1" variant="h5">
             Sign up
         </Typography>
-        <Box style={{ marginTop: 3 }}>
+        <Box style={{ marginTop: 3 }} >
+          {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField 
@@ -111,7 +139,18 @@ function SignUp() {
                 inputRef = {passwordConfirmRef}
                />
             </Grid>
+            <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox checked={agree} onChange={() => setAgree(!agree)} value="allowExtraEmails" color="primary" required />}
+                  label="I agree with Website's Policies"
+                />
+              </Grid>
             <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Submit</Button>
+            <Grid container justifyContent="flex-end">
+                  <Grid item>
+                        <Link href="#" variant="body2">Already have an account? Sign in</Link>
+                  </Grid>
+              </Grid>
          </Grid>
        </Box>
       </Box>
