@@ -23,20 +23,9 @@ const defaultTheme = createTheme({
     primary: { main: '#556cd6' },
     secondary: { main: '#19857b' },
   },
-  components: {
-    MuiContainer: {
-      styleOverrides: {
-        root: {
-          height: '100vh', // Make container full height of the viewport
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center', // Center vertically
-          alignItems: 'center' // Center horizontally
-        }
-      }
-    }
-  }
 });
+
+
 
 function SignUp() {
   const emailRef = useRef(null)
@@ -84,16 +73,19 @@ function SignUp() {
 
   return (
    <ThemeProvider theme={defaultTheme}>
-     <Container component="main">
+     <Container component="main" style = {{
+      width: '100vh',
+      display: 'flex',
+      justifyContent: 'center'
+     }}>
      <CssBaseline />
      <Box
-          sx={{
-            width: '100%',
-            maxWidth: 360,
-            marginTop: 8,
+          style={{
+            width: '500px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+       
           }}
         >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -145,7 +137,7 @@ function SignUp() {
                   label="I agree with Website's Policies"
                 />
               </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>Submit</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>Sign Up</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
                         <Link href="#" variant="body2">Already have an account? Sign in</Link>
@@ -155,7 +147,7 @@ function SignUp() {
        </Box>
       </Box>
     </Container>
-    </ThemeProvider>  
+  </ThemeProvider>  
   )
 }
 
