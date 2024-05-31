@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import SignUp from './components/register/SignUp';
+import SignUp from './components/forms/SignUp';
 import Dashboard  from './components/Dashboard';
-import Login from './components/Login';
-import ForgotPassword from './components/ForgotPassword';
-import PrivateRoute from './components/PrivateRoute';
-import UpdateProfile from './components/UpdateProfile';
+import Login from './components/forms/Login';
+import ForgotPassword from './components/forms/ForgotPassword';
+import PrivateRoute from './components/forms/PrivateRoute';
+import UpdateProfile from './components/forms/UpdateProfile';
 
 
 const App = () => {

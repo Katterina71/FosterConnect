@@ -1,6 +1,6 @@
 
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
@@ -101,7 +101,8 @@ function UpdateProfile() {
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+           {/*Not allow to change email on firebase*/}
+            {/* <Grid item xs={12}>
               <TextField 
                 fullWidth
                 id="email"
@@ -112,7 +113,7 @@ function UpdateProfile() {
                 autoFocus
                 defaultValue={currentUser.email}
                 />
-              </Grid>
+              </Grid> */}
             <Grid item xs={12}>
               <TextField 
                 fullWidth
