@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../navigation/Header'
 import Footer from '../navigation/Footer'
-import { createTheme, ThemeProvider, CssBaseline } from '@mui/material'; 
+import { createTheme, ThemeProvider, CssBaseline, Container } from '@mui/material'; 
 import GlobalStyles from '../../styles/GlobalStyles'; 
 
 const theme = createTheme({
@@ -12,6 +12,7 @@ const theme = createTheme({
           root: { // Apply CSS for all buttons
             fontWeight: 'medium',
             textTransform: 'none',
+            color: '#ffffff'
           },
         },
       },

@@ -76,11 +76,12 @@ function UpdateProfile() {
   }
 
   return (
-  //  <ThemeProvider theme={defaultTheme}>
+ 
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: '10vh'
      }}>
      <CssBaseline />
      <Box
@@ -134,7 +135,7 @@ function UpdateProfile() {
                 inputRef = {passwordConfirmRef}
                />
             </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
                         <Link to='/' variant="body2">Cancel</Link>
@@ -144,7 +145,7 @@ function UpdateProfile() {
        </Box>
       </Box>
     </Container>
-  // </ThemeProvider>  
+
   )
 }
 

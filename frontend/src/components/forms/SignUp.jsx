@@ -78,11 +78,12 @@ function SignUp() {
   }
 
   return (
-  //  <ThemeProvider theme={defaultTheme}>
+  
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: '10vh'
      }}>
      <CssBaseline />
      <Box
@@ -153,7 +154,7 @@ function SignUp() {
        </Box>
       </Box>
     </Container>
-  // </ThemeProvider>  
+ 
   )
 }
 

@@ -65,11 +65,12 @@ function ForgotPassword() {
   }
 
   return (
-  //  <ThemeProvider theme={defaultTheme}>
+ 
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: '10vh'
      }}>
      <CssBaseline />
      <Box
@@ -114,7 +115,7 @@ function ForgotPassword() {
        </Box>
       </Box>
     </Container>
-  // </ThemeProvider>  
+
   )
 }
 
