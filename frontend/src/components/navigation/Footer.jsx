@@ -5,7 +5,6 @@ const footerStyle = {
   backgroundColor: '#f2f2f2',
   padding: '20px',
   textAlign: 'center',
-  marginTop: '40px'
 };
 
 function Footer() {

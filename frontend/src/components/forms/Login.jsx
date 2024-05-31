@@ -77,7 +77,7 @@ function Login() {
       width: '100vh',
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10vh'
+      marginTop: '10vh',
      }}>
     
      <CssBaseline />

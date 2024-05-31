@@ -8,20 +8,9 @@ const GlobalStyles = () => {
       '#root': {
         minHeight: '100vh',
       },
-      body: {
-        margin: 0,
-        padding: 0,
-        fontFamily: '"Nunito", sans-serif'
-      },
       a: {
         textDecoration: 'none', 
         color: 'inherit' 
-      },
-      palette: {
-        primary: {
-          main: '#a5d6a7',
-        },
-        secondary: '#4caf50',
       },
     }} />
   );

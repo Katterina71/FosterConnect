@@ -14,7 +14,7 @@ import {Link, useNavigate} from 'react-router-dom'
 
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Who is Foster?', 'About App', 'Pets Finder'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
