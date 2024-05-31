@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateRoute from './layouts/PrivateRoute';
 
 const defaultTheme = createTheme({
     palette: {

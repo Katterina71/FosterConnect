@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 const defaultTheme = createTheme({
   palette: {
     primary: { main: '#556cd6' },
@@ -70,12 +71,14 @@ function Login() {
   }
 
   return (
+  
    <ThemeProvider theme={defaultTheme}>
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
       justifyContent: 'center'
      }}>
+    
      <CssBaseline />
      <Box
           style={{
