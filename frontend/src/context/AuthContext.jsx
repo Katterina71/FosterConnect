@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, createContext } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword} from 'firebase/auth';
 import { auth} from '../firebase/firebase'; // Ensure this path is correct
 
 const AuthContext = createContext();
@@ -43,13 +43,23 @@ export function AuthProvider({ children }) {
         return sendPasswordResetEmail(auth, email)
       }
     
-    function updateEmail(email) {
-        return updateEmail(currentUser, email)
-      }
+      function changeUserEmail(newEmail) {
+        const user = auth.currentUser;  // Get the current user
+        console.log('New Email: '+ newEmail);
+        if (user) {
+            return updateEmail(user, newEmail).then(() => {
+                console.log('Email updated successfully');
+            }).catch((error) => {
+                console.error('Error updating email:', error);
+            });
+        } else {
+            console.error('No user logged in');
+        }
+    }
     
-    function updatePassword(password) {
-        return updatePassword(currentUser, password)
-      }
+    function changeUserPassword(currentUser, newPassword) {
+        return updatePassword(currentUser, newPassword);
+    }
     
 
     useEffect(() => {
@@ -66,8 +76,8 @@ export function AuthProvider({ children }) {
         login,
         logout,
         resetPassword,
-        updateEmail,
-        updatePassword,
+        changeUserEmail,
+        changeUserPassword,
         loading // Added smth
     };
 
