@@ -25,15 +25,22 @@ function Copyright() {
 
 export default function Footer() {
   return (
-
+    
+      // Sticky footer
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh',
+          py: 3,
+          px: 2,
+          mt: 'auto',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
           position: 'fixed',
-          width: '100%',
-          bottom: '0',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: -1,  
           textAlign: 'center'
         }}
       >

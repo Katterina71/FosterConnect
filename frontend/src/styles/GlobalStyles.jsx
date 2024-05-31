@@ -7,12 +7,11 @@ const GlobalStyles = () => {
 
       '#root': {
         minHeight: '100vh',
-        fontFamily: 'Nunito, sans-serif'
       },
       body: {
         margin: 0,
         padding: 0,
-        
+        fontFamily: '"Nunito", sans-serif'
       },
       a: {
         textDecoration: 'none', 
