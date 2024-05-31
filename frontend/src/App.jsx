@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import SignUp from './components/forms/SignUp';
-import Dashboard  from './components/Dashboard';
+import Profile  from './pages/Profile';
 import Login from './components/forms/Login';
 import ForgotPassword from './components/forms/ForgotPassword';
 import PrivateRoute from './components/layouts/PrivateRoute';
 import UpdateProfile from './components/forms/UpdateProfile';
 import Layout from './components/layouts/Layout';
+import Main from './pages/Main'
 
 
 
@@ -19,7 +20,8 @@ const App = () => {
     <Router>
         <AuthProvider>  
             <Routes>
-              <Route path="/" element={<Layout><PrivateRoute><Dashboard /></PrivateRoute></Layout>} />
+              <Route path="/" exact element={<Layout><Main/></Layout>} />
+              <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
               <Route path="/update-profile" element={<Layout><PrivateRoute><UpdateProfile /></PrivateRoute></Layout>} />
               {/* <Route exact path="/" element={<Dashboard/>} />
               <Route path="/update-profile" element={<UpdateProfile/>} /> */}

@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
-import PrivateRoute from './layouts/PrivateRoute';
+import PrivateRoute from '../components/layouts/PrivateRoute';
 
 const defaultTheme = createTheme({
     palette: {
@@ -19,7 +19,7 @@ const defaultTheme = createTheme({
     },
   });
 
-  export default function Dashboard() {
+  export default function Profile() {
 
     const [error, setError] = useState("")
     const {currentUser, logout} = useAuth()

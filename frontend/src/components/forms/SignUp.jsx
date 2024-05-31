@@ -70,7 +70,7 @@ function SignUp() {
         await signup(emailRef.current.value, passwordRef.current.value);
 
         //Sent to Another page
-        navigate('/')
+        navigate('/profile')
   } catch (error) {
     setError('Failed to create an account');
   }

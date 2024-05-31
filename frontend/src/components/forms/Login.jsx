@@ -63,7 +63,7 @@ function Login() {
         await login(emailRef.current.value, passwordRef.current.value);
 
         //Sen to another page
-        navigate('/')
+        navigate('/profile')
   } catch (error) {
     setError('Failed to Sign In');
   }
