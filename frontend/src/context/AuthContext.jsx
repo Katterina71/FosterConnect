@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
       }
     
     function resetPassword(email) {
-        return sendPasswordResetEmail(auth,email)
+        return sendPasswordResetEmail(auth, email)
       }
     
     function updateEmail(email) {
