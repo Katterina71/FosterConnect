@@ -19,12 +19,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const defaultTheme = createTheme({
-  palette: {
-    primary: { main: '#556cd6' },
-    secondary: { main: '#19857b' },
-  },
-});
+// const defaultTheme = createTheme({
+//   palette: {
+//     primary: { main: '#556cd6' },
+//     secondary: { main: '#19857b' },
+//   },
+// });
 
 
 
@@ -76,7 +76,7 @@ function UpdateProfile() {
   }
 
   return (
-   <ThemeProvider theme={defaultTheme}>
+  //  <ThemeProvider theme={defaultTheme}>
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
@@ -144,7 +144,7 @@ function UpdateProfile() {
        </Box>
       </Box>
     </Container>
-  </ThemeProvider>  
+  // </ThemeProvider>  
   )
 }
 

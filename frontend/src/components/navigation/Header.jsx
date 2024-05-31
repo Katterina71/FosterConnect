@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+
+import {Link, useNavigate} from 'react-router-dom'
+
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -19,6 +22,12 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/signup')
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,28 +46,30 @@ export default function Header() {
 
   return (
     <AppBar position="static">
-      <Container sx={{maxWidth:'100%'}}>
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+      <Container sx={{maxWidth:"100%"}}>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Toolbar disableGutters>
+
+           {/* Responsive Logo Img Positioning - Desktop*/}
+           <Link to='/'>
+           <Box
+            component="img"
+            src='./logo-h.svg'
+            alt='logo'
+            sx={{
+              width: 200,
+              height: 'auto',
+              display: { xs: 'none', md: 'flex' },
+              marginLeft: { md: 0 }, // Center on xs screens, left on md and up
+              marginRight: { md: 0 },
+              
+            }}
+          />
+          </Link>
+          {/* Mobile menu */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
+
+          
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -67,8 +78,13 @@ export default function Header() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+            
+            <MenuIcon sx={{
+                display: { xs: 'block', md: 'none' },
+              }} />
             </IconButton>
+
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -87,6 +103,8 @@ export default function Header() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+
+            {/* Array of pages */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -94,25 +112,27 @@ export default function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+
+           {/* Responsive Logo Img Positioning - Mobile*/}
+           <Link to='/'>
+          <Box
+            component="img"
+            src='./logo-h.svg'
+            alt='logo'
+          
             sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              width: 80,
+              height: 'auto',
+              display: { xs: 'flex', md: 'none'},
+              alignContent: 'center',
+              flexGrow: { xs: 0.5 }, // Allow it to grow on larger screens if needed
+              mr: 1
+              
             }}
-          >
-            LOGO
-          </Typography>
+          />
+          </Link>
+
+          {/* Menu buttons */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -124,13 +144,24 @@ export default function Header() {
               </Button>
             ))}
           </Box>
+            
+          
 
+     
+          
+          {/*Logo */}      
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+          
+          
+
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
+
+            <Button onClick={handleClick} fullWidth variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height:'45px', color: '#ffffff' }}>Sign Up</Button>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -153,7 +184,10 @@ export default function Header() {
                 </MenuItem>
               ))}
             </Menu>
+            
           </Box>
+
+
         </Toolbar>
       </Container>
     </AppBar>

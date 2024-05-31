@@ -12,12 +12,12 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
 import PrivateRoute from '../components/layouts/PrivateRoute';
 
-const defaultTheme = createTheme({
-    palette: {
-      primary: { main: '#556cd6' },
-      secondary: { main: '#19857b' },
-    },
-  });
+// const defaultTheme = createTheme({
+//     palette: {
+//       primary: { main: '#556cd6' },
+//       secondary: { main: '#19857b' },
+//     },
+//   });
 
   export default function Profile() {
 
@@ -37,7 +37,7 @@ const defaultTheme = createTheme({
 
   return (
 
-    <ThemeProvider theme={defaultTheme}>
+    // <ThemeProvider theme={defaultTheme}>
          <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
@@ -65,7 +65,7 @@ const defaultTheme = createTheme({
         </Grid>
         </Box>
         </Container>
-    </ThemeProvider>
+    // </ThemeProvider>
   )
 }
 
