@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
 
     function login(email, password) {
         console.log('Login:');
-         signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
