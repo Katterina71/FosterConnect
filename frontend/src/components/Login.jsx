@@ -119,6 +119,7 @@ function Login() {
               />
             </Grid>
             <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
+            <Link to='/forgot-password'>Forgot Password?</Link>
             <Grid container justifyContent="flex-end">
                   <Grid item>
                         <Link to='/signup' variant="body2">Need an account? Sign up</Link>
