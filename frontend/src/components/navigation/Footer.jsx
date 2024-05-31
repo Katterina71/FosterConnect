@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 
+
+const pages = ['Products', 'Pricing', 'Blog'];
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
@@ -19,17 +22,19 @@ function Copyright() {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 
 export default function Footer() {
   return (
-    <ThemeProvider theme={defaultTheme}>
+
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           minHeight: '100vh',
+          position: 'fixed',
+          width: '100%',
+          bottom: '0',
+          textAlign: 'center'
         }}
       >
         <CssBaseline />
@@ -49,10 +54,12 @@ export default function Footer() {
             <Typography variant="body1">
               My sticky footer can be found here.
             </Typography>
+
+          {/* Menu buttons */}
+
             <Copyright />
           </Container>
         </Box>
-      </Box>
-    </ThemeProvider>
+      </Box>   
   );
 }
