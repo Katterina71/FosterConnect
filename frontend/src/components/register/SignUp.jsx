@@ -1,7 +1,7 @@
 
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../../context/AuthContext';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
 import Avatar from '@mui/material/Avatar';
@@ -32,6 +32,8 @@ function SignUp() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
+
+  const navigate =useNavigate()
   const {signup} = useAuth()
 
   const [agree, setAgree] = useState(false);
@@ -66,6 +68,7 @@ function SignUp() {
         setError('');
         setLoading(true);
         await signup(emailRef.current.value, passwordRef.current.value);
+        navigate('/')
   } catch (error) {
     setError('Failed to create an account');
   }
@@ -141,7 +144,7 @@ function SignUp() {
             <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/login' variant="body2">Already have an account? Sign in</Link>
+                        <Link to='/login' variant="body2">Already have an account? Log in</Link>
                   </Grid>
               </Grid>
          </Grid>

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { auth} from '../firebase/firebase'; // Ensure this path is correct
 
 const AuthContext = createContext();
@@ -20,23 +20,35 @@ export function AuthProvider({ children }) {
     }
 
     function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password)
+        console.log('Login:');
+         signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          return user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // Handle errors here
+          console.error('Login error:', errorCode, errorMessage);
+        });
       }
     
     function logout() {
-        return auth.signOut()
+        return signOut(auth)
       }
     
     function resetPassword(email) {
-        return auth.sendPasswordResetEmail(email)
+        return sendPasswordResetEmail(auth,email)
       }
     
     function updateEmail(email) {
-        return currentUser.updateEmail(email)
+        return updateEmail(currentUser, email)
       }
     
     function updatePassword(password) {
-        return currentUser.updatePassword(password)
+        return updatePassword(currentUser, password)
       }
     
 

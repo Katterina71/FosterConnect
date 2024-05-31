@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../context/AuthContext';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
 import Avatar from '@mui/material/Avatar';
@@ -30,13 +30,15 @@ const defaultTheme = createTheme({
 function Login() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
-  const {signup} = useAuth()
+  const {login} = useAuth()
 
-  const [agree, setAgree] = useState(false);
 
   //Validation and Handle errors
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  //History Hook
+  const navigate = useNavigate()
 
  async function handleClick(e) {
   e.preventDefault()
@@ -49,11 +51,6 @@ function Login() {
       return;
   }
 
-  if (!agree) {
-    setError('You must agree to the website\'s policies to sign up.');
-    return;
-  }
-
 //   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
 //     console.log('Passwords do not match')  // Debugging
 //     return setError('Passwords do not match');
@@ -63,9 +60,13 @@ function Login() {
   try {
         setError('');
         setLoading(true);
-        await signup(emailRef.current.value, passwordRef.current.value);
+        console.log(emailRef.current.value, passwordRef.current.value)
+        await login(emailRef.current.value, passwordRef.current.value);
+
+        //Sen to another page
+        navigate('/')
   } catch (error) {
-    setError('Failed to create an account');
+    setError('Failed to Sign In');
   }
     setLoading(false);
   }
@@ -119,12 +120,6 @@ function Login() {
                 inputRef = {passwordRef}
               />
             </Grid>
-            <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox checked={agree} onChange={() => setAgree(!agree)} value="allowExtraEmails" color="primary" required />}
-                  label="I agree with Website's Policies"
-                />
-              </Grid>
             <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
