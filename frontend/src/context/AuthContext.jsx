@@ -15,20 +15,46 @@ export function AuthProvider({ children }) {
     // Firebase authentication instance
 
     function signup(email, password) {
-        
+
         console.log('New user added')
         createUserWithEmailAndPassword(auth, email, password)
         
         .then((userCredential) => {
             // User is created successfully, now userCredential.user contains the newly created user
             const user = userCredential.user;
-            console.log('New user added:', user.uid);  // Debugging Log the UID of the new user
-          })
-          .catch((error) => {
+            console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
+            console.log('New user email:', user.email);  // Debugging Log the email of the new user
+
+
+            //Add new user in DB
+            const newUser = {
+                firebaseUid: user.uid,
+                contact_info: { email: user.email }
+            };
+            console.log(JSON.stringify(newUser))
+            fetch('http://localhost:5050/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => console.log('Success:', data))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        })
+        .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error adding user:', errorCode, errorMessage);
-          });
+        });
         
         return
 

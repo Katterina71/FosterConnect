@@ -17,8 +17,8 @@ import petsProfiles from "./routes/pets-profiles-routes.js";
 
 //middleware
 app.use(cors()) // connect backend and frontend
-
 app.use(express.json());
+
 
 // Use our Routes
 

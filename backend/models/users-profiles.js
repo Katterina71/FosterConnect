@@ -69,7 +69,7 @@ const usersProfilesSchema = new Schema({
     },
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type:String
@@ -77,7 +77,7 @@ const usersProfilesSchema = new Schema({
     shelter : {
         type : Boolean,
         default: false,
-        required: true,
+        // required: true,
     },
     shelter_name : {
       type : String,
