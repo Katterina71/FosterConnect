@@ -1,6 +1,6 @@
 
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
@@ -28,13 +28,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
-function UpdateProfile() {
+function SignUp() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
 
   const navigate =useNavigate()
-  const {currentUser,  changeUserEmail,  changeUserPassword} = useAuth()
+  const {signup} = useAuth()
 
   const [agree, setAgree] = useState(false);
 
@@ -42,41 +42,42 @@ function UpdateProfile() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function handleClick(e) {
+ async function handleClick(e) {
   e.preventDefault()
+
+
+  // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
+
+  if (!emailRef.current || !passwordRef.current || !passwordConfirmRef.current) {
+      console.error("One of the refs is null");  // Debugging
+      return;
+  }
+
+  if (!agree) {
+    setError('You must agree to the website\'s policies to sign up.');
+    return;
+  }
 
   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
     console.log('Passwords do not match')  // Debugging
     return setError('Passwords do not match');
 }
 
-    const promises = []
-    setError('');
-    setLoading(true);
-
-    if (emailRef.current.value !== currentUser.email){
-        console.log('update email:' + emailRef.current.value)
-        promises.push(changeUserEmail(emailRef.current.value))
-    }
-    if (passwordRef.current.value){
-        promises.push(changeUserPassword(passwordRef.current.value))
-    }
-
-    Promise.all(promises)
-    .then(() => {
-       navigate('/profile') 
-    })
-    .catch(()=> {
-        setError('Failed to update account')
-    })
-    .finally(()=> {
-       setLoading(false) 
-    })
-
+  // Send data to Firebase
+  try {
+        setError('');
+        setLoading(true);
+        await signup(emailRef.current.value, passwordRef.current.value);
+        //Sent to Another page
+        navigate('/profile')
+  } catch (error) {
+    setError('Failed to create an account');
+  }
+    setLoading(false);
   }
 
   return (
- 
+  
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
@@ -97,14 +98,14 @@ function UpdateProfile() {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Update Profile
+            Sign up
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
-           {/*Not allow to change email on firebase*/}
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <TextField 
+                required
                 fullWidth
                 id="email"
                 placeholder="Email Address"
@@ -112,14 +113,14 @@ function UpdateProfile() {
                 type='text'
                 inputRef = {emailRef}
                 autoFocus
-                defaultValue={currentUser.email}
                 />
-              </Grid> */}
+              </Grid>
             <Grid item xs={12}>
               <TextField 
+                required
                 fullWidth
                 name="password"
-                placeholder="Leave blank to keep the same"
+                placeholder="Password"
                 type="password"
                 id="password"
                 inputRef = {passwordRef}
@@ -127,26 +128,33 @@ function UpdateProfile() {
             </Grid>
             <Grid item xs={12}>
               <TextField 
+                required
                 fullWidth
                 name="password-confirm"
-                placeholder="Leave blank to keep the same"
+                placeholder="Password Confirmation"
                 type="password"
                 id="password-confirm"
                 inputRef = {passwordConfirmRef}
                />
             </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
+            <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox checked={agree} onChange={() => setAgree(!agree)} value="allowExtraEmails" color="primary" required />}
+                  label="I agree with Website's Policies"
+                />
+              </Grid>
+            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/' variant="body2">Cancel</Link>
+                        <Link to='/login' variant="body2">Already have an account? Log in</Link>
                   </Grid>
               </Grid>
          </Grid>
        </Box>
       </Box>
     </Container>
-
+ 
   )
 }
 
-export default UpdateProfile
+export default SignUp

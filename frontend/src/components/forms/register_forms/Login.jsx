@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 // const defaultTheme = createTheme({
 //   palette: {
 //     primary: { main: '#556cd6' },
@@ -25,18 +26,18 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
-function ForgotPassword() {
+function Login() {
   const emailRef = useRef(null)
-  const {resetPassword} = useAuth()
+  const passwordRef = useRef(null)
+  const {login} = useAuth()
 
 
   //Validation and Handle errors
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   //History Hook
-
+  const navigate = useNavigate()
 
  async function handleClick(e) {
   e.preventDefault()
@@ -44,34 +45,41 @@ function ForgotPassword() {
 
   // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
 
-  if (!emailRef.current) {
+  if (!emailRef.current || !passwordRef.current ) {
       console.error("One of the refs is null");  // Debugging
       return;
   }
 
+//   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+//     console.log('Passwords do not match')  // Debugging
+//     return setError('Passwords do not match');
+// }
+
   // Send data to Firebase
   try {
-        setMessage('')
         setError('');
         setLoading(true);
-        console.log(emailRef.current.value)
-        await resetPassword(emailRef.current.value);
-        setMessage('Check your inbox for further instructions ')
+        console.log(emailRef.current.value, passwordRef.current.value)
+        await login(emailRef.current.value, passwordRef.current.value);
 
+        //Sen to another page
+        navigate('/profile')
   } catch (error) {
-    setError('Failed to Reset Password');
+    setError('Failed to Sign In');
   }
     setLoading(false);
   }
 
   return (
- 
+  
+  
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10vh'
+      marginTop: '10vh',
      }}>
+    
      <CssBaseline />
      <Box
           style={{
@@ -86,11 +94,10 @@ function ForgotPassword() {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Password Reset
+            Log In
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
-          {message && <Alert severity="error" fullWidth>{message}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField 
@@ -104,8 +111,19 @@ function ForgotPassword() {
                 autoFocus
                 />
               </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Reset Password</Button>
-            <Link to='/login'>Login</Link>
+            <Grid item xs={12}>
+              <TextField 
+                required
+                fullWidth
+                name="password"
+                placeholder="Password"
+                type="password"
+                id="password"
+                inputRef = {passwordRef}
+              />
+            </Grid>
+            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
+            <Link to='/forgot-password'>Forgot Password?</Link>
             <Grid container justifyContent="flex-end">
                   <Grid item>
                         <Link to='/signup' variant="body2">Need an account? Sign up</Link>
@@ -119,4 +137,4 @@ function ForgotPassword() {
   )
 }
 
-export default ForgotPassword
+export default Login

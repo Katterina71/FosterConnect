@@ -1,5 +1,6 @@
+
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
@@ -7,6 +8,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid';
@@ -15,7 +18,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 
 // const defaultTheme = createTheme({
 //   palette: {
@@ -26,60 +28,61 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
-function Login() {
+function UpdateProfile() {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
-  const {login} = useAuth()
+  const passwordConfirmRef = useRef(null)
 
+  const navigate =useNavigate()
+  const {currentUser,  changeUserEmail,  changeUserPassword} = useAuth()
+
+  const [agree, setAgree] = useState(false);
 
   //Validation and Handle errors
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  //History Hook
-  const navigate = useNavigate()
-
- async function handleClick(e) {
+  function handleClick(e) {
   e.preventDefault()
 
+  if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    console.log('Passwords do not match')  // Debugging
+    return setError('Passwords do not match');
+}
 
-  // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
+    const promises = []
+    setError('');
+    setLoading(true);
 
-  if (!emailRef.current || !passwordRef.current ) {
-      console.error("One of the refs is null");  // Debugging
-      return;
-  }
+    if (emailRef.current.value !== currentUser.email){
+        console.log('update email:' + emailRef.current.value)
+        promises.push(changeUserEmail(emailRef.current.value))
+    }
+    if (passwordRef.current.value){
+        promises.push(changeUserPassword(passwordRef.current.value))
+    }
 
-//   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-//     console.log('Passwords do not match')  // Debugging
-//     return setError('Passwords do not match');
-// }
+    Promise.all(promises)
+    .then(() => {
+       navigate('/profile') 
+    })
+    .catch(()=> {
+        setError('Failed to update account')
+    })
+    .finally(()=> {
+       setLoading(false) 
+    })
 
-  // Send data to Firebase
-  try {
-        setError('');
-        setLoading(true);
-        console.log(emailRef.current.value, passwordRef.current.value)
-        await login(emailRef.current.value, passwordRef.current.value);
-
-        //Sen to another page
-        navigate('/profile')
-  } catch (error) {
-    setError('Failed to Sign In');
-  }
-    setLoading(false);
   }
 
   return (
-  
-  
+ 
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10vh',
+      marginTop: '10vh'
      }}>
-    
      <CssBaseline />
      <Box
           style={{
@@ -94,14 +97,14 @@ function Login() {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Log In
+            Update Profile
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+           {/*Not allow to change email on firebase*/}
+            {/* <Grid item xs={12}>
               <TextField 
-                required
                 fullWidth
                 id="email"
                 placeholder="Email Address"
@@ -109,24 +112,33 @@ function Login() {
                 type='text'
                 inputRef = {emailRef}
                 autoFocus
+                defaultValue={currentUser.email}
                 />
-              </Grid>
+              </Grid> */}
             <Grid item xs={12}>
               <TextField 
-                required
                 fullWidth
                 name="password"
-                placeholder="Password"
+                placeholder="Leave blank to keep the same"
                 type="password"
                 id="password"
                 inputRef = {passwordRef}
               />
             </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
-            <Link to='/forgot-password'>Forgot Password?</Link>
+            <Grid item xs={12}>
+              <TextField 
+                fullWidth
+                name="password-confirm"
+                placeholder="Leave blank to keep the same"
+                type="password"
+                id="password-confirm"
+                inputRef = {passwordConfirmRef}
+               />
+            </Grid>
+            <Button onClick = {(e) => handleClick(e)} type="submit" variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/signup' variant="body2">Need an account? Sign up</Link>
+                        <Link to='/' variant="body2">Cancel</Link>
                   </Grid>
               </Grid>
          </Grid>
@@ -137,4 +149,4 @@ function Login() {
   )
 }
 
-export default Login
+export default UpdateProfile

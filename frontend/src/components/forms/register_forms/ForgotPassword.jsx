@@ -1,6 +1,5 @@
-
 import React, {useRef, useState} from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
@@ -8,8 +7,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid';
@@ -28,19 +25,18 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
-function SignUp() {
+function ForgotPassword() {
   const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const passwordConfirmRef = useRef(null)
+  const {resetPassword} = useAuth()
 
-  const navigate =useNavigate()
-  const {signup} = useAuth()
-
-  const [agree, setAgree] = useState(false);
 
   //Validation and Handle errors
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+
+  //History Hook
+
 
  async function handleClick(e) {
   e.preventDefault()
@@ -48,36 +44,28 @@ function SignUp() {
 
   // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
 
-  if (!emailRef.current || !passwordRef.current || !passwordConfirmRef.current) {
+  if (!emailRef.current) {
       console.error("One of the refs is null");  // Debugging
       return;
   }
 
-  if (!agree) {
-    setError('You must agree to the website\'s policies to sign up.');
-    return;
-  }
-
-  if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    console.log('Passwords do not match')  // Debugging
-    return setError('Passwords do not match');
-}
-
   // Send data to Firebase
   try {
+        setMessage('')
         setError('');
         setLoading(true);
-        await signup(emailRef.current.value, passwordRef.current.value);
-        //Sent to Another page
-        navigate('/profile')
+        console.log(emailRef.current.value)
+        await resetPassword(emailRef.current.value);
+        setMessage('Check your inbox for further instructions ')
+
   } catch (error) {
-    setError('Failed to create an account');
+    setError('Failed to Reset Password');
   }
     setLoading(false);
   }
 
   return (
-  
+ 
      <Container component="main" style = {{
       width: '100vh',
       display: 'flex',
@@ -98,10 +86,11 @@ function SignUp() {
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Sign up
+            Password Reset
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
+          {message && <Alert severity="error" fullWidth>{message}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField 
@@ -115,46 +104,19 @@ function SignUp() {
                 autoFocus
                 />
               </Grid>
-            <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password"
-                placeholder="Password"
-                type="password"
-                id="password"
-                inputRef = {passwordRef}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password-confirm"
-                placeholder="Password Confirmation"
-                type="password"
-                id="password-confirm"
-                inputRef = {passwordConfirmRef}
-               />
-            </Grid>
-            <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox checked={agree} onChange={() => setAgree(!agree)} value="allowExtraEmails" color="primary" required />}
-                  label="I agree with Website's Policies"
-                />
-              </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Reset Password</Button>
+            <Link to='/login'>Login</Link>
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/login' variant="body2">Already have an account? Log in</Link>
+                        <Link to='/signup' variant="body2">Need an account? Sign up</Link>
                   </Grid>
               </Grid>
          </Grid>
        </Box>
       </Box>
     </Container>
- 
+
   )
 }
 
-export default SignUp
+export default ForgotPassword
