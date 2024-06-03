@@ -71,9 +71,6 @@ const usersProfilesSchema = new Schema({
       type: String,
       // required: true,
     },
-    email: {
-      type:String
-    },
     shelter : {
         type : Boolean,
         default: false,
