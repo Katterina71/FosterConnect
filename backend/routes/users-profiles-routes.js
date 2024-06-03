@@ -3,28 +3,29 @@ const userRouter = express.Router();
 
 import UserController from '../controllers/users-profiles-controllers.js'
 
+//Get all data for debugging
 userRouter.get('/', UserController.allProfiles);
+
 // Register User
 userRouter.post('/', UserController.register);
 
 // Get User Profile
-userRouter.get('/profile', UserController.getProfile);
+userRouter.get('/:firebaseUid', UserController.getProfile);
 
 // Update User Profile
-userRouter.patch('/profile', UserController.updateProfile);
+userRouter.patch('/:firebaseUid', UserController.updateProfile);
 
 // Delete User Profile
-userRouter.delete('/profile', UserController.deleteProfile);
+userRouter.delete('/:firebaseUid', UserController.deleteProfile);
 
-// // Get Foster Profile
-// userRouter.get('/dashboard/foster', UserController.getFosterProfile);
+// Get All Foster Profile
+userRouter.get('/fosters', UserController.getFosterProfile);
 
-// // Get Shelter Profile
-// userRouter.get('/dashboard/shelter', UserController.getShelterProfile);
+// Get All Shelter Profile
+userRouter.get('/shelters', UserController.getShelterProfile);
 
 // Get Shelters Profile by location
 userRouter.get('/shelters/location', UserController.getSheltersByLocation);
-
 
 // Get Fosters Profile by location
 userRouter.get('/fosters/location', UserController.getFostersByLocation );

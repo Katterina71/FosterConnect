@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, createContext } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword} from 'firebase/auth';
 import { auth} from '../firebase/firebase'; // Ensure this path is correct
+import {BASE_URL} from '../api/endpointsDB'
 
 const AuthContext = createContext();
 
@@ -22,9 +23,9 @@ export function AuthProvider({ children }) {
         .then((userCredential) => {
             // User is created successfully, now userCredential.user contains the newly created user
             const user = userCredential.user;
-            console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
-            console.log('New user email:', user.email);  // Debugging Log the email of the new user
 
+            // console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
+            // console.log('New user email:', user.email);  // Debugging Log the email of the new user
 
             //Add new user in DB
             const newUser = {
@@ -32,7 +33,7 @@ export function AuthProvider({ children }) {
                 contact_info: { email: user.email }
             };
             console.log(JSON.stringify(newUser))
-            fetch('http://localhost:5050/api/users/', {
+            fetch(BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,6 +51,7 @@ export function AuthProvider({ children }) {
                 console.error('Error:', error);
             });
         })
+
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

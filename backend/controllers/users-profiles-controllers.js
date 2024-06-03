@@ -3,6 +3,8 @@ import UsersProfiles from "../models/users-profiles.js";
 
 
 const UserController = {
+
+    // Debugging Working Routes
     allProfiles: async(req,res) => {
         try {
             const data =  await UsersProfiles.find();
@@ -28,22 +30,11 @@ const UserController = {
             res.status(500).json({message: error.message});
         }
     },
-    login: async (req,res) => {
-        const {email, firebaseUid} = req.body;
-        try {
-            const user = await UsersProfiles.findOne({email});
-            if (!user) {
-                res.status(404).send('User not found')
-            }
-            
-        } catch (error) {
-            res.status(500).json({message: error.message})
-        }
+   
 
-    },
     getProfile: async (reg,res) => {
         try {
-            const user = await UsersProfiles.findById(req.params.userId);
+            const user = await UsersProfiles.findById(req.params.firebaseUid);
             if (!user) {
                 return res.status(404).send({message: 'User not found'})
             }    
@@ -54,7 +45,7 @@ const UserController = {
     },
     updateProfile: async (req,res) => {
         try {
-            const updateUser =await UsersProfiles.findByIdAndUpdate(req.params.userId,req.body)
+            const updateUser =await UsersProfiles.findByIdAndUpdate(req.params.firebaseUid,req.body)
             res.json(updateUser)
         } catch (error) {
             res.status(500).json({message:error.message})
@@ -63,12 +54,15 @@ const UserController = {
     },
     deleteProfile: async (req,res) => {
         try {
-            await UsersProfiles.findByIdAndDelete(req.params.userId)
+            await UsersProfiles.findByIdAndDelete(req.params.firebaseUid)
             res.status(204).send({message: 'User was delete'})
         } catch (error) {
             res.status(500).json({message:error.message})
         }
     },
+
+
+    // Get all data of Fosters or Shelters
     getFosterProfile: async (req,res) => {
         try {
             const fosters = await UsersProfiles.find({shelter: false})
@@ -85,6 +79,9 @@ const UserController = {
             res.status(500).json({message:error.message})
         }
     },
+
+    //Find all Fosters or Shelter by Town
+
     getFostersByLocation: async (req,res) => {
         try {
             const fosters = await UsersProfiles.find({shelter: false, 'address.town': town})

@@ -34,7 +34,7 @@ app.use((req,res,next) => {
 
 //routes
 app.get('/', (req, res) => {
-    res.json({mssg: 'Welcome to the app'})
+    res.json({mssg: 'Welcome to the server'})
 }) 
  
 
