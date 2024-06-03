@@ -2,6 +2,8 @@ import express from 'express';
 import 'dotenv/config';
 import connectToDb from './db/connect.js';
 
+import cors from 'cors' // connect backend and frontend
+
 //express app
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +13,10 @@ connectToDb();
 
 import usersProfiles from "./routes/users-profiles-routes.js";
 import petsProfiles from "./routes/pets-profiles-routes.js";
+
+
+//middleware
+app.use(cors()) // connect backend and frontend
 
 app.use(express.json());
 

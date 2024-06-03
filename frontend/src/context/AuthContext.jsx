@@ -15,8 +15,23 @@ export function AuthProvider({ children }) {
     // Firebase authentication instance
 
     function signup(email, password) {
+        
         console.log('New user added')
-        return createUserWithEmailAndPassword(auth, email, password);
+        createUserWithEmailAndPassword(auth, email, password)
+        
+        .then((userCredential) => {
+            // User is created successfully, now userCredential.user contains the newly created user
+            const user = userCredential.user;
+            console.log('New user added:', user.uid);  // Debugging Log the UID of the new user
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error adding user:', errorCode, errorMessage);
+          });
+        
+        return
+
     }
 
     function login(email, password) {
