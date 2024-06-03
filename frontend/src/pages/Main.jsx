@@ -1,7 +1,7 @@
 import React from 'react'
 import HeroImg from '../components/mainPage/HeroImg'
 import MainText from '../components/mainPage/MainText'
-import { Container } from '@mui/material'
+import FormSection from '../components/mainPage/FormSection'
 
 
 export default function Main() {
@@ -9,6 +9,7 @@ export default function Main() {
     <>
             <HeroImg />
             <MainText />
+            <FormSection/>
     </>
   )
 }

@@ -6,6 +6,7 @@ const containerStyle = {
     marginBottom: '100px', // Adjust the value to match the height of the footer
   };
 
+  
 export default function MainText() {
   return (
     <Container sx={containerStyle}>
