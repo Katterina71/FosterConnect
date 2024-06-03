@@ -84,7 +84,7 @@ const UserController = {
 
     getFostersByLocation: async (req,res) => {
         try {
-            const fosters = await UsersProfiles.find({shelter: false, 'address.town': town})
+            const fosters = await UsersProfiles.find({shelter: false, 'address.town':req.params.town})
             res.json(fosters)
             
         } catch (error) {
@@ -93,7 +93,7 @@ const UserController = {
     },
     getSheltersByLocation: async (req,res) => {
         try {
-            const shelters = await UsersProfiles.find({shelter: true, 'address.town': town})
+            const shelters = await UsersProfiles.find({shelter: true, 'address.town': req.params.town})
             res.json(shelters)
         } catch (error) {
             res.status(500).json({message:error.message})

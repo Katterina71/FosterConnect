@@ -25,10 +25,10 @@ userRouter.get('/fosters', UserController.getFosterProfile);
 userRouter.get('/shelters', UserController.getShelterProfile);
 
 // Get Shelters Profile by location
-userRouter.get('/shelters/location', UserController.getSheltersByLocation);
+userRouter.get('/shelters/:town', UserController.getSheltersByLocation);
 
 // Get Fosters Profile by location
-userRouter.get('/fosters/location', UserController.getFostersByLocation );
+userRouter.get('/fosters/:town', UserController.getFostersByLocation );
 
 
 
