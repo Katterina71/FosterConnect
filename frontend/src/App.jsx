@@ -22,6 +22,7 @@ const App = () => {
             <Routes>
               <Route path="/" exact element={<Layout><Main/></Layout>} />
               <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
+              {/* <Route path="/profile" element={<Layout><Profile /></Layout>} /> */}
               <Route path="/update-profile" element={<Layout><PrivateRoute><UpdateProfile /></PrivateRoute></Layout>} />
               {/* <Route exact path="/" element={<Dashboard/>} />
               <Route path="/update-profile" element={<UpdateProfile/>} /> */}

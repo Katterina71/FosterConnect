@@ -68,7 +68,6 @@ function SignUp() {
         setError('');
         setLoading(true);
         await signup(emailRef.current.value, passwordRef.current.value);
-
         //Sent to Another page
         navigate('/profile')
   } catch (error) {
