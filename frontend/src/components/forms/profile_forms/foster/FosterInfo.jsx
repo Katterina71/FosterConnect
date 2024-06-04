@@ -41,7 +41,7 @@ const FosterInfo = () => {
                 <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2 }}>
                     Add New Pet Preference
                 </Button>
-                <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2 }}>
+                <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2, ml:4}}>
                     Submit All Preferences
                 </Button>
             </Container>

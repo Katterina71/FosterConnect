@@ -9,13 +9,14 @@ export const FormProvider = ({ children }) => {
 
     const [formData, setFormData] = useState({
         userInfo: {},
-        petPreferences: []  
+        petPreferences: [],
+        shelterAddress: []  
     });
 
 
      // Method to update general form data
      const updateFormData = (section, data) => {
-        if (section === 'petPreferences') {
+        if (section === 'petPreferences' || section === 'shelterAddress') {
             // Append to the array for pet preferences
             setFormData(prev => ({
                 ...prev,

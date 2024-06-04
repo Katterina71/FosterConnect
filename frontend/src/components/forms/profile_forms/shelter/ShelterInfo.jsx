@@ -10,21 +10,32 @@ export default function FosterInfo() {
 
     const handleAddAddress = () => {
         // Add a new address preference object to the array
-        const newAddress = {
+        setShelterAddress({
             street_address: '',
             town: '',
             county: '',
             postal_code: '',
             state: '',  
-        };
-        setShelterAddress([...shelterAddress, newAddress]);
+        });  
     };
 
     const handleRemovePetPreference = (index) => {
         // Remove a address object from the array by filtering it out
-          const updatedPreferences = shelterAddress.filter((_, i) => i !== index);
-          setShelterAddress(updatedPreferences);
+          setShelterAddress(shelterAddress.filter((_, i) => i !== index));
     }
+
+    const updatePreference = (index, updatedAddress) => {
+        const updatedAddresses = [...shelterAddress];
+        updatedAddresses[index] = updatedAddress;
+        setShelterAddress(updatedAddresses);
+    };
+
+
+    const handleSubmit = () => {
+        console.log(shelterAddress)
+        updateFormData('shelterAddress', shelterAddress);  // This would push all preferences to context
+    };
+
 
     return (
 
@@ -45,6 +56,9 @@ export default function FosterInfo() {
                 </Box>
             ))}
             <Button onClick={handleAddAddress} variant="contained" color='secondary' sx={{my:2}}>Add Another Address</Button>
+            <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2 }}>
+                    Submit All Addresses
+                </Button>
         </Container>
     </Box>
 

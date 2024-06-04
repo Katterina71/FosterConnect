@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Box, Container, Typography, FormControlLabel, Button } from '@mui/material'
+import { Box, Container, Typography, FormControlLabel, Button, ListItemButton, ListItemIcon, Checkbox, ListItemText, Grid,  } from '@mui/material'
 
 import UserInfo from '../components/forms/profile_forms/UserInfo'
 import FosterInfo from '../components/forms/profile_forms/foster/FosterInfo'
@@ -38,6 +38,49 @@ export default function CreateProfile() {
         <Container>
             <Typography variant='h1' sx={{mb:4}}>Welcome!</Typography>
             <Typography>We're thrilled to have you join us. Whether you're looking to provide a temporary home as a foster or you're a shelter wanting to connect with potential fosters, you're in the right place. This quick registration process is the first step towards making a big difference. Let's get started!</Typography>
+            
+             {/* Choose Foster or Shelter    */}
+            <Box sx={{ '& .MuiTextField-root': { m: 2, width: '25ch' }, my: 4 }}>
+                <Typography variant='h2' sx={{mb:4}}>How would you like to join us? As a foster or a shelter?</Typography>
+                <Grid container spacing={2} maxWidth="md" sx={{ my: 4 }}>
+                    <Grid item xs={6} >
+                    <ListItemButton
+                    key={1}
+                    role="listitem"
+                    >
+                    <ListItemIcon>
+                        <Checkbox
+                        checked={checked}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{
+                        }}
+                        />
+                    </ListItemIcon>
+                    <ListItemText id='foster' primary={`Foster`} />
+                    </ListItemButton>
+                </Grid>
+                <Grid item xs={6} >
+                    <ListItemButton
+                    key={2}
+                    role="listitem"
+                    >
+                    <ListItemIcon>
+                        <Checkbox
+                        checked={checked}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 
+                        }}
+                        />
+                    </ListItemIcon>
+                    <ListItemText id='shelter' primary={`Shelter`} />
+                    </ListItemButton>
+                </Grid>
+            </Grid>
+        </Box>
+            
+
             <UserInfo />
             <AddressForm />
             <FormControlLabel
