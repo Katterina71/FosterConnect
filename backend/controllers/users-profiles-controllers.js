@@ -34,6 +34,7 @@ const UserController = {
 
     getProfile: async (reg,res) => {
         try {
+            console.log(req.params)
             const user = await UsersProfiles.findById(req.params.firebaseUid);
             if (!user) {
                 return res.status(404).send({message: 'User not found'})

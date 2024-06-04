@@ -1,5 +1,6 @@
 
-import React, {useRef, useState} from 'react'
+// import React, {useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
@@ -17,15 +18,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// const defaultTheme = createTheme({
-//   palette: {
-//     primary: { main: '#556cd6' },
-//     secondary: { main: '#19857b' },
-//   },
-// });
-
 
 
 function SignUp() {
@@ -69,7 +61,7 @@ function SignUp() {
         setLoading(true);
         await signup(emailRef.current.value, passwordRef.current.value);
         //Sent to Another page
-        navigate('/profile')
+        navigate('/create-profile')
   } catch (error) {
     setError('Failed to create an account');
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { Box, Container, TextField, MenuItem, Typography } from '@mui/material';
 
 const PetPreferences = ({ preference, index, updatePreference }) => {
