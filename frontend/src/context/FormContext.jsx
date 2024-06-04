@@ -9,18 +9,17 @@ export const FormProvider = ({ children }) => {
 
     const [formData, setFormData] = useState({
         userInfo: {},
-        petPreferences: [],
-        shelterAddress: []  
+        petPreferences: {}
     });
 
 
      // Method to update general form data
      const updateFormData = (section, data) => {
-        if (section === 'petPreferences' || section === 'shelterAddress') {
+        if (section === 'petPreferences') {
             // Append to the array for pet preferences
             setFormData(prev => ({
                 ...prev,
-                [section]: Array.isArray(prev[section]) ? [...prev[section], data] : [data]  // Check if it's an array, if not, start a new array
+                [section]: [data]  // Check if it's an array, if not, start a new array
             }));
         } else {
             // Handle other updates for non-array types
@@ -36,6 +35,10 @@ export const FormProvider = ({ children }) => {
 
     const submitForm = () => {
         console.log("Submitting Form:", formData);
+        // setFormData( () => ({
+        //     userInfo: {},
+        //     petPreferences: []
+        // }));
         // Add logic to handle form submission such as API calls.
     };
 
