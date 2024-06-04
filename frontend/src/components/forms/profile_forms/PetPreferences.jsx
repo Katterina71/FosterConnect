@@ -12,17 +12,21 @@ const PetPreferences = () => {
     const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
 
     return (
-        <Box>
-            <Container>
-                <Typography variant="h6" gutterBottom>
+        <Box         
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 2, width: '25ch' },
+                my:4
+            }}
+            noValidate
+            autoComplete="off">
+                <Typography variant="h4" gutterBottom>
                     Pet Preferences
                 </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={4}>
+                <Container maxWidth="md" sx={{my:4}}>
                         <TextField
                             select
                             label="Pet Type"
-                            fullWidth
                             value={petType}
                             onChange={e => setPetType(e.target.value)}
                             variant="outlined"
@@ -33,12 +37,9 @@ const PetPreferences = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
                         <TextField
                             select
                             label="Life Stage"
-                            fullWidth
                             value={lifeStage}
                             onChange={e => setLifeStage(e.target.value)}
                             variant="outlined"
@@ -49,12 +50,9 @@ const PetPreferences = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
                         <TextField
                             select
                             label="Size"
-                            fullWidth
                             value={size}
                             onChange={e => setSize(e.target.value)}
                             variant="outlined"
@@ -65,8 +63,6 @@ const PetPreferences = () => {
                                 </MenuItem>
                             ))}
                         </TextField>
-                    </Grid>
-                </Grid>
             </Container>
         </Box>
     );

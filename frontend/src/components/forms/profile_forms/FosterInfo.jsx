@@ -15,16 +15,30 @@ export default function FosterInfo() {
         setPetPreferences([...petPreferences, newPreference]);
     };
 
+    const handleRemovePetPreference = (index) => {
+        // Remove a pet preference object from the array by filtering it out
+        const updatedPreferences = petPreferences.filter((_, i) => i !== index);
+        setPetPreferences(updatedPreferences);
+    };
+
     return (
-        <Box>
+        <Box sx={{my:4}}>
             <Container>
                 <Typography>Add your pet preferences below:</Typography>
                 {petPreferences.map((preference, index) => (
                     <Box key={index}>
                         <PetPreferences preference={preference} />
+                        <Button 
+                            onClick={() => handleRemovePetPreference(index)} 
+                            variant="contained" 
+                            color="error" 
+                            sx={{ mt: 1 }}
+                        >
+                            Remove
+                        </Button>
                     </Box>
                 ))}
-                <Button onClick={handleAddPetPreference} variant="contained">Add Another Pet Preference</Button>
+                <Button onClick={handleAddPetPreference} variant="contained"  color="secondary" sx={{my:2}}>Add New Pet Preference</Button>
             </Container>
         </Box>
     );

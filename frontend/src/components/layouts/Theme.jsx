@@ -32,8 +32,18 @@ const theme = createTheme({
         fontWeight: '600',
         fontSize: '40px',
       },
-
-
+      h3: {
+        color: '#687A87',
+        fontFamily: 'Signika Negative, sans-serif;',
+        fontWeight: '600',
+        fontSize: '34px',
+      },
+      h4: {
+        color: '#687A87',
+        fontFamily: 'Signika Negative, sans-serif;',
+        fontWeight: '600',
+        fontSize: '28px',
+      },
     },
 
     palette: {

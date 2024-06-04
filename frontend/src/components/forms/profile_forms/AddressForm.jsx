@@ -3,26 +3,27 @@ import { Box, Container, Grid, TextField, Typography } from '@mui/material'
 
 export default function AddressForm() {
   return (
-    <Box>
-    <Container>
-    <Typography variant='h6'>Add your Address</Typography>
-    <Grid container spacing={0}>
-        <Grid item xs={12}>
-            <TextField id="standard-basic" label="Street Address" variant="standard" />
-        </Grid>
-        <Grid item xs={12}>
-             <TextField id="standard-basic" label="Town" variant="standard" />
-        <Grid item xs={12}>
-            <TextField id="standard-basic" label="County" variant="standard" />
-        </Grid>
-        <Grid item xs={12}>
-            <TextField id="standard-basic" label="Postal Code" variant="standard" />
-        </Grid>
-        <Grid item xs={12}>
-            <TextField id="standard-basic" label="State" variant="standard" />
-        </Grid>
-        </Grid>
-     </Grid>
+    <Box
+        component="form"
+        sx={{
+            '& .MuiTextField-root': { m: 2, width: 'ch' },
+            my:4
+        }}
+        noValidate
+        autoComplete="off">
+
+    <Typography variant='h3'>Add your Address</Typography>
+    <Container  maxWidth="md" sx={{my:4}}>
+            <TextField required id="outlined-required" label="Street Address" />
+
+             <TextField required id="outlined-required" label="Town"  />
+    
+            <TextField required id="outlined-required" label="County" />
+
+            <TextField required id="outlined-required" label="Postal Code"/>
+
+            <TextField required id="outlined-required" label="State" />
+
     </Container>
 </Box>
   )
