@@ -11,14 +11,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       padding: 0,
       transform: 'translateX(6px)',
       '&.Mui-checked': {
-        color: '#fff',
+        color: 'blue',
         transform: 'translateX(22px)',
         '& .MuiSwitch-thumb:before': {
           backgroundImage: `url('/switch-icon/paw.svg')`,
         },
         '& + .MuiSwitch-track': {
           opacity: 1,
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: 'green',
         },
       },
     },
@@ -36,6 +36,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundImage: `url('/switch-icon/home.svg')`,
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: 'purple',
+        },
       },
     },
     '& .MuiSwitch-track': {
