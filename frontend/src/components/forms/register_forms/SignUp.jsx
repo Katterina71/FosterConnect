@@ -143,7 +143,7 @@ function SignUp() {
                   label="I agree with Website's Policies"
                 />
               </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" color='secondary' fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Sign Up</Button>
             <Grid container justifyContent="flex-end">
                   <Grid item>
                         <Link to='/login' variant="body2">Already have an account? Log in</Link>

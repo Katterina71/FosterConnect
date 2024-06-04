@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
+
 import {Link, useNavigate} from 'react-router-dom'
 
 
@@ -71,7 +72,7 @@ export default function Header() {
           
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="new-user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -137,7 +138,7 @@ export default function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, mx:4, color: '#220C04', display: 'block'}}
               >
                 {page}
               </Button>
