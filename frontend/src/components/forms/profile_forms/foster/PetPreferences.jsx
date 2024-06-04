@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Grid, TextField, MenuItem, Typography } from '@mui/material';
+import { Box, Container, TextField, MenuItem, Typography } from '@mui/material';
 
 const PetPreferences = () => {
     const [petType, setPetType] = useState('');

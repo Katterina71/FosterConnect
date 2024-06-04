@@ -1,7 +1,20 @@
 import React from 'react'
-import { Box, Container, Grid, TextField, Typography } from '@mui/material'
+import { Box, Container, TextField, Typography } from '@mui/material'
+
+//To apply the phone mask:
+import InputMask from 'react-input-mask';
+
+import { useFormContext } from '../../../context/FormContext';
 
 export default function UserInfo() {
+
+  const { updateFormData } = useFormContext();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    updateFormData('userInfo', { [name]: value });
+};
+
   return (
   <Box component="form"
   sx={{
@@ -13,22 +26,24 @@ export default function UserInfo() {
     <Typography variant='h3'>Personal Information</Typography>
     <Container maxWidth="md" sx={{my:4}}>
         <TextField
-          required
-          id="outlined-required"
-          label="Your name"
+           required
+           id="name-input"
+           label="Your Name"
+           name="name"  
+           onChange={handleInputChange}
+           autoFocus
         />
-                <TextField
-          required
-          id="outlined-required"
-          label="You Phone"
-     
+        <InputMask mask="(999) 999-9999" maskChar=" " onChange={handleInputChange}>
+          {() => (
+          <TextField
+            required
+            id="outlined-required"
+            label="Your Phone"
+            variant="outlined"
+            name="phone" 
         />
-                <TextField
-          required
-          id="outlined-required"
-          label="Subscribe Email"
-          defaultValue="Subscribe Email"
-        />     
+         )}
+         </InputMask>
     </Container>
 </Box>
   )

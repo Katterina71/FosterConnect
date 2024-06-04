@@ -10,6 +10,8 @@ import UpdateProfile from './components/forms/register_forms/UpdateProfile';
 import Layout from './components/layouts/Layout';
 import Main from './pages/Main'
 import CreateProfile from './pages/CreateProfile';
+import { FormProvider } from './context/FormContext';
+
 
 
 
@@ -25,7 +27,7 @@ const App = () => {
               <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
 
               {/* <Route path="/create-profile" element={<Layout><PrivateRoute><CreateProfile /></PrivateRoute></Layout>} /> */}
-              <Route path="/create-profile" element={<Layout><CreateProfile /></Layout>} />
+              <Route path="/create-profile" element={<Layout><FormProvider><CreateProfile /></FormProvider></Layout>} />
           
               <Route path="/update-profile" element={<Layout><PrivateRoute><UpdateProfile /></PrivateRoute></Layout>} />
 

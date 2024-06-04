@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, Button, Grid } from '@mui/material';
-import PetPreferences from '../profile_forms/PetPreferences'; // Assuming you have a PetPreferences component
+import { Box, Container, Typography, Button } from '@mui/material';
+import PetPreferences from '../foster/PetPreferences'; // Assuming you have a PetPreferences component
 
 export default function FosterInfo() {
     const [petPreferences, setPetPreferences] = useState([]);

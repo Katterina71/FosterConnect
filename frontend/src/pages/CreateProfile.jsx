@@ -2,11 +2,14 @@ import React, {useState} from 'react'
 import { Box, Container, Typography, FormControlLabel, Button } from '@mui/material'
 
 import UserInfo from '../components/forms/profile_forms/UserInfo'
-import FosterInfo from '../components/forms/profile_forms/FosterInfo'
-import ShelterInfo from '../components/forms/profile_forms/ShelterInfo'
+import FosterInfo from '../components/forms/profile_forms/foster/FosterInfo'
+import ShelterInfo from '../components/forms/profile_forms/shelter/ShelterInfo'
 
 import MaterialUISwitch from '../components/forms/profile_forms/MaterialUISwitch'
 import AddressForm from '../components/forms/profile_forms/AddressForm'
+
+
+import { useFormContext } from '../context/FormContext';
 
 
 
@@ -14,15 +17,21 @@ export default function CreateProfile() {
     const [checked, setChecked] = useState(false)
     const [typeOfUser, setTypeOfUser] = useState('Foster')
 
+    const { submitForm } = useFormContext();  // Retrieve submitForm from context
+
+
     const handleChange = (e) => {
         const newChecked = e.target.checked
         setChecked(newChecked);
         setTypeOfUser(newChecked ? 'Shelter' : 'Foster');
     }
 
-    const handleForm = (e) => {
-        e.preventDefault()
-    }
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        submitForm();  // Call the submitForm method from the context
+        // Here you can call an API to submit the form data or handle it as needed
+        // console.log("Form Submitted", { submitForm });
+    };
  
   return (
     <Box sx={{my: '80px'}}>
@@ -32,10 +41,10 @@ export default function CreateProfile() {
             <UserInfo />
             <AddressForm />
             <FormControlLabel
-           control={<MaterialUISwitch sx={{ m: 1 }} />}
-           label="Are you registering as a shelter?"
-           required
-           onChange={handleChange}
+                control={<MaterialUISwitch sx={{ m: 1 }} />}
+                label="Are you registering as a shelter?"
+                required
+                onChange={handleChange}
             />
         </Container>
         <Container sx={{my:4}}>
@@ -44,9 +53,8 @@ export default function CreateProfile() {
              {checked ? <ShelterInfo /> : <FosterInfo />}
         </Container>
         <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button onClick={handleForm} variant="contained" color='secondary' sx={{my:2}}>CREATE PROFILE</Button>
+            <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}}>CREATE PROFILE</Button>
         </Container>
-     
     </Box>
   )
 }

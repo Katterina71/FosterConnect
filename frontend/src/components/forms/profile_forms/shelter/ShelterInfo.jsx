@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
-import AddressForm from './AddressForm';
+import AddressForm from '../AddressForm';
 
 export default function FosterInfo() {
     // State to hold the array of AddressForm components

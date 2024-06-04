@@ -14,14 +14,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// const defaultTheme = createTheme({
-//   palette: {
-//     primary: { main: '#556cd6' },
-//     secondary: { main: '#19857b' },
-//   },
-// });
 
 
 
