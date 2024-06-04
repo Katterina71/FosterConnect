@@ -1,45 +1,52 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
-import PetPreferences from '../foster/PetPreferences'; // Assuming you have a PetPreferences component
+import PetPreferences from '../foster/PetPreferences'; // Assuming this is the correct import path
+import { useFormContext } from '../../../../context/FormContext';
 
-export default function FosterInfo() {
+const FosterInfo = () => {
     const [petPreferences, setPetPreferences] = useState([]);
+    const { updateFormData } = useFormContext();
 
     const handleAddPetPreference = () => {
-        // Add a new pet preference object to the array
-        const newPreference = {
-            pet_type: '',
-            life_stage: '',
-            size: ''
-        };
-        setPetPreferences([...petPreferences, newPreference]);
+        setPetPreferences([...petPreferences, { pet_type: '', life_stage: '', size: '' }]);
     };
 
     const handleRemovePetPreference = (index) => {
-        // Remove a pet preference object from the array by filtering it out
-        const updatedPreferences = petPreferences.filter((_, i) => i !== index);
+        setPetPreferences(petPreferences.filter((_, i) => i !== index));
+    };
+
+    const updatePreference = (index, updatedPreference) => {
+        const updatedPreferences = [...petPreferences];
+        updatedPreferences[index] = updatedPreference;
         setPetPreferences(updatedPreferences);
     };
 
+    const handleSubmit = () => {
+        console.log(petPreferences)
+        updateFormData('petPreferences', petPreferences);  // This would push all preferences to context
+    };
+
     return (
-        <Box sx={{my:4}}>
+        <Box sx={{ my: 4 }}>
             <Container>
                 <Typography>Add your pet preferences below:</Typography>
                 {petPreferences.map((preference, index) => (
                     <Box key={index}>
-                        <PetPreferences preference={preference} />
-                        <Button 
-                            onClick={() => handleRemovePetPreference(index)} 
-                            variant="contained" 
-                            color="error" 
-                            sx={{ mt: 1 }}
-                        >
+                        <PetPreferences preference={preference} index={index} updatePreference={updatePreference} />
+                        <Button onClick={() => handleRemovePetPreference(index)} variant="contained" color="error" sx={{ mt: 1 }}>
                             Remove
                         </Button>
                     </Box>
                 ))}
-                <Button onClick={handleAddPetPreference} variant="contained"  color="secondary" sx={{my:2}}>Add New Pet Preference</Button>
+                <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2 }}>
+                    Add New Pet Preference
+                </Button>
+                <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2 }}>
+                    Submit All Preferences
+                </Button>
             </Container>
         </Box>
     );
-}
+};
+
+export default FosterInfo;

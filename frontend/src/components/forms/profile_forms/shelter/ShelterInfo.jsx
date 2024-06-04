@@ -9,7 +9,7 @@ export default function FosterInfo() {
     const [shelterAddress, setShelterAddress] = useState([]);
 
     const handleAddAddress = () => {
-        // Add a new pet preference object to the array
+        // Add a new address preference object to the array
         const newAddress = {
             street_address: '',
             town: '',
