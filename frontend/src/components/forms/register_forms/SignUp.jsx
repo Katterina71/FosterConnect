@@ -71,12 +71,9 @@ function SignUp() {
         //Checking if user has already exist 
         console.error("Error during signup:", error);
         setLoading(false);
-        // Handle specific errors based on Firebase error codes
-        if (error.code === 'auth/email-already-in-use') {
-            setError('Email already in use. Please use a different email or log in.');
-        } else {
-            setError('Failed to create an account: ' + error.message);  // Display the actual error message from Firebase
-        }
+      
+        setError('Failed to create an account: ' + error.message);  // Display the actual error message from Firebase
+
   } 
   
   }

@@ -47,10 +47,13 @@ export default function CreateProfile() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-
         if (typeOfUser) {  // Checks if a type of user has been chosen before submitting
             submitForm();
-            navigate('/')
+            if (typeOfUser === 'Shelter') {
+                navigate('/shelter-dashboard')
+            }
+            else { navigate('/foster-dashboard') }
+          
         } else {
             alert('Please select whether you are registering as a foster or a shelter.');  // Alert if no selection is made
         }

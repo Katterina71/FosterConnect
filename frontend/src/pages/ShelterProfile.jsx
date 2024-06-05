@@ -1,5 +1,6 @@
 
 
+import {useState} from 'react'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,7 +13,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
 
 
-  export default function Profile() {
+  export default function ShelterProfile() {
 
     const [error, setError] = useState("")
     const {currentUser, logout} = useAuth()
@@ -42,8 +43,7 @@ import {useAuth} from '../context/AuthContext'
             width: '500px',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-       
+            alignItems: 'center', 
           }}
         >
         <Typography component="h1" variant="h5">

@@ -19,21 +19,21 @@ export function AuthProvider({ children }) {
         
         console.log('New user added')
         try {
-            
-            const userCredential= await   createUserWithEmailAndPassword(auth, email, password) 
-                   // User is created successfully, now userCredential.user contains the newly created user
-                   const user = userCredential.user;
+             const userCredential = await createUserWithEmailAndPassword(auth, email, password) 
+                // User is created successfully, now userCredential.user contains the newly created user
+                const user = userCredential.user;
+
+                // console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
+                // console.log('New user email:', user.email);  // Debugging Log the email of the new user
         
-                   // console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
-                   // console.log('New user email:', user.email);  // Debugging Log the email of the new user
-        
-                   //Add new user in DB
-                   const newUser = {
+                //Add new user in Mongo DB
+                const newUser = {
                        firebaseUid: user.uid,
                        email: user.email 
                    };
                    console.log(JSON.stringify(newUser))
-                let response= await  fetch(BASE_URL, {
+                
+                   let response= await  fetch(BASE_URL, {
                        method: 'POST',
                        headers: {
                            'Content-Type': 'application/json'
@@ -41,23 +41,21 @@ export function AuthProvider({ children }) {
                        body: JSON.stringify(newUser)
                    })
                
-                       if (!response.ok) {
+                    if (!response.ok) {
                            throw new Error(`HTTP error! Status: ${response.status}`);
                        }
-                    let  data= await  response.json();
-                       
+                    let  data= await  response.json();   
                     console.log('Success:', data)
-                    
-             
-                      navigate('/create-profile');
-           
+
+                    //If signup is successful, navigate to the create-profile page
+                    navigate('/create-profile');
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
        
              // Handle errors more specifically based on errorCode
             if (errorCode === 'auth/email-already-in-use') {
-                console.error('This email is already in use.');
+                console.error('Email already in use. Please use a different email or log in.');
                 throw new Error('This email is already in use.');
             } else if (errorCode === 'auth/invalid-email') {
                 console.error('The email address is not valid.');
