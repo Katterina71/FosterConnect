@@ -50,13 +50,23 @@ import {useAuth} from '../context/AuthContext'
 
   return (
 
-    <Box>
+    <Box sx={{my: '80px'}}>
          {user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>}
-
-        <Link to="/update-profile">Update Profile</Link>
-        <Grid  justifyContent="flex-end">
-                <Button onClick = {handleLogout} variant="contained" sx={{ mt: 5, mb: 2}}>Log Out</Button>
-        </Grid>
+        <Container  sx = {{
+           display: 'flex',
+           justifyContent: 'center'
+           }}>
+        
+        <Box style={{
+            width: '500px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            }}>
+            <Link to="/update-profile">Update Profile</Link>
+            <Button onClick = {handleLogout} variant="contained" sx={{ mt: 5, mb: 2}}>Log Out</Button>
+        </Box>
+        </Container>
     </Box>
   )
 }

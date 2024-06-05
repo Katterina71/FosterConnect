@@ -62,7 +62,7 @@ function Login() {
 
   return (
     <Box sx={{my: '80px'}}>
-     <Container  style = {{
+     <Container  sx = {{
       display: 'flex',
       justifyContent: 'center',
       marginTop: '10vh',
