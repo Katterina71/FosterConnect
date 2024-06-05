@@ -31,9 +31,9 @@ import {useAuth} from '../context/AuthContext'
 
   return (
 
-    // <ThemeProvider theme={defaultTheme}>
-         <Container component="main" style = {{
-      width: '100vh',
+    <Box>
+         <Container sx = {{
+      
       display: 'flex',
       justifyContent: 'center'
      }}>
@@ -47,7 +47,7 @@ import {useAuth} from '../context/AuthContext'
           }}
         >
         <Typography component="h1" variant="h5">
-            Dashboard
+            Shelter Dashboard
         </Typography>
         <Typography component="h1" variant="h5">
             Email: {currentUser.email}
@@ -58,7 +58,7 @@ import {useAuth} from '../context/AuthContext'
         </Grid>
         </Box>
         </Container>
-    // </ThemeProvider>
+      </Box>
   )
 }
 

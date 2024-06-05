@@ -64,10 +64,8 @@ function Login() {
   }
 
   return (
-  
-  
-     <Container component="main" style = {{
-      width: '100vh',
+    <Box sx={{my: '80px'}}>
+     <Container  style = {{
       display: 'flex',
       justifyContent: 'center',
       marginTop: '10vh',
@@ -115,7 +113,7 @@ function Login() {
                 inputRef = {passwordRef}
               />
             </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" color='secondary' fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
             <Link to='/forgot-password'>Forgot Password?</Link>
             <Grid container justifyContent="flex-end">
                   <Grid item>
@@ -126,8 +124,9 @@ function Login() {
        </Box>
       </Box>
     </Container>
-
+    </Box>
   )
+
 }
 
 export default Login

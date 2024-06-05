@@ -79,9 +79,8 @@ function SignUp() {
   }
 
   return (
-  
-     <Container component="main" style = {{
-      width: '100vh',
+  <Box sx={{my: '80px'}}>
+     <Container  sx = {{
       display: 'flex',
       justifyContent: 'center',
       marginTop: '10vh'
@@ -158,7 +157,7 @@ function SignUp() {
        </Box>
       </Box>
     </Container>
- 
+  </Box>
   )
 }
 

@@ -58,9 +58,8 @@ function ForgotPassword() {
   }
 
   return (
- 
-     <Container component="main" style = {{
-      width: '100vh',
+    <Box sx={{my: '80px'}}>
+     <Container style = {{
       display: 'flex',
       justifyContent: 'center',
       marginTop: '10vh'
@@ -97,7 +96,7 @@ function ForgotPassword() {
                 autoFocus
                 />
               </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Reset Password</Button>
+            <Button onClick = {(e) => handleClick(e)} type="submit" color='secondary' fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Reset Password</Button>
             <Link to='/login'>Login</Link>
             <Grid container justifyContent="flex-end">
                   <Grid item>
@@ -108,7 +107,7 @@ function ForgotPassword() {
        </Box>
       </Box>
     </Container>
-
+    </Box>
   )
 }
 

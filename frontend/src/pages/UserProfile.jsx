@@ -30,8 +30,8 @@ import {useAuth} from '../context/AuthContext'
 
   return (
 
-    // <ThemeProvider theme={defaultTheme}>
-         <Container component="main" style = {{
+    <Box>
+         <Container sx = {{
       width: '100vh',
       display: 'flex',
       justifyContent: 'center'
@@ -47,18 +47,18 @@ import {useAuth} from '../context/AuthContext'
           }}
         >
         <Typography component="h1" variant="h5">
-            Dashboard
+            Foster Dashboard
         </Typography>
         <Typography component="h1" variant="h5">
             Email: {currentUser.email}
         </Typography>
         <Link to="/update-profile">Update Profile</Link>
         <Grid  justifyContent="flex-end">
-                <Button onClick = {handleLogout} variant="contained" sx={{ mt: 5, mb: 2}}>Log Out</Button>
+                <Button onClick = {handleLogout} variant="contained" color='secondary' sx={{ mt: 5, mb: 2}}>Log Out</Button>
         </Grid>
         </Box>
         </Container>
-    // </ThemeProvider>
+      </Box>
   )
 }
 
