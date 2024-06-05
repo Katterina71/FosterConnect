@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, createContext } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword} from 'firebase/auth';
-import { auth} from '../firebase/firebase'; // Ensure this path is correct
+import {auth} from '../firebase/firebase'; // Ensure this path is correct
 import {BASE_URL} from '../api/endpointsDB'
 
 const AuthContext = createContext();

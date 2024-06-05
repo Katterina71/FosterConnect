@@ -10,22 +10,26 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-
+import {useAuth} from '../../context/AuthContext'
 import {Link, useNavigate} from 'react-router-dom'
 
 
 
-const pages = ['Who is Foster?', 'About App', 'Pets Finder'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const {currentUser, logout} = useAuth()
+
+  const pages = ['Who is Foster?', 'About App', 'Pets Finder'];
+  // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate('/signup')
+  const handleClickLogo = () => {
+    navigate('/')
   }
 
   const handleOpenNavMenu = (event) => {
@@ -40,18 +44,23 @@ export default function Header() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
+
+  const handleLogout = () => {
+    logout();
+    // handleCloseUserMenu();
   };
 
   return (
     <AppBar position="static">
-      <Container sx={{maxWidth:"100%"}}>
+      <Container sx={{maxWidth:"xl"}}>
 
         <Toolbar disableGutters>
 
            {/* Responsive Logo Img Positioning - Desktop*/}
-           <Link to='/'>
+        <Box>
            <Box
             component="img"
             src='./logo-h.svg'
@@ -60,31 +69,30 @@ export default function Header() {
               width: 200,
               height: 'auto',
               display: { xs: 'none', md: 'flex' },
-              marginLeft: { md: 0 }, // Center on xs screens, left on md and up
-              marginRight: { md: 0 },
-              
+              marginLeft: 'auto', // Center on large screens
+              marginRight: 'auto',
             }}
+            onClick = {handleClickLogo}
           />
-          </Link>
-          {/* Mobile menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex'} }}>
+        </Box>
 
-          
+          {/* Mobile menu */}
+           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="new-user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-            
             <MenuIcon sx={{
                 display: { xs: 'block', md: 'none' },
+                color: 'grey',
+                width: '20'
               }} />
+
             </IconButton>
-
-
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -103,7 +111,6 @@ export default function Header() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-
             {/* Array of pages */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -113,24 +120,19 @@ export default function Header() {
             </Menu>
           </Box>
 
+
            {/* Responsive Logo Img Positioning - Mobile*/}
-           <Link to='/'>
-          <Box
-            component="img"
-            src='./logo-h.svg'
-            alt='logo'
-          
+         <Box sx= {{flexGrow: 10, display : { xs: 'flex', md: 'none'}}}>
+          <Box component="img" src='./logo-h.svg' alt='logo'
             sx={{
-              width: 80,
+              width: 140,
               height: 'auto',
               display: { xs: 'flex', md: 'none'},
-              alignContent: 'center',
-              flexGrow: { xs: 0.5 }, // Allow it to grow on larger screens if needed
-              mr: 1
-              
+              mx: 'auto',  // Centering logo on mobile
             }}
+            onClick = {handleClickLogo}
           />
-          </Link>
+        </Box>
 
           {/* Menu buttons */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -138,56 +140,27 @@ export default function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx:4, color: '#220C04', display: 'block'}}
+                sx={{ my: 2, mx:'auto', color: '#220C04', display: 'block'}}
               >
                 {page}
               </Button>
             ))}
           </Box>
             
-          
-
-     
-          
-          {/*Logo */}      
+          {/* User Authentication Button */}
           <Box sx={{ flexGrow: 0 }}>
-          
-          
-
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip> */}
-
-            <Button onClick={handleClick} fullWidth variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height:'45px', color: '#ffffff' }}>Sign Up</Button>
-
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-            
+            {console.log(currentUser)}
+            {currentUser ? (
+              <>
+                <Typography component="div" sx={{ flexGrow: 1,  color: 'grey', fontSize: '1rem',  alignItems: 'center', display: { xs: 'none', md: 'flex' } }}>
+                  Welcome, {currentUser.email}! {/* Displaying user's name if logged in */}
+                </Typography>
+                <Button onClick={handleLogout} variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height: '45px', color: '#ffffff', ml:2 }}>Logout</Button>
+              </>
+            ) : (
+              <Button onClick={() => navigate('/signup')} variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height: '45px', color: '#ffffff' }}>Sign Up</Button>
+            )}
           </Box>
-
-
         </Toolbar>
       </Container>
     </AppBar>

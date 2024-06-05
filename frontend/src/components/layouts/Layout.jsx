@@ -6,6 +6,8 @@ import GlobalStyles from '../../styles/GlobalStyles';
 
 import theme from './Theme';
 
+import { AuthProvider } from '../../context/AuthContext';
+
  // Footer on the bottom of the page
  const containerStyle = {
   display: 'grid',
@@ -21,7 +23,7 @@ export default function Layout({children}) {
          <GlobalStyles />   
          {/* Helps to reset browser defaults */}
          <CssBaseline />  
-         <Header />
+         <AuthProvider><Header /></AuthProvider>
               {children}
         <Footer />
       </ThemeProvider>
