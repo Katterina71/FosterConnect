@@ -1,5 +1,6 @@
-import {useState} from 'react'
 
+
+import {useEffect, useState} from 'react'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,30 +10,25 @@ import Container from '@mui/material/Container';
 
 
 import {Link, useNavigate} from 'react-router-dom'
-import {useAuth} from '../context/AuthContext'
+import {useAuth} from '../../../context/AuthContext'
 
 
-  export default function FosterProfile() {
+  export default function ShelterDashboard({user}) {
 
     const [error, setError] = useState("")
-    const {currentUser, logout} = useAuth()
+   
+    const {currentUser, loginProfile, logout} = useAuth()
+
     const navigate = useNavigate()
 
-    async function handleLogout (){
-        setError('')
-        try {
-           await logout()
-           navigate('/login') 
-        } catch (error) {
-            setError('Failed to logout')
-        }
-    }
+
+
 
   return (
 
     <Box>
          <Container sx = {{
-      width: '100vh',
+      
       display: 'flex',
       justifyContent: 'center'
      }}>
@@ -42,20 +38,23 @@ import {useAuth} from '../context/AuthContext'
             width: '500px',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-       
+            alignItems: 'center', 
           }}
         >
         <Typography component="h1" variant="h5">
-            Foster Dashboard
+            Shelter Dashboard
         </Typography>
         <Typography component="h1" variant="h5">
             Email: {currentUser.email}
         </Typography>
-        <Link to="/update-profile">Update Profile</Link>
-        <Grid  justifyContent="flex-end">
-                <Button onClick = {handleLogout} variant="contained" color='secondary' sx={{ mt: 5, mb: 2}}>Log Out</Button>
-        </Grid>
+        <Typography component="h1" variant="h5">
+            Name: {user.name || ''}
+        </Typography>
+        <Typography component="h1" variant="h5">
+            Phone: {user.phone || ''}
+        </Typography>
+
+       
         </Box>
         </Container>
       </Box>

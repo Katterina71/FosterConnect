@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import SignUp from './components/forms/register_forms/SignUp';
-import Profile  from './pages/UserProfile';
+import Profile  from './components/dashboard/foster/FosterDashboard';
 import Login from './components/forms/register_forms/Login';
 import ForgotPassword from './components/forms/register_forms/ForgotPassword';
 import PrivateRoute from './components/layouts/PrivateRoute';
@@ -10,8 +10,7 @@ import UpdateProfile from './components/forms/register_forms/UpdateProfile';
 import Layout from './components/layouts/Layout';
 import Main from './pages/Main'
 import CreateProfile from './pages/CreateProfile';
-import ShelterProfile from './pages/ShelterProfile';
-import FosterProfile from './pages/UserProfile';
+import Dashboard from './pages/Dashboard';
 import { FormProvider } from './context/FormContext';
 
 
@@ -27,8 +26,10 @@ const App = () => {
               {/* <Route path="/create-profile" element={<Layout><PrivateRoute><CreateProfile /></PrivateRoute></Layout>} /> */}
               <Route path="/create-profile" element={<Layout><FormProvider><CreateProfile /></FormProvider></Layout>} />
               
-              <Route path="/shelter-dashboard" element={<Layout><PrivateRoute><ShelterProfile /></PrivateRoute></Layout>} />
-              <Route path="/foster-dashboard" element={<Layout><PrivateRoute><FosterProfile /></PrivateRoute></Layout>} />
+              {/* <Route path="/shelter-dashboard" element={<Layout><PrivateRoute><ShelterProfile /></PrivateRoute></Layout>} />
+              <Route path="/foster-dashboard" element={<Layout><PrivateRoute><FosterProfile /></PrivateRoute></Layout>} /> */}
+
+              <Route path="/dashboard" element={<Layout><PrivateRoute><Dashboard /></PrivateRoute></Layout>} />
 
               <Route path="/update-profile" element={<Layout><PrivateRoute><UpdateProfile /></PrivateRoute></Layout>} />
 

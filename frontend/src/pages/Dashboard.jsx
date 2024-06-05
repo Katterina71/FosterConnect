@@ -8,12 +8,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
+import FosterDashboard from '../components/dashboard/foster/FosterDashboard';
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
 
 
-  export default function ShelterProfile() {
+  export default function Dashboard() {
 
     const [error, setError] = useState("")
     const [user, setUser] = useState("")
@@ -49,40 +51,13 @@ import {useAuth} from '../context/AuthContext'
   return (
 
     <Box>
-         <Container sx = {{
-      
-      display: 'flex',
-      justifyContent: 'center'
-     }}>
-     <CssBaseline />
-     <Box
-          style={{
-            width: '500px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center', 
-          }}
-        >
-        <Typography component="h1" variant="h5">
-            Shelter Dashboard
-        </Typography>
-        <Typography component="h1" variant="h5">
-            Email: {currentUser.email}
-        </Typography>
-        <Typography component="h1" variant="h5">
-            Name: {user.name || ''}
-        </Typography>
-        <Typography component="h1" variant="h5">
-            Phone: {user.phone || ''}
-        </Typography>
+         {user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>}
 
         <Link to="/update-profile">Update Profile</Link>
         <Grid  justifyContent="flex-end">
                 <Button onClick = {handleLogout} variant="contained" sx={{ mt: 5, mb: 2}}>Log Out</Button>
         </Grid>
-        </Box>
-        </Container>
-      </Box>
+    </Box>
   )
 }
 

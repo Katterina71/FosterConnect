@@ -88,7 +88,8 @@ export function AuthProvider({ children }) {
        
 
          //If signup is successful, navigate to the foster or shelter dashboard page
-         data.shelter ? navigate('/shelter-dashboard') : navigate('/foster-dashboard');
+        //  data.shelter ? navigate('/shelter-dashboard') : navigate('/foster-dashboard');
+          navigate('/dashboard')
          return user;
 
         } catch (error) {
