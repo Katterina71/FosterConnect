@@ -15,7 +15,7 @@ export const FormProvider = ({ children }) => {
 
     const [formData, setFormData] = useState({
         userInfo: {},
-        petPreferences: {}
+        fostering_preferences: {}
     });
 
 
@@ -46,7 +46,7 @@ export const FormProvider = ({ children }) => {
 
         // Set up the options for the fetch request
         const requestOptions = {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },

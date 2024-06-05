@@ -24,7 +24,7 @@ const FosterInfo = () => {
 
     const handleSubmit = () => {
         console.log(petPreferences)
-        updateFormData('petPreferences', petPreferences);  // This would push all preferences to context
+        updateFormData('fostering_preferences', petPreferences);  // This would push all preferences to context
     };
 
     return (

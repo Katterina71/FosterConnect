@@ -16,17 +16,18 @@ const UserController = {
     },
 
     register: async(req, res) => {
-        const { firebaseUid, contact_info} = req.body;
+        const { firebaseUid, email} = req.body;
         console.log(req.body); // Debugging
         try {
             const newUser = new UsersProfiles({
                 firebaseUid,
-                contact_info,
+                email
             });
-            console.log('Hello')
+            console.log('Create user')
             await newUser.save();
             res.status(201).json('User registered successfully.');
         } catch (error) {
+            console.error(error)
             res.status(500).json({message: error.message});
         }
     },
@@ -46,17 +47,39 @@ const UserController = {
 
     updateProfile: async (req,res) => {
         try {
-            console.log('update')
-            console.log(req.body)
-            const updateUser =await UsersProfiles.findByOneAndUpdate({firebaseUid: req.params.firebaseUid},req.body)
-            res.json(updateUser)
+            console.log('Update profile')
+            console.log(req.body) // Ensure the body is as expected
+            const { name, shelter, shelter_name, phone, status, address, fostering_preferences } = req.body;
+
+            const data = {
+                name: req.body.userInfo.name,  
+                shelter: req.body.userInfo.shelter,
+                shelter_name: req.body.userInfo.shelter_name,
+                phone:  req.body.userInfo.phone,
+                status,
+                address,
+                fostering_preferences: fostering_preferences[0] || []  // Ensure it's an array
+            };
+     
+            console.log(data) // Debugging
+            const updateUser = await UsersProfiles.findOneAndUpdate(
+                { firebaseUid: req.params.firebaseUid },
+                { $set: data} ,
+                { new: true, runValidators: true }  // Ensure updated document is returned and validators run
+            );
+                if (!updateUser) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                res.json(updateUser);
         } catch (error) {
+            console.error(error);  // More detailed logging
             res.status(500).json({message:error.message})
             
         }
     },
     deleteProfile: async (req,res) => {
         try {
+            console.log('Remove profile')
             await UsersProfiles.findByOneAndDelete({firebaseUid: req.params.firebaseUid})
             res.status(204).send({message: 'User was delete'})
         } catch (error) {

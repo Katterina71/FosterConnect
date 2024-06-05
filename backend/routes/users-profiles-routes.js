@@ -13,7 +13,7 @@ userRouter.post('/', UserController.register);
 userRouter.get('/:firebaseUid', UserController.getProfile);
 
 // Update User Profile
-userRouter.patch('/:firebaseUid', UserController.updateProfile);
+userRouter.put('/:firebaseUid', UserController.updateProfile);
 
 // Delete User Profile
 userRouter.delete('/:firebaseUid', UserController.deleteProfile);

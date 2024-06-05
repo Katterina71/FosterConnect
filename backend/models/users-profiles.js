@@ -13,32 +13,6 @@ const addressSchema = new Schema ({
    _id: false
  });
  
- // contactInfo Schema
- const contactInfoSchema = new Schema ({
-  email: {
-    type: String,
-    required: true,
-    validate: {
-      validator: function(v) {
-        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: props => `${props.value} is not a valid email address!`
-    },
-    unique: true
-  },
-  phone: {
-    type: String,
-    validate: {
-      validator: function(v) {
-        return /\d{3}-\d{3}-\d{4}/.test(v);
-      },
-      message: props => `${props.value} is not a valid phone number!`
-    }
-  },
- }, {
-   _id: false 
- });
-
  // fosteringPreferences Schema
  const fosteringPreferencesSchema = new Schema ({
         pet_type: 
@@ -80,7 +54,27 @@ const usersProfilesSchema = new Schema({
       type : String,
       default: 'none',
   },
-    contact_info : contactInfoSchema,
+    email: {
+      type: String,
+      // required: true,
+      // validate: {
+      //   validator: function(v) {
+      //     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+      //   },
+      //   message: props => `${props.value} is not a valid email address!`
+      // },
+      // unique: true
+    },
+    phone: {
+      type: String,
+      validate: {
+        validator: function(v) {
+          return /\d{3}-\d{3}-\d{4}/.test(v);
+        },
+        message: props => `${props.value} is not a valid phone number!`
+      }
+    },
+
     address : [addressSchema],
     fostering_preferences: [fosteringPreferencesSchema],
     status : {

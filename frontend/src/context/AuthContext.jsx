@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
             //Add new user in DB
             const newUser = {
                 firebaseUid: user.uid,
-                contact_info: { email: user.email }
+                email: user.email 
             };
             console.log(JSON.stringify(newUser))
             fetch(BASE_URL, {

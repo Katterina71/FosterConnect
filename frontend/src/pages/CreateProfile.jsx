@@ -39,6 +39,7 @@ export default function CreateProfile() {
                 updateFormData('petPreferences', []);  // Clear pet preferences when changing to Shelter
                 updateFormData('userInfo', {shelter : true}); 
             }
+            else { updateFormData('userInfo', {shelter : false}); }
             setTypeOfUser(newUserType);  // Update the user type state
         }
          
