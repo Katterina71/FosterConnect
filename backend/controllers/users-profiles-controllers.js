@@ -32,21 +32,23 @@ const UserController = {
     },
    
 
-    getProfile: async (reg,res) => {
+    getProfile: async (req,res) => {
         try {
-            console.log(req.params)
-            const user = await UsersProfiles.findById(req.params.firebaseUid);
+            const user = await UsersProfiles.findOne({firebaseUid: req.params.firebaseUid});
             if (!user) {
-                return res.status(404).send({message: 'User not found'})
+                return res.status(404).json({message: 'User not found'})
             }    
             res.json(user)        
         } catch (error) {
-            req.status(500).json({message:error.message})
+            res.status(500).json({message:error.message})
         }
     },
+
     updateProfile: async (req,res) => {
         try {
-            const updateUser =await UsersProfiles.findByIdAndUpdate(req.params.firebaseUid,req.body)
+            console.log('update')
+            console.log(req.body)
+            const updateUser =await UsersProfiles.findByOneAndUpdate({firebaseUid: req.params.firebaseUid},req.body)
             res.json(updateUser)
         } catch (error) {
             res.status(500).json({message:error.message})
@@ -55,7 +57,7 @@ const UserController = {
     },
     deleteProfile: async (req,res) => {
         try {
-            await UsersProfiles.findByIdAndDelete(req.params.firebaseUid)
+            await UsersProfiles.findByOneAndDelete({firebaseUid: req.params.firebaseUid})
             res.status(204).send({message: 'User was delete'})
         } catch (error) {
             res.status(500).json({message:error.message})

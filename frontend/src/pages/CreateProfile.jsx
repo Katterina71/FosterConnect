@@ -37,6 +37,7 @@ export default function CreateProfile() {
         if (newUserType !== typeOfUser){  // Check if the type has actually changed
             if (newUserType === 'Shelter') {
                 updateFormData('petPreferences', []);  // Clear pet preferences when changing to Shelter
+                updateFormData('userInfo', {shelter : true}); 
             }
             setTypeOfUser(newUserType);  // Update the user type state
         }
