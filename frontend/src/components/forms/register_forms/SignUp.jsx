@@ -36,6 +36,7 @@ function SignUp() {
 
  async function handleClick(e) {
   e.preventDefault()
+  
 
 
   // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
@@ -55,17 +56,29 @@ function SignUp() {
     return setError('Passwords do not match');
 }
 
+
+  setError('');  // Clear any previous errors
+  setLoading(true); // Start the loading process
+
   // Send data to Firebase
   try {
-        setError('');
-        setLoading(true);
-        await signup(emailRef.current.value, passwordRef.current.value);
-        //Sent to Another page
-        navigate('/create-profile')
+        // Attempt to sign up the user
+         await signup(emailRef.current.value, passwordRef.current.value, navigate);
+    
+        // If signup is successful, navigate to the create-profile page
+       
   } catch (error) {
-    setError('Failed to create an account');
-  }
-    setLoading(false);
+        //Checking if user has already exist 
+        console.error("Error during signup:", error);
+        setLoading(false);
+        // Handle specific errors based on Firebase error codes
+        if (error.code === 'auth/email-already-in-use') {
+            setError('Email already in use. Please use a different email or log in.');
+        } else {
+            setError('Failed to create an account: ' + error.message);  // Display the actual error message from Firebase
+        }
+  } 
+  
   }
 
   return (
@@ -94,6 +107,9 @@ function SignUp() {
         </Typography>
         <Box style={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
+          {error && error.includes('Email already in use.') && (
+        <Alert severity="warning" fullWidth>Warning: This email is already in use. Please use a different email or log in.</Alert>
+         )}
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField 

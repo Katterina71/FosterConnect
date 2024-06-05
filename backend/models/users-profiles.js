@@ -56,20 +56,20 @@ const usersProfilesSchema = new Schema({
   },
     email: {
       type: String,
-      // required: true,
-      // validate: {
-      //   validator: function(v) {
-      //     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      //   },
-      //   message: props => `${props.value} is not a valid email address!`
-      // },
-      // unique: true
+      required: true,
+      validate: {
+        validator: function(v) {
+          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+        },
+        message: props => `${props.value} is not a valid email address!`
+      },
+      unique: true
     },
     phone: {
       type: String,
       validate: {
         validator: function(v) {
-          return /\d{3}-\d{3}-\d{4}/.test(v);
+          return /(\d{3})-\d{3}-\d{4}/.test(v);
         },
         message: props => `${props.value} is not a valid phone number!`
       }

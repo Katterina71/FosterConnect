@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Header from '../navigation/Header'
 import Footer from '../navigation/Footer'
 import {ThemeProvider, CssBaseline } from '@mui/material'; 

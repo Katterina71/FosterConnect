@@ -12,53 +12,67 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    
     // Firebase authentication instance
-
-    function signup(email, password) {
-
-        console.log('New user added')
-        createUserWithEmailAndPassword(auth, email, password)
+    
+    async function signup(email, password, navigate) {
         
-        .then((userCredential) => {
-            // User is created successfully, now userCredential.user contains the newly created user
-            const user = userCredential.user;
-
-            // console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
-            // console.log('New user email:', user.email);  // Debugging Log the email of the new user
-
-            //Add new user in DB
-            const newUser = {
-                firebaseUid: user.uid,
-                email: user.email 
-            };
-            console.log(JSON.stringify(newUser))
-            fetch(BASE_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => console.log('Success:', data))
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        })
-
-        .catch((error) => {
+        console.log('New user added')
+        try {
+            
+            const userCredential= await   createUserWithEmailAndPassword(auth, email, password) 
+                   // User is created successfully, now userCredential.user contains the newly created user
+                   const user = userCredential.user;
+        
+                   // console.log('New user uid:', user.uid);  // Debugging Log the UID of the new user
+                   // console.log('New user email:', user.email);  // Debugging Log the email of the new user
+        
+                   //Add new user in DB
+                   const newUser = {
+                       firebaseUid: user.uid,
+                       email: user.email 
+                   };
+                   console.log(JSON.stringify(newUser))
+                let response= await  fetch(BASE_URL, {
+                       method: 'POST',
+                       headers: {
+                           'Content-Type': 'application/json'
+                       },
+                       body: JSON.stringify(newUser)
+                   })
+               
+                       if (!response.ok) {
+                           throw new Error(`HTTP error! Status: ${response.status}`);
+                       }
+                    let  data= await  response.json();
+                       
+                    console.log('Success:', data)
+                    
+             
+                      navigate('/create-profile');
+           
+        } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.error('Error adding user:', errorCode, errorMessage);
-        });
+       
+             // Handle errors more specifically based on errorCode
+            if (errorCode === 'auth/email-already-in-use') {
+                console.error('This email is already in use.');
+                throw new Error('This email is already in use.');
+            } else if (errorCode === 'auth/invalid-email') {
+                console.error('The email address is not valid.');
+            } else if (errorCode === 'auth/weak-password') {
+                console.error('The password is too weak.');
+            } else {
+                console.error('Error adding user:', errorCode, errorMessage);
+            }
+            throw new Error(errorMessage); // Propagate error up if you need to handle it outside
+       
         
-        return
+            
+        }
+
+        
 
     }
 
