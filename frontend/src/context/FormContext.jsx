@@ -39,7 +39,7 @@ export const FormProvider = ({ children }) => {
         }
     };
 
-    const submitForm = () => {
+    const submitForm = async () => {
         console.log("Submitting Form:", formData);
 
         // Add logic to handle form submission such as API calls.
@@ -53,21 +53,24 @@ export const FormProvider = ({ children }) => {
         body: JSON.stringify(formData)  // Convert the formData object into a JSON string
         };
 
+        console.log(formData)
+        console.log(currentUser.uid)
+
     // Perform the fetch operation to send the data to the server
-         fetch(BASE_URL+'/'+currentUser.uid, requestOptions)
-        .then(response => {
+        try {
+            let response = await fetch(BASE_URL+'/'+currentUser.uid, requestOptions)
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
-        })
-        .then(data => {
+            let data = await response.json()
             console.log('Success:', data);  // Log success message and data returned from the server
-        })
-        .catch(error => {
+            return data;
+        } catch (error) {
             console.error('Error:', error);  // Log any errors encountered during the fetch
-        });
-        
+        }
+         
+
     };
 
     return (

@@ -52,11 +52,8 @@ function Login() {
   try {
         setError('');
         setLoading(true);
-        console.log(emailRef.current.value, passwordRef.current.value)
-        await login(emailRef.current.value, passwordRef.current.value);
+        await login(emailRef.current.value, passwordRef.current.value, navigate);
 
-        //Sen to another page
-        navigate('/profile')
   } catch (error) {
     setError('Failed to Sign In');
   }

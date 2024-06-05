@@ -149,7 +149,6 @@ export default function Header() {
             
           {/* User Authentication Button */}
           <Box sx={{ flexGrow: 0 }}>
-            {console.log(currentUser)}
             {currentUser ? (
               <>
                 <Typography component="div" sx={{ flexGrow: 1,  color: 'grey', fontSize: '1rem',  alignItems: 'center', display: { xs: 'none', md: 'flex' } }}>

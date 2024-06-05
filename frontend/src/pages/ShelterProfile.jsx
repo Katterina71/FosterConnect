@@ -1,6 +1,6 @@
 
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,8 +16,25 @@ import {useAuth} from '../context/AuthContext'
   export default function ShelterProfile() {
 
     const [error, setError] = useState("")
-    const {currentUser, logout} = useAuth()
+    const [user, setUser] = useState("")
+    const {currentUser, loginProfile, logout} = useAuth()
+
     const navigate = useNavigate()
+
+    async function getData(){
+      console.log(currentUser)
+      try {
+       let data = await (loginProfile(currentUser))
+       console.log(data)
+       setUser(data)
+       } catch (error) {
+         setError('Data not found')
+       }
+    }
+    
+    useEffect(() => {
+      getData()
+    }, [])
 
     async function handleLogout (){
         setError('')
@@ -52,6 +69,13 @@ import {useAuth} from '../context/AuthContext'
         <Typography component="h1" variant="h5">
             Email: {currentUser.email}
         </Typography>
+        <Typography component="h1" variant="h5">
+            Name: {user.name || ''}
+        </Typography>
+        <Typography component="h1" variant="h5">
+            Phone: {user.phone || ''}
+        </Typography>
+
         <Link to="/update-profile">Update Profile</Link>
         <Grid  justifyContent="flex-end">
                 <Button onClick = {handleLogout} variant="contained" sx={{ mt: 5, mb: 2}}>Log Out</Button>

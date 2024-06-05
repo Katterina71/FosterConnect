@@ -34,6 +34,7 @@ export default function CreateProfile() {
     const handleChange = (event) => {
        
         const newUserType = event.target.value; 
+        console.log(newUserType)
         if (newUserType !== typeOfUser){  // Check if the type has actually changed
             if (newUserType === 'Shelter') {
                 updateFormData('petPreferences', []);  // Clear pet preferences when changing to Shelter
