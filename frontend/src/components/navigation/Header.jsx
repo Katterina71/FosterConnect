@@ -28,6 +28,16 @@ export default function Header() {
 
   const navigate = useNavigate()
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleClickLogo = () => {
     navigate('/')
   }
@@ -71,6 +81,7 @@ export default function Header() {
               display: { xs: 'none', md: 'flex' },
               marginLeft: 'auto', // Center on large screens
               marginRight: 'auto',
+              cursor: 'pointer' // Changes cursor on hover to indicate interactivity
             }}
             onClick = {handleClickLogo}
           />
@@ -129,6 +140,7 @@ export default function Header() {
               height: 'auto',
               display: { xs: 'flex', md: 'none'},
               mx: 'auto',  // Centering logo on mobile
+            
             }}
             onClick = {handleClickLogo}
           />
@@ -151,13 +163,42 @@ export default function Header() {
           <Box sx={{ flexGrow: 0 }}>
             {currentUser ? (
               <>
-                <Typography component="div" sx={{ flexGrow: 1,  color: 'grey', fontSize: '1rem',  alignItems: 'center', display: { xs: 'none', md: 'flex' } }}>
-                  Welcome, {currentUser.email}! {/* Displaying user's name if logged in */}
-                </Typography>
-                <Button onClick={handleLogout} variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height: '45px', color: '#ffffff', ml:2 }}>Logout</Button>
+                <Link  sx={{ flexGrow: 1,  fontSize: '1rem', fortWeight: '500',  color: 'black', alignItems: 'center', display: { xs: 'none', md: 'flex' } }}
+                 aria-controls={open ? 'demo-positioned-menu' : undefined}
+                 aria-haspopup="true"
+                 aria-expanded={open ? 'true' : undefined}
+                 onClick={handleClick}>
+                  Hi, {currentUser.email}! {/* Displaying user's name if logged in */}
+                </Link>
+                <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={handleClose}
+                 anchorOrigin={{ vertical: 'top',  horizontal: 'left', }} transformOrigin={{
+                 vertical: 'top',
+                 horizontal: 'left',
+                 }} 
+                 sx={{mt:4}}>
+               <MenuItem  onClick={() => navigate('/dashboard')}>My Profile</MenuItem>
+               <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+    
               </>
             ) : (
-              <Button onClick={() => navigate('/signup')} variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height: '45px', color: '#ffffff' }}>Sign Up</Button>
+              <Box>
+              <Button variant="contained" color="secondary" sx={{ mt: 1, mb: 2, height: '45px', color: '#ffffff' }}
+               aria-controls={open ? 'demo-positioned-menu' : undefined}
+               aria-haspopup="true"
+               aria-expanded={open ? 'true' : undefined}
+               onClick={handleClick}>  Sign Up</Button>
+
+               <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={handleClose}
+               anchorOrigin={{ vertical: 'top',  horizontal: 'left', }} transformOrigin={{
+                vertical: 'top',
+                 horizontal: 'left',
+                 }} 
+                 sx={{mt:4}}>
+               <MenuItem  onClick={() => navigate('/signup')}>Create Account</MenuItem>
+               <MenuItem onClick={() => navigate('/login')}>Login</MenuItem>
+              </Menu>
+      </Box>
             )}
           </Box>
         </Toolbar>

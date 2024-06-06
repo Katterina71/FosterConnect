@@ -10,7 +10,8 @@ const GlobalStyles = () => {
       },
       a: {
         textDecoration: 'none', 
-        color: 'inherit' 
+        color: '90CCF4',
+        fontWeight: '800' 
       },
     }} />
   );
