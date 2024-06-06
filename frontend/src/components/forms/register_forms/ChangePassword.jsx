@@ -1,42 +1,28 @@
 
-import React, {useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
 //MUI
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+
 
 import Alert from '@mui/material/Alert'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// const defaultTheme = createTheme({
-//   palette: {
-//     primary: { main: '#556cd6' },
-//     secondary: { main: '#19857b' },
-//   },
-// });
 
 
+export default function ChangePassword() {
 
-function UpdateProfile() {
-  const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const passwordConfirmRef = useRef(null)
 
   const navigate =useNavigate()
-  const {currentUser,  changeUserEmail,  changeUserPassword} = useAuth()
+  const {currentUser, changeUserPassword} = useAuth()
 
-  const [agree, setAgree] = useState(false);
 
   //Validation and Handle errors
   const [error, setError] = useState('');
@@ -54,17 +40,14 @@ function UpdateProfile() {
     setError('');
     setLoading(true);
 
-    if (emailRef.current.value !== currentUser.email){
-        console.log('update email:' + emailRef.current.value)
-        promises.push(changeUserEmail(emailRef.current.value))
-    }
+
     if (passwordRef.current.value){
         promises.push(changeUserPassword(passwordRef.current.value))
     }
 
     Promise.all(promises)
     .then(() => {
-       navigate('/profile') 
+       navigate('/dashboard') 
     })
     .catch(()=> {
         setError('Failed to update account')
@@ -76,30 +59,13 @@ function UpdateProfile() {
   }
 
   return (
- 
-     <Container component="main" style = {{
-      width: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '10vh'
-     }}>
-     <CssBaseline />
-     <Box
-          style={{
-            width: '500px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-       
-          }}
-        >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-        </Avatar>
+    <Box sx={{my: '80px'}}>
+     <Container sx = {{ display: 'flex',  justifyContent: 'center', marginTop: '10vh' }}>
+     <Box sx={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
         <Typography component="h1" variant="h5">
-            Update Profile
+            Change Password
         </Typography>
-        <Box style={{ marginTop: 3 }} >
+        <Box sx={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
            {/*Not allow to change email on firebase*/}
@@ -116,10 +82,8 @@ function UpdateProfile() {
                 />
               </Grid> */}
             <Grid item xs={12}>
-              <TextField 
-                fullWidth
-                name="password"
-                placeholder="Leave blank to keep the same"
+              <TextField  fullWidth name="password"
+                placeholder="New password"
                 type="password"
                 id="password"
                 inputRef = {passwordRef}
@@ -129,24 +93,25 @@ function UpdateProfile() {
               <TextField 
                 fullWidth
                 name="password-confirm"
-                placeholder="Leave blank to keep the same"
+                placeholder="Repeat new password"
                 type="password"
                 id="password-confirm"
                 inputRef = {passwordConfirmRef}
                />
             </Grid>
-            <Button onClick = {(e) => handleClick(e)} type="submit" variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
+            <Button onClick = {(e) => handleClick(e)}  type="submit" color='secondary' fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Update</Button>
+              
             <Grid container justifyContent="flex-end">
                   <Grid item>
-                        <Link to='/' variant="body2">Cancel</Link>
+                        <Link to='/dashboard' variant="body2">Cancel</Link>
                   </Grid>
               </Grid>
          </Grid>
        </Box>
       </Box>
     </Container>
-
+  </Box>
   )
 }
 
-export default UpdateProfile
+

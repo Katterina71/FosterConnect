@@ -6,7 +6,7 @@ import Profile  from './components/dashboard/foster/FosterDashboard';
 import Login from './components/forms/register_forms/Login';
 import ForgotPassword from './components/forms/register_forms/ForgotPassword';
 import PrivateRoute from './components/layouts/PrivateRoute';
-import UpdateProfile from './components/forms/register_forms/UpdateProfile';
+import ChangePassword from './components/forms/register_forms/ChangePassword';
 import Layout from './components/layouts/Layout';
 import Main from './pages/Main'
 import CreateProfile from './pages/CreateProfile';
@@ -31,7 +31,7 @@ const App = () => {
 
               <Route path="/dashboard" element={<Layout><PrivateRoute><Dashboard /></PrivateRoute></Layout>} />
 
-              <Route path="/update-profile" element={<Layout><PrivateRoute><UpdateProfile /></PrivateRoute></Layout>} />
+              <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
 
 
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />

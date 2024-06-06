@@ -21,7 +21,10 @@ export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const {currentUser, logout} = useAuth()
+  const {currentUser, userData, logout} = useAuth()
+  // const {currentUser, userData, logout} = useAuth()
+
+  console.log(userData)
 
   const pages = ['Who is Foster?', 'About App', 'Pets Finder'];
   // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -168,7 +171,8 @@ export default function Header() {
                  aria-haspopup="true"
                  aria-expanded={open ? 'true' : undefined}
                  onClick={handleClick}>
-                  Hi, {currentUser.email}! {/* Displaying user's name if logged in */}
+                     {/* Hi, {currentUser.email || 'user'}!  Displaying user's name if logged in */}
+                 Hi, {userData.name || 'Welcome Back'}!  {/* Displaying user's name if logged in */}
                 </Link>
                 <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={handleClose}
                  anchorOrigin={{ vertical: 'top',  horizontal: 'left', }} transformOrigin={{

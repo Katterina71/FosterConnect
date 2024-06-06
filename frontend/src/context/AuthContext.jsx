@@ -12,6 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState('');
 
     
     // Firebase authentication instance
@@ -116,9 +117,7 @@ export function AuthProvider({ children }) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
            let  data= await response.json();   
-            console.log('Success:', data)
-
-
+            console.log('Success:', data);
          return data;
 
         } catch (error) {
@@ -130,8 +129,6 @@ export function AuthProvider({ children }) {
 
       }
 
-    
-    
     function logout() {
         return signOut(auth)
       }
@@ -169,6 +166,7 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
+        userData,
         loginProfile,
         signup,
         login,
