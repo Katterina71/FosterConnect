@@ -30,7 +30,7 @@ const App = () => {
               {/* <Route path="/shelter-dashboard" element={<Layout><PrivateRoute><ShelterProfile /></PrivateRoute></Layout>} />
               <Route path="/foster-dashboard" element={<Layout><PrivateRoute><FosterProfile /></PrivateRoute></Layout>} /> */}
 
-              <Route path="/dashboard" element={<Layout><PrivateRoute><Dashboard /></PrivateRoute></Layout>} />
+              <Route path="/dashboard" element={<Layout><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
 
               <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
 

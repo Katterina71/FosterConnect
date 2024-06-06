@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import {Dialog} from '@mui/material'
+import {Alert} from '@mui/material'
 
 import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
 import FosterDashboard from '../components/dashboard/foster/FosterDashboard';
@@ -60,25 +61,18 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
            display: 'flex',
            justifyContent: 'center'
            }}>
-                <Box style={{
-                        width: '500px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-            }}>
+            {error && <Alert severity="error" fullWidth>{error}</Alert>}
+            <Box style={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box sx={{display: 'flex', justifyContent: 'space-between', gap:'16px'}}>
                 <Link to="/update-profile">Update Profile</Link>
                 <Link to="/change-password">Change Password</Link>
-
                 {/* This button triggers the dialog */}
                <Button color="warning" variant="contained" onClick={handleOpen}>
                     Remove Profile
                </Button>
-
                 <Dialog open={open} onClose={handleClose} color="warning" variant="contained">
                      <RemoveProfile  />
                 </Dialog>
-    
             </Box>
 
             <Button onClick = {handleLogout} color='secondary' variant="contained" sx={{ mt: 8, mb: 4}}>Logout</Button>

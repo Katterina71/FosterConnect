@@ -1,12 +1,11 @@
 // import React, {useState} from 'react'
 import  {useState} from 'react'
-import { Box, Container, Typography, FormControlLabel, Button, FormControl, RadioGroup, Radio } from '@mui/material'
+import { Box, Container, Typography, FormControlLabel, Button, FormControl, RadioGroup, Radio, Alert } from '@mui/material'
 
 import UserInfo from '../components/forms/profile_forms/UserInfo'
 import FosterInfo from '../components/forms/profile_forms/foster/FosterInfo'
 import ShelterInfo from '../components/forms/profile_forms/shelter/ShelterInfo'
 
-import MaterialUISwitch from '../components/forms/profile_forms/MaterialUISwitch'
 import AddressForm from '../components/forms/profile_forms/AddressForm'
 
 import {useNavigate} from 'react-router-dom'
@@ -24,12 +23,6 @@ export default function CreateProfile() {
 
     const { submitForm, updateFormData } = useFormContext();  // Retrieve submitForm from context
 
-
-    // const handleChange = (e) => {
-    //     const newChecked = e.target.checked
-    //     setChecked(newChecked);
-    //     setTypeOfUser(newChecked ? 'Shelter' : 'Foster');
-    // }
 
     const handleChange = (event) => {
        
@@ -50,11 +43,7 @@ export default function CreateProfile() {
         e.preventDefault();
         if (typeOfUser) {  // Checks if a type of user has been chosen before submitting
             submitForm();
-            if (typeOfUser === 'Shelter') {
-                navigate('/shelter-dashboard')
-            }
-            else { navigate('/foster-dashboard') }
-          
+            navigate('/dashboard')
         } else {
             alert('Please select whether you are registering as a foster or a shelter.');  // Alert if no selection is made
         }
@@ -66,7 +55,7 @@ export default function CreateProfile() {
         <Container>
             <Typography variant='h1' sx={{mb:4}}>Welcome!</Typography>
             <Typography>We&apos;re thrilled to have you join us. Whether you&apos;re looking to provide a temporary home as a foster or you&apos;re a shelter wanting to connect with potential fosters, you&apos;re in the right place. This quick registration process is the first step towards making a big difference. Let&apos;s get started!</Typography>
-            
+            {alert && <Alert severity="error" fullWidth>{alert}</Alert>}
             {/* Radio buttons for choosing Foster or Shelter */}
             <FormControl component="fieldset" sx={{ mt: 4, mb: 2 }}>
                     <Typography variant='h2'>How would you like to join us?</Typography>

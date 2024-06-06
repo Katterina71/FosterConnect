@@ -50,8 +50,9 @@ export default function UpdateProfile() {
                 onChange={handleChange}
             />
         </Container>
-        <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap:'20px' }}>
             <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}}>Update PROFILE</Button>
+            <Button onClick={()=> {navigate('/dashboard')}} variant="contained" color='secondary' sx={{my:2}}>Cancel</Button>
         </Container>
     </Box>
   )

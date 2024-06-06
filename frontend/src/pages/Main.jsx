@@ -1,4 +1,4 @@
-import React from 'react'
+
 import HeroImg from '../components/mainPage/HeroImg'
 import MainText from '../components/mainPage/MainText'
 import FormSection from '../components/mainPage/FormSection'

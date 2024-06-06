@@ -43,10 +43,6 @@ function Login() {
       return;
   }
 
-//   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-//     console.log('Passwords do not match')  // Debugging
-//     return setError('Passwords do not match');
-// }
 
   // Send data to Firebase
   try {
@@ -62,16 +58,9 @@ function Login() {
 
   return (
     <Box sx={{my: '80px'}}>
-     <Container  sx = {{
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '10vh',
-     }}>
-    
+     <Container  sx = {{  display: 'flex', justifyContent: 'center', marginTop: '10vh',   }}>
      <CssBaseline />
-     <Box
-          style={{
-            width: '500px',
+     <Box style={{  width: '500px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
