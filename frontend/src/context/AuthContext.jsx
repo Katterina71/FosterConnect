@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, createContext } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateEmail, updatePassword} from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, deleteUser, updatePassword} from 'firebase/auth';
 import {auth} from '../firebase/firebase'; // Ensure this path is correct
-import {BASE_URL} from '../api/endpointsDB'
+import {BASE_URL} from '../services/endpointsDB'
 
 const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [userData, setUserData] = useState('');
+    // const [userData, setUserData] = useState('');
 
     
     // Firebase authentication instance
@@ -86,8 +86,6 @@ export function AuthProvider({ children }) {
             }
            let  data= await response.json();   
             console.log('Success:', data)
-       
-
          //If signup is successful, navigate to the foster or shelter dashboard page
         //  data.shelter ? navigate('/shelter-dashboard') : navigate('/foster-dashboard');
           navigate('/dashboard')
@@ -137,24 +135,38 @@ export function AuthProvider({ children }) {
         return sendPasswordResetEmail(auth, email)
       }
     
-      function changeUserEmail(newEmail) {
-        const user = auth.currentUser;  // Get the current user
-        console.log('New Email: '+ newEmail);
-        if (user) {
-            return updateEmail(user, newEmail).then(() => {
-                console.log('Email updated successfully');
-            }).catch((error) => {
-                console.error('Error updating email:', error);
-            });
-        } else {
-            console.error('No user logged in');
-        }
-    }
+    // function changeUserEmail(newEmail) {
+    //     const user = auth.currentUser;  // Get the current user
+    //     console.log('New Email: '+ newEmail);
+    //     if (user) {
+    //         return updateEmail(user, newEmail).then(() => {
+    //             console.log('Email updated successfully');
+    //         }).catch((error) => {
+    //             console.error('Error updating email:', error);
+    //         });
+    //     } else {
+    //         console.error('No user logged in');
+    //     }
+    // }
     
+
     function changeUserPassword(currentUser, newPassword) {
         return updatePassword(currentUser, newPassword);
     }
     
+   async function removeAccount(){
+        try {
+            console.log('Removing profile: ')
+            const user = auth.currentUser
+            await deleteUser(user);
+            console.log('User deleted');
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // Handle errors here
+            console.error('Login error:', errorCode, errorMessage);
+        }
+    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
@@ -166,15 +178,13 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
-        userData,
         loginProfile,
         signup,
         login,
         logout,
         resetPassword,
-        changeUserEmail,
         changeUserPassword,
-        loading // Added smth
+        removeAccount
     };
 
     return (

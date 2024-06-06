@@ -2,7 +2,7 @@
 // import React, { createContext, useContext, useState } from 'react';
 import { createContext, useContext, useState } from 'react';
 
-import {BASE_URL} from '../api/endpointsDB'
+import {BASE_URL} from '../services/endpointsDB'
 import {useAuth} from '../context/AuthContext'
 
 const FormContext = createContext();

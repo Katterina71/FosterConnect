@@ -80,8 +80,8 @@ const UserController = {
     deleteProfile: async (req,res) => {
         try {
             console.log('Remove profile')
-            await UsersProfiles.findByOneAndDelete({firebaseUid: req.params.firebaseUid})
-            res.status(204).send({message: 'User was delete'})
+            await UsersProfiles.findOneAndDelete({firebaseUid: req.params.firebaseUid})
+            res.status(204).json({message: 'User was delete'})
         } catch (error) {
             res.status(500).json({message:error.message})
         }
