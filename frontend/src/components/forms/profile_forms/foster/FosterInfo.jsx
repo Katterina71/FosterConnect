@@ -6,47 +6,69 @@ import { useFormContext } from '../../../../context/FormContext';
 
 const FosterInfo = () => {
     const [petPreferences, setPetPreferences] = useState([]);
+    const [submitted, setSubmitted] = useState(false); // State to track if the preferences have been submitted
     const { updateFormData } = useFormContext();
 
     const handleAddPetPreference = () => {
-        setPetPreferences([...petPreferences, { pet_type: '', life_stage: '', size: '' }]);
+        if (!submitted) { // Allow adding new preferences only if not submitted
+            setPetPreferences([...petPreferences, { pet_type: '', life_stage: '', size: '' }]);
+        }
     };
 
     const handleRemovePetPreference = (index) => {
+        if (!submitted) { // Allow removing preferences only if not submitted
         setPetPreferences(petPreferences.filter((_, i) => i !== index));
+        }
     };
 
     const updatePreference = (index, updatedPreference) => {
+     if (!submitted) { // Allow removing preferences only if not submitted
         const updatedPreferences = [...petPreferences];
         updatedPreferences[index] = updatedPreference;
         setPetPreferences(updatedPreferences);
+     }
     };
 
     const handleSubmit = () => {
         console.log(petPreferences)
         updateFormData('fostering_preferences', petPreferences);  // This would push all preferences to context
+        setSubmitted(true); // Change the state to show the submitted view
     };
 
     return (
         <Box sx={{ my: 4 }}>
-            <Container>
-                <Typography>Add your pet preferences below:</Typography>
-                {petPreferences.map((preference, index) => (
+        <Container>
+            <Typography>Add your pet preferences below:</Typography>
+            {submitted ? (
+                petPreferences.map((preference, index) => (
+                    <Box key={index} sx={{ mb: 2 }}>
+                        <Typography>Type: {preference.pet_type}</Typography>
+                        <Typography>Life Stage: {preference.life_stage}</Typography>
+                        <Typography>Size: {preference.size}</Typography>
+                    </Box>
+                ))
+            ) : (
+                petPreferences.map((preference, index) => (
                     <Box key={index}>
                         <PetPreferences preference={preference} index={index} updatePreference={updatePreference} />
                         <Button onClick={() => handleRemovePetPreference(index)} variant="contained" color="error" sx={{ mt: 1 }}>
                             Remove
                         </Button>
                     </Box>
-                ))}
-                <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2 }}>
-                    Add New Pet Preference
-                </Button>
-                <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2, ml:4}}>
-                    Submit All Preferences
-                </Button>
-            </Container>
-        </Box>
+                ))
+            )}
+            {!submitted && (
+                <>
+                    <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2 }}>
+                        Add New Pet Preference
+                    </Button>
+                    <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2, ml: 4 }}>
+                        Submit All Preferences
+                    </Button>
+                </>
+            )}
+        </Container>
+    </Box>
     );
 };
 
