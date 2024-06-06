@@ -7,12 +7,14 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {Dialog} from '@mui/material'
 
 import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
 import FosterDashboard from '../components/dashboard/foster/FosterDashboard';
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
+import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
 
 
   export default function Dashboard() {
@@ -22,6 +24,11 @@ import {useAuth} from '../context/AuthContext'
     const {currentUser, loginProfile, logout} = useAuth()
 
     const navigate = useNavigate()
+
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     async function getData(){
       console.log(currentUser)
@@ -65,7 +72,16 @@ import {useAuth} from '../context/AuthContext'
             <Box sx={{display: 'flex', justifyContent: 'space-between', gap:'16px'}}>
                 <Link to="/update-profile">Update Profile</Link>
                 <Link to="/change-password">Change Password</Link>
-                <Link to="/update-profile" color='warning'>Remove Profile</Link>
+
+                {/* This button triggers the dialog */}
+               <Button color="warning" variant="contained" onClick={handleOpen}>
+                    Remove Profile
+               </Button>
+
+                <Dialog open={open} onClose={handleClose} color="warning" variant="contained">
+                     <RemoveProfile  />
+                </Dialog>
+    
             </Box>
 
             <Button onClick = {handleLogout} color='secondary' variant="contained" sx={{ mt: 8, mb: 4}}>Logout</Button>
