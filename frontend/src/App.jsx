@@ -12,6 +12,7 @@ import Main from './pages/Main'
 import CreateProfile from './pages/CreateProfile';
 import Dashboard from './pages/Dashboard';
 import { FormProvider } from './context/FormContext';
+import UpdateProfile from './pages/UpdateProfile';
 
 
 const App = () => {
@@ -24,8 +25,8 @@ const App = () => {
               <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
 
               {/* <Route path="/create-profile" element={<Layout><PrivateRoute><CreateProfile /></PrivateRoute></Layout>} /> */}
-              <Route path="/create-profile" element={<Layout><FormProvider><CreateProfile /></FormProvider></Layout>} />
-              
+              <Route path="/create-profile" element={<Layout><PrivateRoute><FormProvider><CreateProfile /></FormProvider></PrivateRoute></Layout>} />
+              <Route path="/update-profile" element={<Layout><PrivateRoute><FormProvider><UpdateProfile /></FormProvider></PrivateRoute></Layout>} />
               {/* <Route path="/shelter-dashboard" element={<Layout><PrivateRoute><ShelterProfile /></PrivateRoute></Layout>} />
               <Route path="/foster-dashboard" element={<Layout><PrivateRoute><FosterProfile /></PrivateRoute></Layout>} /> */}
 

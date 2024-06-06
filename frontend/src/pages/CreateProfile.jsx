@@ -84,12 +84,6 @@ export default function CreateProfile() {
 
             <UserInfo />
             <AddressForm />
-            <FormControlLabel
-                control={<MaterialUISwitch sx={{ m: 1 }} />}
-                label="Are you registering as a shelter?"
-                required
-                onChange={handleChange}
-            />
         </Container>
         <Container sx={{my:4}}>
              <Typography variant='h3'>Additional Information for {typeOfUser || 'selecting your role'}</Typography>
