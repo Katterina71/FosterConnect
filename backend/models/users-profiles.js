@@ -14,25 +14,13 @@ const addressSchema = new Schema ({
  });
  
  // fosteringPreferences Schema
- const fosteringPreferencesSchema = new Schema ({
-        pet_type: 
-        {
-          type: String,
-          default: 'none'
-        },
-        life_stage:
-        {
-          type: String,
-          default: 'none'
-        },
-        size: 
-        {
-          type: String,
-          default: 'none'
-        }
+ const fosteringPreferencesSchema = new Schema ([{
+        pet_type:  { type: String, default: 'none'},
+        life_stage: { type: String, default: 'none'},
+        size: { type: String, default: 'none'  }
   }, {
     _id: false 
-  });
+  }]);
 
 // Main Document Schema for User Profile
 const usersProfilesSchema = new Schema({

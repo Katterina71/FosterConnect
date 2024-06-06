@@ -66,7 +66,7 @@ const handleSavePreference = (newPreference) => {
         <Box>
         <Typography variant="h4" sx={{ mt: 2 }}>Manage Your Pet Preferences:</Typography>
 
-                {petPreferences.map((preference, index) => (
+                {Array.isArray(petPreferences) && petPreferences.map((preference, index) => (
                     <Box key={index} sx={{ my: 4 }}>
                     <Grid container key={index} spacing={2} alignItems="center" sx={{ mb: 2 }}>
                         <Grid item xs={10} sx={{display:'flex', gap:'20px'}}>

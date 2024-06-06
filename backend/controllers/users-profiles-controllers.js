@@ -45,11 +45,15 @@ const UserController = {
         }
     },
 
+
     updateProfile: async (req,res) => {
         try {
             console.log('Update profile')
             console.log(req.body) // Ensure the body is as expected
             const { name, shelter, shelter_name, phone, status, address, fostering_preferences } = req.body;
+
+            const preferencesArray = Object.keys(fostering_preferences).map(key => fostering_preferences[key])
+        
 
             const data = {
                 name: req.body.userInfo.name,  
@@ -58,7 +62,7 @@ const UserController = {
                 phone:  req.body.userInfo.phone,
                 status,
                 address,
-                fostering_preferences: fostering_preferences[0] || []  // Ensure it's an array
+                fostering_preferences: preferencesArray  // Ensure it's an array
             };
      
             console.log(data) // Debugging
