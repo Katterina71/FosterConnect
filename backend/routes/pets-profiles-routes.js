@@ -12,7 +12,7 @@ petRouter.get('/', PetController.getAllPets)
 petRouter.get('/', PetController.getPetsByTypeAndLocation)
 
 // Create Pet Profile
-petRouter.post('/', PetController.createPet);
+petRouter.post('/:shelter_id', PetController.createPet);
 
 // Update Pet Profile
 petRouter.patch('/', PetController.updatePet);
@@ -21,6 +21,6 @@ petRouter.patch('/', PetController.updatePet);
 petRouter.delete('/', PetController.deletePet);
 
 // Get All Pets Profile by shelter
-petRouter.get('/:shelter', PetController.getAllPetsByShelter);
+petRouter.get('/:shelter_id', PetController.getAllPetsByShelter);
 
 export default petRouter

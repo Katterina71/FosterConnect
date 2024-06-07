@@ -22,9 +22,9 @@ export default function usePetsProfile() {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            let  petArray = await response.json();   
-            console.log('Get success:', petArray);
-            return setPetArray();
+            let  data = await response.json();   
+            console.log('Get success:', data);
+            setPetArray(data);
   
         } catch (error) {
             // Handle errors here
@@ -33,5 +33,30 @@ export default function usePetsProfile() {
         }
     } 
 
-    return { getPetsProfiles, petArray, error };
+    const postPetProfile = async(petData) => {
+        console.log('Add pet profile frontend')
+        setError(null);
+        try {
+            let response= await fetch(`${BASE_PETS_URL}/${currentUser.uid}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json' },
+                body: JSON.stringify(petData)
+            })
+        
+            if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            let result = await response.json();
+            console.log('Post success:', result);
+            return result;
+            
+        } catch (error) {
+             // Handle errors here
+             console.error('Failed to get pets profiles', error);
+             setError(error.response ? error.response.data : error.message);
+        }
+    }
+
+    return { getPetsProfiles, postPetProfile, petArray, error };
 }

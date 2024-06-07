@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // Main Document Schema for Pet Profile
 const petsProfilesSchema = new Schema ({
     shelter_id: {
-        type: Schema.Types.ObjectId, 
+        type: String,  // Use String type for Firebase UIDs
         ref: 'users-profiles',  
         required: true  
       },

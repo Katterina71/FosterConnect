@@ -22,14 +22,17 @@ const PetController = {
     },
 
     createPet: async (req, res) => {
-        const { shelter_id, type, name, img, age_month, size, gender, description } = req.body;
+        const { type, name, img, age_month, life_stage, size, gender, description } = req.body;
+        const shelterId = req.params.shelter_id;
+        console.log('Add pet profile. Server')
         try {
             const newPet = new PetsProfile({
-                shelter_id,
+                shelter_id:shelterId,
                 type,
                 name,
-                img,
+                img:'none',
                 age_month,
+                life_stage,
                 size,
                 gender,
                 description
@@ -37,6 +40,7 @@ const PetController = {
             await newPet.save();
             res.status(201).json(newPet);
         } catch (error) {
+            console.error(error)
             res.status(500).json({ message: error.message });
         }
     },
@@ -63,6 +67,7 @@ const PetController = {
             }
             res.status(204).send();
         } catch (error) {
+            console.error(error)
             res.status(500).json({ message: error.message });
         }
     },
