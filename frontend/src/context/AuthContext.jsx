@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
         console.log('Login profile:');
         try {
          
-          let response= await fetch(BASE_URL+'/'+currentUser.uid, {
+          let response= await fetch(`${BASE_URL}/${currentUser.uid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -17,7 +17,6 @@ petRouter.post('/', PetController.createPet);
 // Update Pet Profile
 petRouter.patch('/', PetController.updatePet);
 
-
 // Delete Pet Profile
 petRouter.delete('/', PetController.deletePet);
 

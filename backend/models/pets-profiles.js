@@ -22,8 +22,11 @@ const petsProfilesSchema = new Schema ({
         required: true
       },
     age_month: {
-          type: Number,
-          required: true
+          type: String,
+      },
+    life_stage: {
+        type: String,
+        required: true
       },
     size: {
         type: String,
@@ -35,7 +38,6 @@ const petsProfilesSchema = new Schema ({
       },
     description: {
         type: String,
-        required: true  
       },
     created_at: {
         type: Date,
