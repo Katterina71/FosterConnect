@@ -77,7 +77,7 @@ export default function CreateProfile() {
         <Container sx={{my:4}}>
              <Typography variant='h3'>Additional Information for {typeOfUser || 'selecting your role'}</Typography>
             {/* Conditionally render FosterInfo or ShelterInfo based on the checked state */}
-            {typeOfUser === 'Shelter' ? <ShelterInfo /> : typeOfUser === 'Foster' ? <FosterInfo /> : null}
+            {typeOfUser === 'Shelter' ? <ShelterInfo /> : typeOfUser === 'Foster' ? <FosterInfo petArray={[]}/> : null}
         </Container>
         <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}}>CREATE PROFILE</Button>

@@ -1,13 +1,18 @@
 // import React, { useState } from 'react';
-import {  useState } from 'react';
+import {  useState, useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import PetPreferences from '../foster/PetPreferences'; // Assuming this is the correct import path
 import { useFormContext } from '../../../../context/FormContext';
 
-const FosterInfo = () => {
-    const [petPreferences, setPetPreferences] = useState([]);
+const FosterInfo = ({petArray}) => {
+    const [petPreferences, setPetPreferences] = useState(petArray);
     const [submitted, setSubmitted] = useState(false); // State to track if the preferences have been submitted
     const { updateFormData } = useFormContext();
+
+ 
+
+    console.log('Pet FosterInfo:')
+    console.log(petPreferences);
 
     const handleAddPetPreference = () => {
         if (!submitted) { // Allow adding new preferences only if not submitted

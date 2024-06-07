@@ -1,51 +1,48 @@
 import {useState, useEffect} from 'react'
-
-
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-
-
+import { Box, Container, Typography, Button, Grid, CssBaseline } from '@mui/material';
 
 import {useAuth} from '../../../context/AuthContext'
+import {useFormContext} from '../../../context/FormContext'
 
 import FosterInfo from '../../forms/profile_forms/foster/FosterInfo'
-
 import HeroImg from '../../mainPage/HeroImg';
 
 
   export default function FosterDashboard({user}) {
 
-    const [petPreferences, setPetPreferences] = useState(user.fostering_preferences || []);
+    const [petPreferences, setPetPreferences] = useState([]);
     const [showAddPreference, setShowAddPreference] = useState(false);
-
- 
     const {currentUser} = useAuth()
+    const {updateFormData, submitForm} = useFormContext()
  
-    console.log(petPreferences)
-
+   
     useEffect(() => {
+       // Initialize pet preferences when the component mounts or user data changes
       setPetPreferences(user.fostering_preferences || []);
   }, [user.fostering_preferences]);
 
-  const handleRemovePreference = (index) => {
-    const newPreferences = [...petPreferences];
-    newPreferences.splice(index, 1);
-    setPetPreferences(newPreferences);
-  
-};
-
-const handleAddPreference = () => {
+  const handleAddPreference = () => {
     setShowAddPreference(true)
 };
 
-const handleSavePreference = (newPreference) => {
-  setPetPreferences(prev => [...prev, newPreference]);
-  setShowAddPreference(false);  // Hide the PetPreferences component after saving
-};
+  
+  const handleSaveNewPreference = (newPreference) => {
+    console.log("Current Preferences:", petPreferences);
+    setPetPreferences(prevPreferences => {
+      console.log("Previous Preferences:", prevPreferences);
+      return [...prevPreferences, newPreference];
+    });
+    setShowAddPreference(false); // Hide the form after adding
+  };
+
+
+    const handleSaveAllPreferences = () => {
+      console.log('save pet:')
+      console.log(petPreferences)
+      updateFormData('fostering_preferences', petPreferences);
+      submitForm(); // This function should handle sending data to the server
+      setShowAddPreference(false)
+    };
 
   return (
     <Box>
@@ -66,6 +63,17 @@ const handleSavePreference = (newPreference) => {
         <Box>
         <Typography variant="h4" sx={{ mt: 2 }}>Manage Your Pet Preferences:</Typography>
 
+                <Button variant="contained" color="secondary" onClick={handleAddPreference} sx={{ mt: 2 }}>
+                    Update Preference
+                </Button>
+                {showAddPreference &&                
+                <Box>
+                  <FosterInfo petArray={petPreferences} onSave={handleSaveNewPreference} />
+                  <Button variant="contained" color="secondary" onClick={handleSaveAllPreferences} sx={{ mt: 2 }}>
+                      Save All Changes
+                  </Button>
+                </Box> }
+
                 {Array.isArray(petPreferences) && petPreferences.map((preference, index) => (
                     <Box key={index} sx={{ my: 4 }}>
                     <Grid container key={index} spacing={2} alignItems="center" sx={{ mb: 2 }}>
@@ -74,22 +82,13 @@ const handleSavePreference = (newPreference) => {
                           <Typography>{`Life Stage: ${preference.life_stage}`}</Typography>
                           <Typography>{`Size: ${preference.size}`}</Typography>
                         </Grid>
-                    <Grid item xs={2}>
-                    <Button variant="contained" color="error" onClick={() => handleRemovePreference(index)} fullWidth>
-                        Remove
-                    </Button>
-                </Grid>
-            </Grid>
-          </Box>
+                   </Grid>
+                  </Box>
                 ))}
-                <Button variant="contained" color="secondary" onClick={handleAddPreference} sx={{ mt: 2 }}>
-                    Add New Preference
-                </Button>
-                {showAddPreference && <FosterInfo/>}
-        </Box>
-        </Container>
-        </Box>
       </Box>
+      </Container>
+     </Box>
+    </Box>
   )
 }
 
