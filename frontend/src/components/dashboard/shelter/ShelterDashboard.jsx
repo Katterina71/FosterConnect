@@ -8,7 +8,8 @@ import HeroImg from '../../mainPage/HeroImg';
 
 import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../../../context/AuthContext'
-import AddPetForm from '../../forms/profile_forms/shelter/AddPetForm';
+import AddPetForm from '../../forms/pet_form/AddPetForm';
+import PetsProfilesGallery from '../../gallery/PetsProfilesGallery';
 
 
   export default function ShelterDashboard({user}) {
@@ -36,6 +37,9 @@ import AddPetForm from '../../forms/profile_forms/shelter/AddPetForm';
            <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={()=>setNewPet(true)}>Add Pet Profile</Button>
            <Box sx={{mt:4}}>
               {newPet && <AddPetForm/>}
+           </Box>
+           <Box sx={{mt:4}}>
+              <PetsProfilesGallery/>
            </Box>
        </Container>
        </Box>

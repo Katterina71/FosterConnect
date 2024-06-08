@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import usePetsProfile from '../../../../hooks/usePetsProfile'
+import usePetsProfile from '../../../hooks/usePetsProfile'
 
 function AddPetForm() {
     const petTypes = ['Dog', 'Cat', 'Bird', 'Other'];
@@ -33,58 +33,82 @@ function AddPetForm() {
     };
 
     const handleImageChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          setPet({ ...pet, img: file });
-          const reader = new FileReader();
-          reader.onloadend = () => {
-              setPreview(reader.result);
-          };
-          reader.readAsDataURL(file);
-      }
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //       setPet({ ...pet, img: file });
+    //       const reader = new FileReader();
+    //       reader.onloadend = () => {
+    //           setPreview(reader.result);
+    //       };
+    //       reader.readAsDataURL(file);
+    //   }
+    const file = event.target.files[0];
+    if (file) {
+        setPet({ ...pet, img: file });
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
   };
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'pets_library'); 
+
+    const cloudName = import.meta.env.VITE_REACT_APP_CLOUDINARY_NAME
+    const url =`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
+    try {
+        const response = await fetch(url, { 
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status} Message: ${data.error.message}`);
+        }
+        return data.secure_url; // This is the URL of the uploaded image
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        throw error;
+    }
+};
 
   //Utilizes FormData to prepare the data for HTTP submission, which is suitable for sending files.
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Create an instance of FormData
-    // const formData = new FormData();
-    // // Append each part of the pet state to formData
-    // formData.append('type', pet.type);
-    // formData.append('name', pet.name);
-    // formData.append('img', pet.img); // Ensure this is the file, not a string
-    // formData.append('age_month', pet.age_month);
-    // formData.append('life_stage', pet.life_stage);
-    // formData.append('size', pet.size);
-    // formData.append('gender', pet.gender);
-    // formData.append('description', pet.description);
-
-    // // Debugging `formData` to the server
-    // console.log('Form Data Submitted');
-    // console.log(pet)
-    // postPetProfile(pet);
-
-    // Debugging to see what's being sent (won't show file content)
-    // for (let key of formData.keys()) {
-    //     console.log(key, formData.get(key));
-    // }
-
     // try {
-    //     // Call your postPetProfile function which should handle the FormData
-    //     const response = await postPetProfile(formData);
-    //     console.log('Form submission successful', response);
+    //     console.log('Form Data Submitted');
+    //     console.log(pet)
+    //     console.log(pet.img)
+    //     postPetProfile(pet);
     // } catch (error) {
     //     console.error('Failed to submit the form', error);
     // }
+
+    if (!pet.img) {
+        alert('Please upload an image.');
+        return;
+    }
+
     try {
-        console.log('Form Data Submitted');
-        console.log(pet)
-        console.log(pet.img)
-        postPetProfile(pet);
+        const uploadedImageUrl = await uploadImage(pet.img);
+        const newPet = {
+            ...pet,
+            img: uploadedImageUrl  // Use the URL returned from Cloudinary
+        };
+        await postPetProfile(newPet);
+        alert('Pet profile successfully added!');
+        // Optionally reset form or navigate away
     } catch (error) {
         console.error('Failed to submit the form', error);
+        alert('Failed to process the form: ' + error.message);
     }
+
 };
 
     return (
