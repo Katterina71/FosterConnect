@@ -66,7 +66,7 @@ function AddPetForm() {
             body: formData
         });
         const data = await response.json();
-
+        console.log(data)
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status} Message: ${data.error.message}`);
         }
@@ -91,7 +91,7 @@ function AddPetForm() {
     // }
 
     if (!pet.img) {
-        alert('Please upload an image.');
+        console.log('Please upload an image.');
         return;
     }
 
@@ -102,11 +102,11 @@ function AddPetForm() {
             img: uploadedImageUrl  // Use the URL returned from Cloudinary
         };
         await postPetProfile(newPet);
-        alert('Pet profile successfully added!');
+        console.log('Pet profile successfully added!');
         // Optionally reset form or navigate away
     } catch (error) {
         console.error('Failed to submit the form', error);
-        alert('Failed to process the form: ' + error.message);
+        console.log('Failed to process the form: ' + error.message);
     }
 
 };

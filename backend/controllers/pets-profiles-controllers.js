@@ -30,7 +30,7 @@ const PetController = {
                 shelter_id:shelterId,
                 type,
                 name,
-                img:'none',
+                img,
                 age_month,
                 life_stage,
                 size,
