@@ -78,5 +78,31 @@ export default function usePetsProfile() {
         }
     }
 
-    return { getPetsProfiles, postPetProfile, removePetProfile, error };
+    const getAllPetsProfiles = async() =>{
+        console.log('Get all pets profiles frontend')
+        setError(null);
+        try {
+            let response= await fetch(`${BASE_PETS_URL}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+               })
+        
+             if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+    
+                let  data = await response.json();   
+                console.log('Get success:', data);
+                return data
+            
+        } catch (error) {
+                // Handle errors here
+                console.error('Failed to get pets profiles', error);
+                setError(error.response ? error.response.data : error.message);    
+        }
+    }
+
+    return { getPetsProfiles, postPetProfile, removePetProfile, getAllPetsProfiles, error };
 }

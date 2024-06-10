@@ -1,9 +1,13 @@
-import React from 'react'
+import { Typography, Box, Container } from "@mui/material"
+import Pets from "../components/finder/Pets"
 
 export default function Finder() {
   return (
-    <div>
-      
-    </div>
+        <Box sx={{mt:4}}>
+            <Container>
+                <Typography variant="h1">Find a pet or shelter</Typography>
+                <Pets/>
+            </Container>
+        </Box>
   )
 }
