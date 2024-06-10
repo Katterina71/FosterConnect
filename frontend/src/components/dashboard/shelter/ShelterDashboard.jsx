@@ -15,13 +15,10 @@ import PetsProfilesGallery from '../../gallery/PetsProfilesGallery';
   export default function ShelterDashboard({user}) {
     const [petArray, setPetArray] = useState([])
     const [newPet, setNewPet] = useState(false)
-
-  
+    
     const {currentUser} = useAuth()
 
-   useEffect(()=>{
-    setPetArray(user.pets)
-   }, [])
+
 
 
   return (

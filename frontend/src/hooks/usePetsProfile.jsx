@@ -24,7 +24,7 @@ export default function usePetsProfile() {
 
             let  data = await response.json();   
             console.log('Get success:', data);
-            setPetArray(data);
+            return data
   
         } catch (error) {
             // Handle errors here
@@ -58,5 +58,5 @@ export default function usePetsProfile() {
         }
     }
 
-    return { getPetsProfiles, postPetProfile, petArray, error };
+    return { getPetsProfiles, postPetProfile, error };
 }
