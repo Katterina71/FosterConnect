@@ -79,8 +79,8 @@ export default function AboutFosterConnect() {
             </Grid>
         </Grid>
        </Box>
-        <Box><Typography variant="body">At Fosters Connect, we believe in making a difference in the lives of pets awaiting their forever homes by providing them with a loving temporary home. Our platform is not just about listings and notifications; it's a tool that brings together communities to support animal welfare collaboratively. Whether you are a shelter looking to expand your reach or a foster ready to open your home to a new friend, Fosters Connect is here to support and streamline every step of the process. </Typography></Box>
-        <Box sx={{mt:2}}><Typography variant="body" >Join us today and be part of a compassionate movement dedicated to providing care and comfort to pets in need. Together, we can make a significant impact in the animal welfare community.</Typography></Box>
+        <Typography variant="body" paragraph>At Fosters Connect, we believe in making a difference in the lives of pets awaiting their forever homes by providing them with a loving temporary home. Our platform is not just about listings and notifications; it's a tool that brings together communities to support animal welfare collaboratively. Whether you are a shelter looking to expand your reach or a foster ready to open your home to a new friend, Fosters Connect is here to support and streamline every step of the process. </Typography>
+       <Typography variant="body" paragraph >Join us today and be part of a compassionate movement dedicated to providing care and comfort to pets in need. Together, we can make a significant impact in the animal welfare community.</Typography>
     </Container>
   </Box>
   )

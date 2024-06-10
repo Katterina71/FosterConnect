@@ -15,6 +15,7 @@ import { FormProvider } from './context/FormContext';
 import UpdateProfile from './pages/UpdateProfile';
 import Finder from './pages/Finder';
 import AboutFosterConnect from './pages/AboutFosterConnect';
+import WhoIsFoster from './pages/WhoIsFoster';
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
               
               <Route path="/finder" element={<Layout><Finder/></Layout>} />
               <Route path="/about" element={<Layout><AboutFosterConnect /></Layout>} />
+              <Route path="/who-is-foster" element={<Layout><WhoIsFoster /></Layout>} />
 
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />
               <Route path="/login" element = {<Layout><Login/></Layout>} />

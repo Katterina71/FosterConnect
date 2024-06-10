@@ -27,7 +27,7 @@ export default function Header() {
   console.log(userData)
 
   const pages = [ {name:'Who is Foster?',
-                  link: ''},
+                  link: '/who-is-foster'},
                   {name:'About Fosters Connect',
                   link: '/about'},
                   {name:'Pets Finder',
