@@ -38,9 +38,7 @@ const handleRemovePet = async (petId) => {
       {petArray.map((pet, index) => (
            <Grid item xs={4} key={index}>
                     <Card>
-                        <CardMedia sx={{ height: 180 }}
-                             image={pet.img}
-                             title={`${pet.type} ${pet.name}`}  />
+                        <CardMedia sx={{ height: 180 }} image={pet.img}  title={`${pet.type} ${pet.name}`}  />
                         <Box sx={{p:2}}>   
                         <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
                         <Typography variant='body1'>{`Type: ${pet.type}, Age: ${pet.age_month}`}</Typography>
