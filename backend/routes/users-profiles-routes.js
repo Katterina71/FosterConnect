@@ -9,15 +9,6 @@ userRouter.get('/', UserController.allProfiles);
 // Register User
 userRouter.post('/', UserController.register);
 
-// Get User Profile
-userRouter.get('/:firebaseUid', UserController.getProfile);
-
-// Update User Profile
-userRouter.put('/:firebaseUid', UserController.updateProfile);
-
-// Delete User Profile
-userRouter.delete('/:firebaseUid', UserController.deleteProfile);
-
 // Get All Foster Profile
 userRouter.get('/fosters', UserController.getFosterProfile);
 
@@ -29,6 +20,17 @@ userRouter.get('/shelters/:town', UserController.getSheltersByLocation);
 
 // Get Fosters Profile by location
 userRouter.get('/fosters/:town', UserController.getFostersByLocation );
+
+// Get User Profile
+userRouter.get('/:firebaseUid', UserController.getProfile);
+
+// Update User Profile
+userRouter.put('/:firebaseUid', UserController.updateProfile);
+
+// Delete User Profile
+userRouter.delete('/:firebaseUid', UserController.deleteProfile);
+
+
 
 
 

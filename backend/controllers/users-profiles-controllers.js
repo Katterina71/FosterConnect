@@ -96,17 +96,22 @@ const UserController = {
     getFosterProfile: async (req,res) => {
         try {
             const fosters = await UsersProfiles.find({shelter: false})
-            res.json(fosters)
+            res.status(200).json(fosters)
         } catch (error) {
             res.status(500).json({message:error.message})
         }
     },
+
     getShelterProfile: async (req,res) => {
+        console.log('hello')
         try {
-            const shelters = await UsersProfiles.find({shelter: true})
-            res.json(shelters)
+            const shelters = await UsersProfiles.find({ shelter: true });
+            if (shelters.length === 0) {
+                return res.status(404).json({ message: "No shelters found" });
+            }
+            res.json(shelters);
         } catch (error) {
-            res.status(500).json({message:error.message})
+            res.status(500).json({ message: error.message });
         }
     },
 

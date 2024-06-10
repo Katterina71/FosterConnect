@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, createContext } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, deleteUser, updatePassword} from 'firebase/auth';
 import {auth} from '../firebase/firebase'; // Ensure this path is correct
-import {BASE_URL} from '../services/endpointsDB'
+import useUserProfile from '../hooks/useUserProfile';
 
 const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    // const [userData, setUserData] = useState('');
+    const { createNewUserProfile, getUserProfile, getUserInfo } = useUserProfile();
 
     
     // Firebase authentication instance
@@ -30,25 +30,11 @@ export function AuthProvider({ children }) {
                        firebaseUid: user.uid,
                        email: user.email 
                    };
-                   console.log(JSON.stringify(newUser)) //Debugging
-                
-                   let response= await  fetch(BASE_URL, {
-                       method: 'POST',
-                       headers: {
-                           'Content-Type': 'application/json'
-                       },
-                       body: JSON.stringify(newUser)
-                   })
-               
-                    if (!response.ok) {
-                           throw new Error(`HTTP error! Status: ${response.status}`);
-                       }
-                    let  data= await response.json();   
-                    console.log('Success:', data)
+                   
+                await createNewUserProfile(newUser)
 
-
-                    //If signup is successful, navigate to the create-profile page
-                    navigate('/create-profile');
+                //If signup is successful, navigate to the create-profile page
+                navigate('/create-profile');
 
         } catch (error) {
             const errorCode = error.code;
@@ -74,27 +60,15 @@ export function AuthProvider({ children }) {
           const userCredential = await signInWithEmailAndPassword(auth, email, password)
           const user = userCredential.user;
 
-          let response= await fetch(BASE_URL+'/'+user.uid, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-           })
-    
-         if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-           let  data= await response.json();   
-            console.log('Success:', data)
+          await getUserProfile(user);
+
          //If signup is successful, navigate to the foster or shelter dashboard page
-        //  data.shelter ? navigate('/shelter-dashboard') : navigate('/foster-dashboard');
           navigate('/dashboard')
          return user;
 
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // Handle errors here
             console.error('Login error:', errorCode, errorMessage);
         }
 
@@ -103,28 +77,14 @@ export function AuthProvider({ children }) {
       async function loginProfile(currentUser) {
         console.log('Login profile:');
         try {
-         
-          let response= await fetch(`${BASE_URL}/${currentUser.uid}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-           })
-    
-         if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-           let  data= await response.json();   
-            console.log('Success:', data);
-         return data;
+           const data = await getUserInfo(currentUser.uid)
+           return  data;
 
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // Handle errors here
             console.error('Login error:', errorCode, errorMessage);
         }
-
       }
 
     function logout() {
@@ -134,20 +94,6 @@ export function AuthProvider({ children }) {
     function resetPassword(email) {
         return sendPasswordResetEmail(auth, email)
       }
-    
-    // function changeUserEmail(newEmail) {
-    //     const user = auth.currentUser;  // Get the current user
-    //     console.log('New Email: '+ newEmail);
-    //     if (user) {
-    //         return updateEmail(user, newEmail).then(() => {
-    //             console.log('Email updated successfully');
-    //         }).catch((error) => {
-    //             console.error('Error updating email:', error);
-    //         });
-    //     } else {
-    //         console.error('No user logged in');
-    //     }
-    // }
     
 
     function changeUserPassword(currentUser, newPassword) {
