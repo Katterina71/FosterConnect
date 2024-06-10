@@ -18,7 +18,7 @@ petRouter.post('/:shelter_id', PetController.createPet);
 petRouter.patch('/', PetController.updatePet);
 
 // Delete Pet Profile
-petRouter.delete('/', PetController.deletePet);
+petRouter.delete('/:id', PetController.deletePet);
 
 // Get All Pets Profile by shelter
 petRouter.get('/:shelter_id', PetController.getAllPetsByShelter);

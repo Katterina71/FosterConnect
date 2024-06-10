@@ -3,7 +3,6 @@ import { BASE_PETS_URL } from '../services/endpointsDB';
 import { useAuth } from '../context/AuthContext';
 
 export default function usePetsProfile() {
-    const [petArray, setPetArray] = useState(null);
     const [error, setError] = useState(null);
     const {currentUser} = useAuth()
 
@@ -58,5 +57,26 @@ export default function usePetsProfile() {
         }
     }
 
-    return { getPetsProfiles, postPetProfile, error };
+    const removePetProfile = async(id) => {
+        console.log('Remove pet profile frontend')
+        setError(null);
+        try {
+        
+            let response= await fetch(`${BASE_PETS_URL}/${id}`, {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json' },
+            })
+        
+            if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log(`Pet's profile was removed`);       
+        } catch (error) {
+            // Handle errors here
+            console.error('Failed to get pets profiles', error);
+            setError(error.response ? error.response.data : error.message);  
+        }
+    }
+
+    return { getPetsProfiles, postPetProfile, removePetProfile, error };
 }
