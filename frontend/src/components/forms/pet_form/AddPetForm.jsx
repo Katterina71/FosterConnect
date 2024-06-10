@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box } from '@mui/material';
+import { useState } from 'react';
+import { Container, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Alert } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import usePetsProfile from '../../../hooks/usePetsProfile'
 
-function AddPetForm() {
+function AddPetForm({ onPetAdded }) {
     const petTypes = ['Dog', 'Cat', 'Bird', 'Other'];
     const lifeStages = ['Puppy/Kitten', 'Juvenile', 'Adult', 'Senior'];
     const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
     const gender = ['Male', 'Female'];
 
-    const {getPetsProfiles, postPetProfile, petArray, error} = usePetsProfile()
+    const {postPetProfile} = usePetsProfile()
 
 
     const [pet, setPet] = useState({
@@ -33,15 +33,7 @@ function AddPetForm() {
     };
 
     const handleImageChange = (event) => {
-    //   const file = event.target.files[0];
-    //   if (file) {
-    //       setPet({ ...pet, img: file });
-    //       const reader = new FileReader();
-    //       reader.onloadend = () => {
-    //           setPreview(reader.result);
-    //       };
-    //       reader.readAsDataURL(file);
-    //   }
+
     const file = event.target.files[0];
     if (file) {
         setPet({ ...pet, img: file });
@@ -81,14 +73,6 @@ function AddPetForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // try {
-    //     console.log('Form Data Submitted');
-    //     console.log(pet)
-    //     console.log(pet.img)
-    //     postPetProfile(pet);
-    // } catch (error) {
-    //     console.error('Failed to submit the form', error);
-    // }
 
     if (!pet.img) {
         console.log('Please upload an image.');
@@ -97,13 +81,12 @@ function AddPetForm() {
 
     try {
         const uploadedImageUrl = await uploadImage(pet.img);
-        const newPet = {
-            ...pet,
-            img: uploadedImageUrl  // Use the URL returned from Cloudinary
-        };
+        const newPet = {...pet, img: uploadedImageUrl}; // Use the URL returned from Cloudinary
         await postPetProfile(newPet);
         console.log('Pet profile successfully added!');
-        // Optionally reset form or navigate away
+        
+        onPetAdded();
+        alert('Pet profile added successfully!');
     } catch (error) {
         console.error('Failed to submit the form', error);
         console.log('Failed to process the form: ' + error.message);
@@ -115,6 +98,7 @@ function AddPetForm() {
         <Container maxWidth="sm">
             <Typography variant="h4" sx={{ mb: 2 }}>Add New Pet Profile</Typography>
             <form onSubmit={handleSubmit}>
+            {alert && <Alert severity="error" fullWidth>{alert}</Alert>}
                 <FormControl fullWidth sx={{ mb: 2 }}>
                     <InputLabel>Type</InputLabel>
                     <Select  value={pet.type}  label="Type"  name="type"  onChange={handleChange}  required  >

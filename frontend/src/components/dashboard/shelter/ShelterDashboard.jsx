@@ -6,19 +6,31 @@ import {Box, Button, Typography, Container } from '@mui/material';
 import HeroImg from '../../mainPage/HeroImg';
 
 
-import {Link, useNavigate} from 'react-router-dom'
-import {useAuth} from '../../../context/AuthContext'
+
 import AddPetForm from '../../forms/pet_form/AddPetForm';
 import PetsProfilesGallery from '../../gallery/PetsProfilesGallery';
+import usePetsProfile from '../../../hooks/usePetsProfile'
 
 
   export default function ShelterDashboard({user}) {
-    const [petArray, setPetArray] = useState([])
+    const { getPetsProfiles } = usePetsProfile();
+
     const [newPet, setNewPet] = useState(false)
+    const [petArray, setPetArray] = useState([]);
+
+    const fetchPets = async () => {
+      const data = await getPetsProfiles();
+      setPetArray(data);
+  };
     
-    const {currentUser} = useAuth()
+      useEffect(() => {
+        fetchPets();
+    }, []); // Initial fetch
 
-
+    const handlePetAdded = () => {
+      fetchPets(); // Re-fetch pets after a new one is added
+      setNewPet(false); // Close the Add Pet Form
+  };
 
 
   return (
@@ -33,10 +45,10 @@ import PetsProfilesGallery from '../../gallery/PetsProfilesGallery';
            <Typography> Manage your profile and settings seamlessly from here. You have the ability to update your information, create listings for pets available for fostering, and customize your newsletter preferences. If you wish to take a break, you can deactivate your account to temporarily remove your shelter from our finder tool. Utilize your dashboard to maximize your shelter's outreach and engagement.</Typography>
            <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={()=>setNewPet(true)}>Add Pet Profile</Button>
            <Box sx={{mt:4}}>
-              {newPet && <AddPetForm/>}
+             {newPet && <AddPetForm onPetAdded={handlePetAdded} />}
            </Box>
            <Box sx={{mt:4}}>
-              <PetsProfilesGallery/>
+              <PetsProfilesGallery pets={petArray}/>
            </Box>
        </Container>
        </Box>

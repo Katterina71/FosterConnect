@@ -26,8 +26,13 @@ export default function Header() {
 
   console.log(userData)
 
-  const pages = ['Who is Foster?', 'About App', 'Pets Finder'];
-  // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const pages = [ {name:'Who is Foster?',
+                  link: ''},
+                  {name:'About App',
+                  link: ''},
+                  {name:'Pets Finder',
+                  link:'/finder'}];
+
 
   const navigate = useNavigate()
 
@@ -126,9 +131,9 @@ export default function Header() {
               }}
             >
             {/* Array of pages */}
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page,index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -151,13 +156,9 @@ export default function Header() {
 
           {/* Menu buttons */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx:'auto', color: '#220C04', display: 'block'}}
-              >
-                {page}
+            {pages.map((page, index) => (
+              <Button key={index} onClick={()=> {navigate(page.link)}}  sx={{ my: 2, mx:'auto', color: '#220C04', display: 'block'}} >
+                {page.name}
               </Button>
             ))}
           </Box>

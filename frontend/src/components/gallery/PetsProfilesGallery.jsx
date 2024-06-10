@@ -4,8 +4,8 @@ import usePetsProfile from '../../hooks/usePetsProfile'
 
 
 
-export default function PetsProfilesGallery() {
-  const [petArray, setPetArray] = useState([])
+export default function PetsProfilesGallery({ pets }) {
+  const [petArray, setPetArray] = useState([pets])
   const {getPetsProfiles, removePetProfile} = usePetsProfile()
 
 

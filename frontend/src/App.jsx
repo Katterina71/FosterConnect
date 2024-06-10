@@ -13,6 +13,7 @@ import CreateProfile from './pages/CreateProfile';
 import Dashboard from './pages/Dashboard';
 import { FormProvider } from './context/FormContext';
 import UpdateProfile from './pages/UpdateProfile';
+import Finder from './pages/Finder';
 
 
 const App = () => {
@@ -33,7 +34,8 @@ const App = () => {
               <Route path="/dashboard" element={<Layout><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
 
               <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
-
+              
+              <Route path="/finder" element={<Layout><Finder/></Layout>} />
 
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />
               <Route path="/login" element = {<Layout><Login/></Layout>} />
