@@ -14,6 +14,7 @@ import Dashboard from './pages/Dashboard';
 import { FormProvider } from './context/FormContext';
 import UpdateProfile from './pages/UpdateProfile';
 import Finder from './pages/Finder';
+import AboutFosterConnect from './pages/AboutFosterConnect';
 
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
               <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
               
               <Route path="/finder" element={<Layout><Finder/></Layout>} />
+              <Route path="/about" element={<Layout><AboutFosterConnect /></Layout>} />
 
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />
               <Route path="/login" element = {<Layout><Login/></Layout>} />

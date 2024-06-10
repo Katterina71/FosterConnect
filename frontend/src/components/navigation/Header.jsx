@@ -28,8 +28,8 @@ export default function Header() {
 
   const pages = [ {name:'Who is Foster?',
                   link: ''},
-                  {name:'About App',
-                  link: ''},
+                  {name:'About Fosters Connect',
+                  link: '/about'},
                   {name:'Pets Finder',
                   link:'/finder'}];
 
