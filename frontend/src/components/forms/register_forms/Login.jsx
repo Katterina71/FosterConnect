@@ -3,20 +3,8 @@ import {useRef, useState} from 'react'
 import { useAuth } from '../../../context/AuthContext';
 import {Link, useNavigate} from 'react-router-dom'
 
-//MUI
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-
-import Alert from '@mui/material/Alert'
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {Box,Container,Grid, Avatar, Button, CssBaseline, Typography, TextField, Alert} from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-
-
 
 
 function Login() {
@@ -32,28 +20,31 @@ function Login() {
   //History Hook
   const navigate = useNavigate()
 
- async function handleClick(e) {
+  async function handleClick(e) {
   e.preventDefault()
-
 
   // console.log(emailRef.current.value, passwordRef.current.value) // Debugging
 
-  if (!emailRef.current || !passwordRef.current ) {
+  if (!emailRef.current.value|| !passwordRef.current.value ) {
       console.error("One of the refs is null");  // Debugging
+      setError("One of the refs is null");
       return;
   }
 
-
+  setError('');
+  setLoading(true);
   // Send data to Firebase
   try {
-        setError('');
-        setLoading(true);
-        await login(emailRef.current.value, passwordRef.current.value, navigate);
-
+      await login(emailRef.current.value, passwordRef.current.value, navigate);
   } catch (error) {
-    setError('Failed to Sign In');
-  }
     setLoading(false);
+
+     if (error.message === 'Firebase: Error (auth/invalid-email).') {
+      setError(`We can’t find an account. Please enter a valid email address or create new account`);
+     } else
+      {setError(`We can’t find an account. The password you entered is incorrect or account not exist. Please try again.`)}
+  }
+   
   }
 
   return (

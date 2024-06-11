@@ -108,7 +108,7 @@ const handleFilterChange = (event) => {
                         </Select>
             </FormControl>
             
-            <Grid container spacing={2} sx={{mt:4}}>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }} sx={{mt:4}}>
             {state.filteredPets.map((pet, index) => (
                 <Grid item xs={4} key={index}>
                             <Card>

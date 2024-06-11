@@ -71,7 +71,6 @@ function SignUp() {
         //Checking if user has already exist 
         console.error("Error during signup:", error);
         setLoading(false);
-      
         setError('Failed to create an account: ' + error.message);  // Display the actual error message from Firebase
 
   } 

@@ -1,10 +1,14 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Box, Container, Typography, CardMedia, Grid } from "@mui/material"
 import FormSection from "../components/mainPage/FormSection"
 
 export default function WhoIsFoster() {
+    const imgPath = './who-is-foster.jpg'
+
   return (
     <Box sx={{my:6}}>
         <Container>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }}>
+            <Grid item xs={6}>
             <Typography variant="h1">Who is Foster?</Typography>
             <Box sx={{my:6}}>
             <Typography variant="body1" paragraph>
@@ -30,7 +34,14 @@ export default function WhoIsFoster() {
                 <strong>Emotional Support:</strong> Offer the love and stability these animals need to thrive, often during a critical period of their lives.
             </Typography>
 
-            <Typography variant="h3" sx={{my:4}}>
+            </Box>
+            </Grid>
+         <Grid item xs={6}>
+             <CardMedia sx={{ height: 600, borderRadius: 2 }} image={imgPath}  title='Be Foster' />
+         </Grid>
+         </Grid>
+         <Box>
+         <Typography variant="h3" sx={{my:4}}>
                 Benefits for the Animals
             </Typography>
             <Typography variant="body1" paragraph>
@@ -69,8 +80,9 @@ export default function WhoIsFoster() {
             <Typography variant="body1" paragraph>
                 <strong>Rewarding Experience:</strong> Fostering is profoundly gratifying, knowing that you are providing a lifeline for animals in need and playing a direct role in preparing them for a new, loving home.
             </Typography>
-            </Box>
+         </Box>
             <FormSection/>
+
         </Container>
     </Box>
 

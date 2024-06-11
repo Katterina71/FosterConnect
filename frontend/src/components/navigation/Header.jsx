@@ -79,61 +79,30 @@ export default function Header() {
 
            {/* Responsive Logo Img Positioning - Desktop*/}
         <Box>
-           <Box
-            component="img"
-            src='./logo-h.svg'
-            alt='logo'
-            sx={{
-              width: 200,
-              height: 'auto',
-              display: { xs: 'none', md: 'flex' },
+           <Box  component="img"  src='./logo-h.svg'  alt='logo'
+            sx={{  width: 200,  height: 'auto',  display: { xs: 'none', md: 'flex' },
               marginLeft: 'auto', // Center on large screens
               marginRight: 'auto',
               cursor: 'pointer' // Changes cursor on hover to indicate interactivity
             }}
-            onClick = {handleClickLogo}
-          />
+            onClick = {handleClickLogo}  />
         </Box>
 
           {/* Mobile menu */}
            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-            <MenuIcon sx={{
-                display: { xs: 'block', md: 'none' },
-                color: 'grey',
-                width: '20'
-              }} />
-
+            <IconButton  size="large"  aria-label="menu"  aria-controls="menu-appbar"  aria-haspopup="true"  onClick={handleOpenNavMenu}  color="inherit"  >
+            <MenuIcon sx={{   display: { xs: 'block', md: 'none' },  color: 'grey',  width: '20'  }} />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
+            <Menu  id="menu-appbar"  anchorEl={anchorElNav} anchorOrigin={{  vertical: 'bottom', horizontal: 'left',   }}  keepMounted
+              transformOrigin={{  vertical: 'top',  horizontal: 'left',  }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
+              sx={{  display: { xs: 'block', md: 'none' },  }}
             >
             {/* Array of pages */}
               {pages.map((page,index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                <Typography textAlign="center" onClick={()=> {navigate(page.link)}}>{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -154,7 +123,7 @@ export default function Header() {
           />
         </Box>
 
-          {/* Menu buttons */}
+          {/* Menu buttons and links*/}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
               <Button key={index} onClick={()=> {navigate(page.link)}}  sx={{ my: 2, mx:'auto', color: '#220C04', display: 'block'}} >
@@ -172,8 +141,9 @@ export default function Header() {
                  aria-haspopup="true"
                  aria-expanded={open ? 'true' : undefined}
                  onClick={handleClick}>
-                     {/* Hi, {currentUser.email || 'user'}!  Displaying user's name if logged in */}
-                 Hi,  {'Welcome Back'}!  {/* Displaying user's name if logged in */}
+
+                {/* Hi, {currentUser.email || 'user'}!  Displaying user's name if logged in */}
+                Hi,  {'Welcome Back'}!  {/* Displaying user's name if logged in */}
                 </Link>
                 <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={handleClose}
                  anchorOrigin={{ vertical: 'top',  horizontal: 'left', }} transformOrigin={{

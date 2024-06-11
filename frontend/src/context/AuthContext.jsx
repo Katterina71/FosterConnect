@@ -17,8 +17,7 @@ export function AuthProvider({ children }) {
     
     // Firebase authentication instance
     
-    async function signup(email, password, navigate) {
-        
+    async function signup(email, password, navigate) {    
         console.log('New user added')
         try {
              const userCredential = await createUserWithEmailAndPassword(auth, email, password) 
@@ -70,6 +69,7 @@ export function AuthProvider({ children }) {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Login error:', errorCode, errorMessage);
+            throw new Error(errorMessage); // Propagate error up if you need to handle it outside
         }
 
       }
@@ -81,9 +81,7 @@ export function AuthProvider({ children }) {
            return  data;
 
         } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Login error:', errorCode, errorMessage);
+            throw new Error(error.code);
         }
       }
 
