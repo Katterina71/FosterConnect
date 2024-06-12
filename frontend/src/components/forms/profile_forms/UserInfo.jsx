@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Box, Container, TextField, Typography } from '@mui/material'
+import { Box, Container, TextField, Typography, Alert } from '@mui/material'
 
 //To apply the phone mask:
 import InputMask from 'react-input-mask';
@@ -14,9 +14,13 @@ export default function UserInfo({user}) {
     phone: '',
   });
 
-  const { updateFormData } = useFormContext();
-  const [isValid, setIsValid] = useState(true);
+  const [errors, setErrors] = useState({
+    name: '',
+    phone: '',
+  });
 
+  const { updateFormData } = useFormContext();
+  
 
   // Effect to update local state when user prop changes
   useEffect(() => {
@@ -29,8 +33,17 @@ export default function UserInfo({user}) {
   }, []);
 
 
-  const validateField = (value) => {
-    setIsValid(value.trim() !== "");
+  //validation form
+  const validateField = (name, value) => {
+    let error = '';
+    if (value.trim() === '') {
+      error = `The ${name} field is required.`;
+    }
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: error
+    }));
+    return error === '';
   };
 
   const handleInputChange = (e) => {
@@ -39,8 +52,8 @@ export default function UserInfo({user}) {
       ...prevState,
       [name]: value
     }));
+    validateField(name, value);
     updateFormData('userInfo', { [name]: value });
-    // validateField(value);
 };
 
   return (
@@ -52,13 +65,15 @@ export default function UserInfo({user}) {
   autoComplete="off" >
     <Typography variant='h3'>Personal Information</Typography>
       <Container maxWidth="md" sx={{my:4}}>
-          <TextField id="name" required label="Your name" name="name" value={userInfo.name} onChange={handleInputChange}/>
-          <InputMask id="phone" mask="(999) 999-9999" maskChar="" name="phone" value={userInfo.phone}  onChange={handleInputChange} >
+          <TextField id="name" label="Your name" name="name" value={userInfo.name} onChange={handleInputChange} error={Boolean(errors.name)} helperText={errors.name} required/>
+          <InputMask id="phone" mask="(999) 999-9999" maskChar="" name="phone" value={userInfo.phone} onChange={handleInputChange} required >
             {() => (
-           <TextField id="phone" required label="Your Phone"  variant="outlined"  name="phone"   /> 
+           <TextField id="phone"  label="Your Phone"  variant="outlined"  name="phone" error={Boolean(errors.phone)}  helperText={errors.phone} required/> 
            )}
            </InputMask>
     </Container>
+    {Object.values(errors).map((error, index) => (
+            error && <Alert key={index} severity="error">{error}</Alert> ))}
 </Box>
   )
 }

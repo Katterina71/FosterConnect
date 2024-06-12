@@ -44,6 +44,7 @@ const FosterInfo = ({petArray}) => {
         <Box sx={{ my: 4 }}>
         <Container>
             <Typography>Add your pet preferences below:</Typography>
+            <form>
             {submitted ? (
                 petPreferences.map((preference, index) => (
                     <Box key={index} sx={{ mb: 2 }}>
@@ -72,6 +73,7 @@ const FosterInfo = ({petArray}) => {
                     </Button>
                 </>
             )}
+            </form>
         </Container>
     </Box>
     );
