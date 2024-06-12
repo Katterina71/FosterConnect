@@ -17,11 +17,15 @@ const navigate = useNavigate();
 useEffect(()=>{
     const fetchData = async() =>{
     const data = await getAllShelter()
-    console.log(data)
-    setSheltersArray(data)
+    if (data.length === 0) {
+        setSheltersArray([])  
+    }
+    else {
+        setSheltersArray(data)
     // Extract unique towns
     const uniqueTowns = [...new Set(data.map(shelter => shelter.address[0].town))];
     setTowns(uniqueTowns);
+    }
   };
   fetchData()
  },[])
@@ -50,7 +54,7 @@ useEffect(()=>{
             <Container>
             <Typography variant='h2'>All Shelters</Typography>
 
-            <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+           { (sheltersArray.length !== 0) ? <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <FormControl sx={{ minWidth: 200, mr: 2 }}>
                     <InputLabel>Town</InputLabel>
                     <Select value={selectedTown} onChange={handleTownFilterChange} label="Town">
@@ -63,8 +67,8 @@ useEffect(()=>{
                 <Button variant="contained" color="secondary" onClick={handleResetFilters}>
                     Reset All
                 </Button>
-             </Box>
-
+             </Box> : <Typography sx={{mt:4}}>No Shelters</Typography>
+           }
             <Grid container spacing={2} sx={{mt:4}}>
             {filteredShelters.map((shelter, index) => (
                 <Grid item xs={12} key={index}>
@@ -84,6 +88,6 @@ useEffect(()=>{
                     ))}
             </Grid>    
             </Container>
-        </Box>
+        </Box> 
   )
 }

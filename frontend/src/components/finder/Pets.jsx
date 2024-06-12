@@ -99,7 +99,7 @@ const handleResetFilters = () => {
   return (
         <Box sx={{my:6}}>
             <Container>
-            <Typography variant='h2'>All pets profiles</Typography>
+            <Typography variant='h2'>All Pets Profiles</Typography>
             <Box sx={{mt:6}}>
             <Grid container spacing={{ xs: 2, md: 3}} columns={{ xs: 4, md: 12 }} alignItems="center" justifyContent='flex-center'>
                 <Grid  xs={4} >
