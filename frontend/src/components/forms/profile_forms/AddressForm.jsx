@@ -20,20 +20,32 @@ export default function AddressForm({user}) {
 
   // Effect to update local state when user prop changes
   useEffect(() => {
-    if (user && user.address) {
+    if (user && user.address && user.address.length > 0) {
+      const userAddress = user.address[0];
       setAddress({
-        street_address: user.address[0].street_address || '',
-        town: user.address[0].town || '',
-        county: user.address[0].county || '',
-        postal_code: user.address[0].postal_code || '',
-        state: user.address[0].state || ''
+        street_address: userAddress.street_address || '',
+        town: userAddress.town || '',
+        county: userAddress.county || '',
+        postal_code: userAddress.postal_code || '',
+        state: userAddress.state || ''
+      });
+    } else {
+      setAddress({
+        street_address: '',
+        town: '',
+        county: '',
+        postal_code: '',
+        state: ''
       });
     }
-  }, []);
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAddress({  name: value  })
+    setAddress(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
     updateFormData('address', { [name]: value });
 };
 
@@ -46,7 +58,7 @@ export default function AddressForm({user}) {
     <Typography variant='h3'>Add your Address</Typography>
 
     <Container  maxWidth="md" sx={{my:4}}>
-            <TextField id="street_address" required label="Street Address" name="street_address"  value = {address.street_address}  onChange={handleInputChange} autoFocus  />
+            <TextField id="street_address" required label="Street Address" name="street_address"  value = {address.street_address || ''}  onChange={handleInputChange} autoFocus  />
             
             <TextField required id="town" label="Town" name='town' value = {address.town}  onChange={handleInputChange} />
     
