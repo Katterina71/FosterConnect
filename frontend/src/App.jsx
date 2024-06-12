@@ -16,6 +16,7 @@ import UpdateProfile from './pages/UpdateProfile';
 import Finder from './pages/Finder';
 import AboutFosterConnect from './pages/AboutFosterConnect';
 import WhoIsFoster from './pages/WhoIsFoster';
+import PolicyPage from './pages/PolicyPage';
 
 
 const App = () => {
@@ -27,11 +28,8 @@ const App = () => {
               <Route path="/" exact element={<Layout><Main/></Layout>} />
               <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
 
-              {/* <Route path="/create-profile" element={<Layout><PrivateRoute><CreateProfile /></PrivateRoute></Layout>} /> */}
               <Route path="/create-profile" element={<Layout><PrivateRoute><FormProvider><CreateProfile /></FormProvider></PrivateRoute></Layout>} />
               <Route path="/update-profile" element={<Layout><PrivateRoute><FormProvider><UpdateProfile /></FormProvider></PrivateRoute></Layout>} />
-              {/* <Route path="/shelter-dashboard" element={<Layout><PrivateRoute><ShelterProfile /></PrivateRoute></Layout>} />
-              <Route path="/foster-dashboard" element={<Layout><PrivateRoute><FosterProfile /></PrivateRoute></Layout>} /> */}
 
               <Route path="/dashboard" element={<Layout><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
 
@@ -40,6 +38,7 @@ const App = () => {
               <Route path="/finder" element={<Layout><Finder/></Layout>} />
               <Route path="/about" element={<Layout><AboutFosterConnect /></Layout>} />
               <Route path="/who-is-foster" element={<Layout><WhoIsFoster /></Layout>} />
+              <Route path="/website-policy" element={<Layout><PolicyPage /></Layout>} />
 
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />
               <Route path="/login" element = {<Layout><Login/></Layout>} />

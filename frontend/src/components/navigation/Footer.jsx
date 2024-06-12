@@ -1,5 +1,6 @@
-import React from 'react';
+
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
 const footerStyle = {
   backgroundColor: '#f2f2f2',
@@ -11,6 +12,8 @@ function Footer() {
   return (
     <Box sx={footerStyle}>
       <p>© 2024 All Rights Reserved</p>
+      <Link to="/website-policy">Website Policy</Link>
+
     </Box>
   );
 }
