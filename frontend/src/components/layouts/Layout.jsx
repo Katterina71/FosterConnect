@@ -15,9 +15,10 @@ import { AuthProvider } from '../../context/AuthContext';
   minHeight: '100vh',
 };
 
-export default function Layout({children}) {
-    return (
+export default function Layout({children, title}) {
+    return (  
     <div style={containerStyle}>
+    <title>{title || ' Fosters Connect'}</title> 
       <ThemeProvider theme={theme}>
           {/* Using GlobalStyles component */}
          <GlobalStyles />   

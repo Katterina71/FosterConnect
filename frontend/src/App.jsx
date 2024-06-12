@@ -26,26 +26,26 @@ const App = () => {
     <Router>
         <AuthProvider>  
             <Routes>
-              <Route path="/" exact element={<Layout><Main/></Layout>} />
-              <Route path="/profile" element={<Layout><PrivateRoute><Profile /></PrivateRoute></Layout>} />
+              <Route path="/" exact element={<Layout title={'Welcome to Fosters Connect - Connecting Shelters and Fosters'}><Main/></Layout>} />
+              <Route path="/profile" element={<Layout title={'Your Profile - Manage Your Foster Preferences and Details'}><PrivateRoute><Profile /></PrivateRoute></Layout>} />
 
-              <Route path="/create-profile" element={<Layout><PrivateRoute><FormProvider><CreateProfile /></FormProvider></PrivateRoute></Layout>} />
-              <Route path="/update-profile" element={<Layout><PrivateRoute><FormProvider><UpdateProfile /></FormProvider></PrivateRoute></Layout>} />
+              <Route path="/create-profile" element={<Layout title={'Your Profile - Manage Your Foster Preferences and Details'}><PrivateRoute><FormProvider><CreateProfile /></FormProvider></PrivateRoute></Layout>} />
+              <Route path="/update-profile" element={<Layout title={'Update Your Profile - Keep Your Information Current'}><PrivateRoute><FormProvider><UpdateProfile /></FormProvider></PrivateRoute></Layout>} />
 
-              <Route path="/dashboard" element={<Layout><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
+              <Route path="/dashboard" element={<Layout title={'Dashboard - Overview of Your Foster Activities'}><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
 
               
-              <Route path="/finder" element={<Layout><Finder/></Layout>} />
-              <Route path="/shelter-pets" element={<Layout><FormProvider><ShelterPets /></FormProvider></Layout>} />
+              <Route path="/finder" element={<Layout title={'Find a Shelter - Search for Pets in Need of Temporary Homes'}><Finder/></Layout>} />
+              <Route path="/shelter-pets" element={<Layout title={'Shelter Pets - View Pets Available for Fostering'}><FormProvider><ShelterPets /></FormProvider></Layout>} />
 
-              <Route path="/about" element={<Layout><AboutFosterConnect /></Layout>} />
-              <Route path="/who-is-foster" element={<Layout><WhoIsFoster /></Layout>} />
-              <Route path="/website-policy" element={<Layout><PolicyPage /></Layout>} />
+              <Route path="/about" element={<Layout title={'About Fosters Connect - Learn More About Our Mission'}><AboutFosterConnect /></Layout>} />
+              <Route path="/who-is-foster" element={<Layout title={'Who is a Foster? - Understanding the Role of a Foster'}><WhoIsFoster /></Layout>} />
+              <Route path="/website-policy" element={<Layout title={'Website Policy - Our Terms and Conditions'}><PolicyPage /></Layout>} />
 
-              <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
-              <Route path="/signup" element={<Layout><SignUp/></Layout>} />
-              <Route path="/login" element = {<Layout><Login/></Layout>} />
-              <Route path="/forgot-password" element ={<Layout><ForgotPassword/></Layout>}/>
+              <Route path="/change-password" element={<Layout title={'Change Password - Secure Your Account'}><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
+              <Route path="/signup" element={<Layout title={'Sign Up - Join Fosters Connect Today'}><SignUp/></Layout>} />
+              <Route path="/login" element = {<Layout title={'Log In - Access Your Fosters Connect Account'}><Login/></Layout>} />
+              <Route path="/forgot-password" element ={<Layout title={'Forgot Password - Recover Your Account Access'}><ForgotPassword/></Layout>}/>
             </Routes>
        </AuthProvider>
     </Router>
