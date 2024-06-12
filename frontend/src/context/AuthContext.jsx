@@ -60,15 +60,9 @@ export function AuthProvider({ children }) {
           const user = userCredential.user;
 
           await getUserProfile(user);
-
           // if user did not complete create account and did not choose foster or shelter profile
-          if (!user.shelter) {
-            navigate('/create-profile')
-           }
-           else {
-            navigate('/dashboard')
-           }
-
+          navigate('/dashboard')
+           
          return user;
 
         } catch (error) {
@@ -80,11 +74,13 @@ export function AuthProvider({ children }) {
 
       }
 
-      async function loginProfile(currentUser) {
+      async function loginProfile(currentUser, navigate) {
         console.log('Login profile:');
         try {
            const data = await getUserInfo(currentUser.uid)
-          
+           if (!data.shelter) {
+            navigate('/create-profile')
+           }
            return data;
         } catch (error) {
             throw new Error(error.code);

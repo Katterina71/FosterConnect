@@ -31,7 +31,7 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
     async function getData(){
       console.log(currentUser)
       try {
-       let data = await (loginProfile(currentUser))
+       let data = await (loginProfile(currentUser, navigate))
        console.log(data)
        setUser(data)
        } catch (error) {

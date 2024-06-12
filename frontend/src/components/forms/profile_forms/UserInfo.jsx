@@ -16,7 +16,7 @@ export default function UserInfo({user}) {
 
   const { updateFormData } = useFormContext();
   const [isValid, setIsValid] = useState(true);
-  // const {userProfile} = useAuth()
+
 
   // Effect to update local state when user prop changes
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function UserInfo({user}) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
     setUserInfo({  name: value  })
     updateFormData('userInfo', { [name]: value });
     // validateField(value);

@@ -1,4 +1,5 @@
 import UsersProfiles from "../models/users-profiles.js";
+import PetsProfiles from "../models/pets-profiles.js"
 // import admin from 'firebase-admin'
 
 
@@ -84,7 +85,13 @@ const UserController = {
     deleteProfile: async (req,res) => {
         try {
             console.log('Remove profile')
-            await UsersProfiles.findOneAndDelete({firebaseUid: req.params.firebaseUid})
+            const userDeletionResult = await UsersProfiles.findOneAndDelete({firebaseUid: req.params.firebaseUid})
+
+            // if (userDeletionResult.deletedCount === 0) {
+            //     throw new Error("User not found");
+            // }
+            // Delete PetsProfiles related to the user
+            await PetsProfiles.deleteMany({ shelter_id: req.params.firebaseUid }, {});
             res.status(204).json({message: 'User was delete'})
         } catch (error) {
             res.status(500).json({message:error.message})
