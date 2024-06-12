@@ -62,9 +62,9 @@ const usersProfilesSchema = new Schema({
 
     address : [addressSchema],
     fostering_preferences: [fosteringPreferencesSchema],
-    status : {
-        type: String,
-        default: 'Active'
+    active : {
+        type: Boolean,
+        default: true
     },
     created_at: {
         type: Date,

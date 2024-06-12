@@ -60,8 +60,8 @@ const UserController = {
                 name: req.body.userInfo.name,  
                 shelter: req.body.userInfo.shelter,
                 shelter_name: req.body.userInfo.shelter_name,
-                phone:  req.body.userInfo.phone,
-                status,
+                phone: req.body.userInfo.phone,
+                active: req.body.userInfo.active,
                 address,
                 fostering_preferences: preferencesArray  // Ensure it's an array
             };

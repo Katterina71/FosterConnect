@@ -16,7 +16,7 @@ import { useAuth } from '../context/AuthContext'
 
 export default function UpdateProfile() {
 
-    const [checked, setChecked] = useState(true)
+    const [checked, setChecked] = useState()
     const [user, setUser] = useState([])
     const [loading ,setLoading] = useState(false)
     const navigate = useNavigate()
@@ -31,7 +31,8 @@ export default function UpdateProfile() {
                 try {
                     const data = await getUserInfo(currentUser.uid);
                     setUser(data);
-                    setLoading(true)
+                    setChecked(data.active)
+                    setLoading(true);
                 } catch (error) {
                     console.error('Data not found', error);
                 }
@@ -47,14 +48,14 @@ export default function UpdateProfile() {
     const handleChange = (e) => {
         const newChecked = e.target.checked
         setChecked(newChecked);
-    }
-
-    const handleFormSubmit = (e) => {
-        if (checked) {
+        if (newChecked) {
             updateFormData('userInfo', {active : true}); 
         } else {
             updateFormData('userInfo', {active : false}); 
         } 
+    }
+
+    const handleFormSubmit = (e) => {
         e.preventDefault();
         submitForm();
         navigate('/dashboard')
@@ -72,7 +73,7 @@ export default function UpdateProfile() {
             />
         </Container>
         <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap:'20px' }}>
-            <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}}>Update PROFILE</Button>
+            <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}} checked={checked}>Update PROFILE</Button>
             <Button onClick={()=> {navigate('/dashboard')}} variant="contained" color='secondary' sx={{my:2}}>Cancel</Button>
         </Container>
     </Box>
