@@ -54,9 +54,9 @@ export default function CreateProfile() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        if (!validateForm()) {
-            return; // Stop form submission if validation fails
-        }
+        // if (!validateForm()) {
+        //     return; // Stop form submission if validation fails
+        // }
 
         if (typeOfUser) {  // Checks if a type of user has been chosen before submitting
             submitForm();

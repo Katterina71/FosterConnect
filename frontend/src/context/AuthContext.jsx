@@ -78,7 +78,9 @@ export function AuthProvider({ children }) {
         console.log('Login profile:');
         try {
            const data = await getUserInfo(currentUser.uid)
-           if (!data.shelter) {
+           console.log(data)
+           console.log(data.shelter)
+           if (data.shelter !== true && data.shelter !== false ) {
             navigate('/create-profile')
            }
            return data;

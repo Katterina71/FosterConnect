@@ -35,7 +35,10 @@ export default function UserInfo({user}) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo({  name: value  })
+    setUserInfo(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
     updateFormData('userInfo', { [name]: value });
     // validateField(value);
 };
