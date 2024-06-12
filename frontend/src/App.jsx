@@ -17,6 +17,7 @@ import Finder from './pages/Finder';
 import AboutFosterConnect from './pages/AboutFosterConnect';
 import WhoIsFoster from './pages/WhoIsFoster';
 import PolicyPage from './pages/PolicyPage';
+import ShelterPets from './pages/ShelterPets';
 
 
 const App = () => {
@@ -33,13 +34,15 @@ const App = () => {
 
               <Route path="/dashboard" element={<Layout><PrivateRoute><FormProvider><Dashboard /></FormProvider></PrivateRoute></Layout>} />
 
-              <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
               
               <Route path="/finder" element={<Layout><Finder/></Layout>} />
+              <Route path="/shelter-pets" element={<Layout><FormProvider><ShelterPets /></FormProvider></Layout>} />
+
               <Route path="/about" element={<Layout><AboutFosterConnect /></Layout>} />
               <Route path="/who-is-foster" element={<Layout><WhoIsFoster /></Layout>} />
               <Route path="/website-policy" element={<Layout><PolicyPage /></Layout>} />
 
+              <Route path="/change-password" element={<Layout><PrivateRoute><ChangePassword /></PrivateRoute></Layout>} />
               <Route path="/signup" element={<Layout><SignUp/></Layout>} />
               <Route path="/login" element = {<Layout><Login/></Layout>} />
               <Route path="/forgot-password" element ={<Layout><ForgotPassword/></Layout>}/>

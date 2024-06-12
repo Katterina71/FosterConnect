@@ -1,6 +1,6 @@
 import {useEffect, useReducer} from 'react'
 
-import {Box,Container, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel} from '@mui/material'
+import {Box,Container, Button, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
 
 const initialState = {
@@ -36,6 +36,17 @@ function reducer(state, action) {
                 filteredPets: filtered
             };
         }
+        case 'RESET_FILTERS':
+            return {
+              ...state,
+              filters: {
+                type: '',
+                town: '',
+                animalType: '',
+              },
+              filteredPets: state.pets // Reset to show all pets
+            };
+
         case 'SORT_PETS':
             {let sortedPets = state.filteredPets.slice(); // Use slice to copy the array
             sortedPets.sort((a, b) => {
@@ -60,7 +71,6 @@ function reducer(state, action) {
 
 export default function Pets() {
 
-
 const [state, dispatch] = useReducer(reducer, initialState);
 const {getAllPetsProfiles} = usePetsProfile();
 
@@ -68,7 +78,6 @@ useEffect(()=>{
     const fetchData = async() =>{
     const data = await getAllPetsProfiles()
     dispatch({ type: 'SET_PETS', payload: data });
-  
   };
   fetchData()
  },[])
@@ -83,26 +92,43 @@ const handleFilterChange = (event) => {
     dispatch({ type: 'APPLY_FILTERS' });
 };
 
+const handleResetFilters = () => {
+    dispatch({ type: 'RESET_FILTERS' });
+  };
+
   return (
         <Box sx={{my:6}}>
             <Container>
             <Typography variant='h2'>All pets profiles</Typography>
-            <Select value={''} displayEmpty  onChange={handleSortChange} inputProps={{ 'aria-label': 'Without label' }}>
-                    <MenuItem value=""> <em>None</em></MenuItem>
-                    <MenuItem value="name">Sort by Name</MenuItem>
-                    <MenuItem value="age">Sort by Age</MenuItem>
-                    <MenuItem value="size">Sort by Size</MenuItem>
-            </Select>
-            <FormControl fullWidth sx={{ mb: 2 }}>
-                        <InputLabel>Type</InputLabel>
-                        <Select   value={state.filters.animalType}    onChange={handleFilterChange}    name="type"    label="Type" >
-                            <MenuItem value=""><em>All</em></MenuItem>
-                            <MenuItem value="Dog">Dog</MenuItem>
-                            <MenuItem value="Cat">Cat</MenuItem>
-                            <MenuItem value="Bird">Bird</MenuItem>
-                            <MenuItem value="Other">Other</MenuItem>
-                        </Select>
-            </FormControl>
+            <Box sx={{mt:6}}>
+            <Grid container spacing={{ xs: 2, md: 3}} columns={{ xs: 4, md: 12 }} alignItems="center" justifyContent='flex-center'>
+                <Grid  xs={4} >
+                <FormControl fullWidth>
+                            <InputLabel>Type</InputLabel>
+                            <Select value={state.filters.animalType}  onChange={handleFilterChange}    name="type"    label="Type" >
+                                <MenuItem><em>Filters</em></MenuItem>
+                                <MenuItem value="Dog">Dog</MenuItem>
+                                <MenuItem value="Cat">Cat</MenuItem>
+                                <MenuItem value="Bird">Bird</MenuItem>
+                                <MenuItem value="Other">Other</MenuItem>
+                            </Select>
+                </FormControl>
+                </Grid>
+                <Grid xs={4} sx={{ml:4}} >
+                    <Select value={''} displayEmpty  onChange={handleSortChange} inputProps={{ 'aria-label': 'Without label' }}>
+                            <MenuItem value=""> <em>Sorting</em></MenuItem>
+                            <MenuItem value="name">Sort by Name</MenuItem>
+                            <MenuItem value="age">Sort by Age</MenuItem>
+                            <MenuItem value="size">Sort by Size</MenuItem>
+                    </Select>
+                </Grid>
+                <Grid sx={{ml:4}}>
+                <Button variant="contained" color="secondary" onClick={handleResetFilters} sx={{ mt: 2 }}>
+                  Reset Filters
+                 </Button>
+                </Grid>
+            </Grid>
+            </Box>
             
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }} sx={{mt:4}}>
             {state.filteredPets.map((pet, index) => (
