@@ -15,7 +15,7 @@ function Login() {
 
   //Validation and Handle errors
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+ 
 
   //History Hook
   const navigate = useNavigate()
@@ -32,13 +32,13 @@ function Login() {
   }
 
   setError('');
-  setLoading(true);
+
   // Send data to Firebase
   try {
       await login(emailRef.current.value, passwordRef.current.value, navigate);
   } catch (error) {
-    setLoading(false);
-
+  
+    console.log(error)
      if (error.message === 'Firebase: Error (auth/invalid-email).') {
       setError(`We can’t find an account. Please enter a valid email address or create new account`);
      } else
@@ -51,13 +51,7 @@ function Login() {
     <Box sx={{my: '80px'}}>
      <Container  sx = {{  display: 'flex', justifyContent: 'center', marginTop: '10vh',   }}>
      <CssBaseline />
-     <Box style={{  width: '500px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-       
-          }}
-        >
+     <Box sx={{  width: '500px',  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }} >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
         </Avatar>
@@ -68,27 +62,10 @@ function Login() {
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                id="email"
-                placeholder="Email Address"
-                name="email"
-                type='text'
-                inputRef = {emailRef}
-                autoFocus
-                />
-              </Grid>
+              <TextField   required  fullWidth  id="email"  placeholder="Email Address"  name="email"  type='text'  inputRef = {emailRef}  autoFocus  />
+            </Grid>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password"
-                placeholder="Password"
-                type="password"
-                id="password"
-                inputRef = {passwordRef}
-              />
+              <TextField   required  fullWidth name="password"  placeholder="Password"  type="password"  id="password"  inputRef = {passwordRef}  />
             </Grid>
             <Button onClick = {(e) => handleClick(e)} type="submit" color='secondary' fullWidth variant="contained" sx={{ mt: 1, mb: 2, height:'45px' }}>Log In</Button>
             <Link to='/forgot-password'>Forgot Password?</Link>
@@ -96,7 +73,7 @@ function Login() {
                   <Grid item>
                         <Link to='/signup' variant="body2">Need an account? Sign up</Link>
                   </Grid>
-              </Grid>
+            </Grid>
          </Grid>
        </Box>
       </Box>

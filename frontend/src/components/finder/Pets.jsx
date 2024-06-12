@@ -1,4 +1,4 @@
-import {useEffect, useReducer,useState} from 'react'
+import {useEffect, useReducer} from 'react'
 
 import {Box,Container, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
@@ -95,11 +95,7 @@ const handleFilterChange = (event) => {
             </Select>
             <FormControl fullWidth sx={{ mb: 2 }}>
                         <InputLabel>Type</InputLabel>
-                        <Select
-                            value={state.filters.animalType}
-                            onChange={handleFilterChange}
-                            name="type"
-                            label="Type" >
+                        <Select   value={state.filters.animalType}    onChange={handleFilterChange}    name="type"    label="Type" >
                             <MenuItem value=""><em>All</em></MenuItem>
                             <MenuItem value="Dog">Dog</MenuItem>
                             <MenuItem value="Cat">Cat</MenuItem>
@@ -112,9 +108,7 @@ const handleFilterChange = (event) => {
             {state.filteredPets.map((pet, index) => (
                 <Grid item xs={4} key={index}>
                             <Card>
-                                <CardMedia sx={{ height: 180 }}
-                                    image={pet.img}
-                                    title={`${pet.type} ${pet.name}`}  />
+                                <CardMedia sx={{ height: 180 }}    image={pet.img}    title={`${pet.type} ${pet.name}`}  />
                                 <Box sx={{p:2}}>   
                                 <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
                                 <Typography variant='body1'>{`Type: ${pet.type}, Age: ${pet.age_month}`}</Typography>

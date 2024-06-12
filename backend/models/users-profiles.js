@@ -31,12 +31,9 @@ const usersProfilesSchema = new Schema({
     },
     name: {
       type: String,
-      // required: true,
     },
     shelter : {
         type : Boolean,
-        default: false,
-        // required: true,
     },
     shelter_name : {
       type : String,

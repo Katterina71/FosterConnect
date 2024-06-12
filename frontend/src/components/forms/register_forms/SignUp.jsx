@@ -32,7 +32,7 @@ function SignUp() {
 
   //Validation and Handle errors
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  
 
  async function handleClick(e) {
   e.preventDefault()
@@ -58,42 +58,24 @@ function SignUp() {
 
 
   setError('');  // Clear any previous errors
-  setLoading(true); // Start the loading process
+ 
 
   // Send data to Firebase
   try {
         // Attempt to sign up the user
-         await signup(emailRef.current.value, passwordRef.current.value, navigate);
-    
-        // If signup is successful, navigate to the create-profile page
-       
+         await signup(emailRef.current.value, passwordRef.current.value, navigate);    
   } catch (error) {
         //Checking if user has already exist 
         console.error("Error during signup:", error);
-        setLoading(false);
         setError('Failed to create an account: ' + error.message);  // Display the actual error message from Firebase
-
   } 
-  
   }
 
   return (
   <Box sx={{my: '80px'}}>
-     <Container  sx = {{
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '10vh'
-     }}>
+     <Container  sx = {{  display: 'flex',  justifyContent: 'center',  marginTop: '10vh' }}>
      <CssBaseline />
-     <Box
-          style={{
-            width: '500px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-       
-          }}
-        >
+     <Box  style={{  width: '500px',  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }}  >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
         </Avatar>
@@ -107,38 +89,13 @@ function SignUp() {
          )}
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                id="email"
-                placeholder="Email Address"
-                name="email"
-                type='text'
-                inputRef = {emailRef}
-                autoFocus
-                />
+              <TextField   required  fullWidth  id="email"  placeholder="Email Address"  name="email" type='text'  inputRef = {emailRef}  autoFocus  />
               </Grid>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password"
-                placeholder="Password"
-                type="password"
-                id="password"
-                inputRef = {passwordRef}
-              />
+              <TextField   required  fullWidth  name="password"  placeholder="Password"  type="password"  id="password"  inputRef = {passwordRef}  />
             </Grid>
             <Grid item xs={12}>
-              <TextField 
-                required
-                fullWidth
-                name="password-confirm"
-                placeholder="Password Confirmation"
-                type="password"
-                id="password-confirm"
-                inputRef = {passwordConfirmRef}
-               />
+              <TextField   required  fullWidth  name="password-confirm"  placeholder="Password Confirmation" type="password"  id="password-confirm"  inputRef = {passwordConfirmRef} />
             </Grid>
             <Grid item xs={12}>
                 <FormControlLabel

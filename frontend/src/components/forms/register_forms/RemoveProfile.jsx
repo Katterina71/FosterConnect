@@ -18,18 +18,18 @@ export default function RemoveProfile() {
 
     const handleDelete = () => {
         console.log('Account deletion logic here');
-        deleteUser();
+
         removeAccount();
+        deleteUser();
+
         setOpen(false);
         handleClose();
+
         navigate('/');
     };
 
     return (
         <>
-            {/* <Button color="warning" variant="contained" onClick={handleClickOpen}>
-                Remove Account
-            </Button> */}
             <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title"  aria-describedby="alert-dialog-description" >
             <HeroImg imgPath={'./dashboard/fosters.jpg'} imgHeight={'300px'}/>
             {error && <Alert severity="error" fullWidth>{error}</Alert>}

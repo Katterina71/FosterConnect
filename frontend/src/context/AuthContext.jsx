@@ -61,8 +61,14 @@ export function AuthProvider({ children }) {
 
           await getUserProfile(user);
 
-         //If signup is successful, navigate to the foster or shelter dashboard page
-          navigate('/dashboard')
+          // if user did not complete create account and did not choose foster or shelter profile
+          if (!user.shelter) {
+            navigate('/create-profile')
+           }
+           else {
+            navigate('/dashboard')
+           }
+
          return user;
 
         } catch (error) {
@@ -78,8 +84,8 @@ export function AuthProvider({ children }) {
         console.log('Login profile:');
         try {
            const data = await getUserInfo(currentUser.uid)
-           return  data;
-
+          
+           return data;
         } catch (error) {
             throw new Error(error.code);
         }
@@ -89,8 +95,14 @@ export function AuthProvider({ children }) {
         return signOut(auth)
       }
     
-    function resetPassword(email) {
-        return sendPasswordResetEmail(auth, email)
+    async function resetPassword(email) {
+        console.log('Reset Password')
+        try {
+            return await sendPasswordResetEmail(auth, email)
+        
+        } catch (error) {
+          throw new Error(error.code);
+        } 
       }
     
 

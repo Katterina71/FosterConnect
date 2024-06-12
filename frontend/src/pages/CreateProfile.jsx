@@ -16,18 +16,30 @@ import { useFormContext } from '../context/FormContext';
 
 export default function CreateProfile() {
 
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('')
+    const [zipCode, setZipCode] = useState('');
 
-    // const [checked, setChecked] = useState(false)
     const [typeOfUser, setTypeOfUser] = useState('')
-    const navigate = useNavigate()
 
+
+
+    const navigate = useNavigate()
     const { submitForm, updateFormData } = useFormContext();  // Retrieve submitForm from context
 
 
-    const handleChange = (event) => {
+    const validateForm = () => {
        
+        if (!zipCode || !/^\d+$/.test(zipCode)) {
+            setError('ZIP code must be numeric and filled.');
+            return false;
+        }
+        
+        return true;
+    };
+
+    const handleChange = (event) => {
         const newUserType = event.target.value; 
-        console.log(newUserType)
         if (newUserType !== typeOfUser){  // Check if the type has actually changed
             if (newUserType === 'Shelter') {
                 updateFormData('petPreferences', []);  // Clear pet preferences when changing to Shelter
@@ -41,11 +53,17 @@ export default function CreateProfile() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateForm()) {
+            return; // Stop form submission if validation fails
+        }
+
         if (typeOfUser) {  // Checks if a type of user has been chosen before submitting
             submitForm();
+            setMessage('Profile was created successfully')
             navigate('/dashboard')
         } else {
-            alert('Please select whether you are registering as a foster or a shelter.');  // Alert if no selection is made
+            setError('Please select whether you are registering as a foster or a shelter.');  // Alert if no selection is made
         }
         
     };
@@ -55,24 +73,20 @@ export default function CreateProfile() {
         <Container>
             <Typography variant='h1' sx={{mb:4}}>Welcome!</Typography>
             <Typography>We&apos;re thrilled to have you join us. Whether you&apos;re looking to provide a temporary home as a foster or you&apos;re a shelter wanting to connect with potential fosters, you&apos;re in the right place. This quick registration process is the first step towards making a big difference. Let&apos;s get started!</Typography>
-            {alert && <Alert severity="error" fullWidth>{alert}</Alert>}
+           
+            {error && <Alert severity="error" fullWidth>{error}</Alert>}
+            {message && <Alert severity="success" fullWidth>{message}</Alert>}
+            
             {/* Radio buttons for choosing Foster or Shelter */}
             <FormControl component="fieldset" sx={{ mt: 4, mb: 2 }}>
                     <Typography variant='h2'>How would you like to join us?</Typography>
-                    <RadioGroup
-                        aria-label="user type"
-                        name="user-type"
-                        value={typeOfUser}
-                        onChange={handleChange}
-                    >
+                    <RadioGroup  aria-label="user type"name="user-type"value={typeOfUser} onChange={handleChange}>
                         <FormControlLabel value="Foster" control={<Radio />} label="Foster" />
                         <FormControlLabel value="Shelter" control={<Radio />} label="Shelter" />
                     </RadioGroup>
                 </FormControl>
-
-
-            <UserInfo />
-            <AddressForm />
+            <UserInfo user={''}/>
+            <AddressForm setZipCode={setZipCode} user={''}/>
         </Container>
         <Container sx={{my:4}}>
              <Typography variant='h3'>Additional Information for {typeOfUser || 'selecting your role'}</Typography>
