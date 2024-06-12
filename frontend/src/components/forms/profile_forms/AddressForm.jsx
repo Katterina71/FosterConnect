@@ -32,7 +32,6 @@ export default function AddressForm({user}) {
   }, []);
 
   const handleInputChange = (e) => {
-
     const { name, value } = e.target;
     setAddress({  name: value  })
     updateFormData('address', { [name]: value });

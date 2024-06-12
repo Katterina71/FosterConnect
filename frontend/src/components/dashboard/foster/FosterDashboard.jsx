@@ -44,12 +44,17 @@ import HeroImg from '../../mainPage/HeroImg';
       setShowAddPreference(false)
     };
 
+    console.log(user.active)
+
   return (
     <Box>
      <HeroImg imgPath={'./dashboard/smile-dog.jpg'} imgHeight={'600px'}/>
      <CssBaseline />
      <Box sx={{my: '80px'}}>
         <Container>
+          <Box sx={{ display:'flex', justifyContent:'flex-end'}}> {user.status ? <Typography sx={{color:'green', fontSize:'30px', fontWeight:'500'}}>Active</Typography> : <Typography sx={{color:'gray', fontSize:'30px', fontWeight:'500'}}>No Active</Typography>}
+          </Box>
+           
             <Typography variant='h1' sx={{mb:4}}>Hi, {user.name || 'Foster'}!</Typography>
             <Typography variant='h2' sx={{mb:4}}>Welcome to Your Foster Dashboard!</Typography>
             <Typography>Here, you can personalize your profile, manage your pet preferences, and adjust your account settings. Feel free to activate or deactivate your account as needed to stop receiving email notifications from our app. </Typography>

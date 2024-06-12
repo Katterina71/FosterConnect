@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import {Dialog} from '@mui/material'
+import {Dialog, Typography} from '@mui/material'
 import {Alert} from '@mui/material'
 
 import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
@@ -56,11 +56,9 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
   return (
 
     <Box>
+       
          {user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>}
-        <Container  sx = {{
-           display: 'flex',
-           justifyContent: 'center'
-           }}>
+        <Container  sx = {{ display: 'flex', justifyContent: 'center' }}>
             {error && <Alert severity="error" fullWidth>{error}</Alert>}
             <Box style={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Box sx={{display: 'flex', justifyContent: 'space-between', gap:'16px'}}>

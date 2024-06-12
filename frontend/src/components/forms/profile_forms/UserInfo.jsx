@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { Box, Container, TextField, Typography } from '@mui/material'
 
 //To apply the phone mask:
@@ -9,9 +9,25 @@ import { useFormContext } from '../../../context/FormContext';
 
 export default function UserInfo({user}) {
 
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    phone: '',
+  });
+
   const { updateFormData } = useFormContext();
   const [isValid, setIsValid] = useState(true);
   // const {userProfile} = useAuth()
+
+  // Effect to update local state when user prop changes
+  useEffect(() => {
+    if (user) {
+      setUserInfo({
+        name: user.name || '',
+        phone: user.phone || '',
+      });
+    }
+  }, []);
+
 
   const validateField = (value) => {
     setIsValid(value.trim() !== "");
@@ -19,8 +35,10 @@ export default function UserInfo({user}) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    setUserInfo({  name: value  })
     updateFormData('userInfo', { [name]: value });
-    validateField(value);
+    // validateField(value);
 };
 
   return (
@@ -32,10 +50,10 @@ export default function UserInfo({user}) {
   autoComplete="off" >
     <Typography variant='h3'>Personal Information</Typography>
       <Container maxWidth="md" sx={{my:4}}>
-          <TextField id="name-input" required label="Your name" name="name" value={user.name || ''} onChange={handleInputChange} autoFocus  />
-          <InputMask mask="(999) 999-9999" maskChar=" " onChange={handleInputChange} value={user.phone || ''}>
+          <TextField id="name" required label="Your name" name="name" value={userInfo.name} onChange={handleInputChange}/>
+          <InputMask id="phone" mask="(999) 999-9999" maskChar="" name="phone" value={userInfo.phone}  onChange={handleInputChange} >
             {() => (
-           <TextField id="outlined-required" required label="Your Phone"  variant="outlined"  name="phone"  onChange={handleInputChange}  /> 
+           <TextField id="phone" required label="Your Phone"  variant="outlined"  name="phone"   /> 
            )}
            </InputMask>
     </Container>
