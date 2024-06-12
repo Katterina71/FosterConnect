@@ -18,27 +18,15 @@ export default function CreateProfile() {
 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('')
-    const [zipCode, setZipCode] = useState('');
 
     const [typeOfUser, setTypeOfUser] = useState('')
-
-
 
     const navigate = useNavigate()
     const { submitForm, updateFormData } = useFormContext();  // Retrieve submitForm from context
 
 
-    const validateForm = () => {
-       
-        if (!zipCode || !/^\d+$/.test(zipCode)) {
-            setError('ZIP code must be numeric and filled.');
-            return false;
-        }
-        
-        return true;
-    };
-
     const handleChange = (event) => {
+        setError('')
         const newUserType = event.target.value; 
         if (newUserType !== typeOfUser){  // Check if the type has actually changed
             if (newUserType === 'Shelter') {
@@ -52,12 +40,8 @@ export default function CreateProfile() {
     };
 
     const handleFormSubmit = (e) => {
+        setError('')
         e.preventDefault();
-
-        // if (!validateForm()) {
-        //     return; // Stop form submission if validation fails
-        // }
-
         if (typeOfUser) {  // Checks if a type of user has been chosen before submitting
             submitForm();
             setMessage('Profile was created successfully')
@@ -74,8 +58,7 @@ export default function CreateProfile() {
             <Typography variant='h1' sx={{mb:4}}>Welcome!</Typography>
             <Typography>We&apos;re thrilled to have you join us. Whether you&apos;re looking to provide a temporary home as a foster or you&apos;re a shelter wanting to connect with potential fosters, you&apos;re in the right place. This quick registration process is the first step towards making a big difference. Let&apos;s get started!</Typography>
            
-            {error && <Alert severity="error" fullWidth>{error}</Alert>}
-            {message && <Alert severity="success" fullWidth>{message}</Alert>}
+
             
             {/* Radio buttons for choosing Foster or Shelter */}
             <FormControl component="fieldset" sx={{ mt: 4, mb: 2 }}>
@@ -86,13 +69,15 @@ export default function CreateProfile() {
                     </RadioGroup>
                 </FormControl>
             <UserInfo user={''}/>
-            <AddressForm setZipCode={setZipCode} user={''}/>
+            <AddressForm user={''}/>
         </Container>
         <Container sx={{my:4}}>
              <Typography variant='h3'>Additional Information for {typeOfUser || 'selecting your role'}</Typography>
             {/* Conditionally render FosterInfo or ShelterInfo based on the checked state */}
             {typeOfUser === 'Shelter' ? <ShelterInfo /> : typeOfUser === 'Foster' ? <FosterInfo petArray={[]}/> : null}
         </Container>
+        {error && <Alert severity="error" fullWidth>{error}</Alert>}
+        {message && <Alert severity="success" fullWidth>{message}</Alert>}
         <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button onClick={handleFormSubmit} variant="contained" color='secondary' sx={{my:2}}>CREATE PROFILE</Button>
         </Container>
