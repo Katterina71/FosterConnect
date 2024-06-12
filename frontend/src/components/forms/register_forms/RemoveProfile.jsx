@@ -9,6 +9,7 @@ export default function RemoveProfile() {
     const [open, setOpen] = useState(true);
     const { deleteUser, isDeleting, error } = useDeleteUser();
     const navigate = useNavigate()
+    const [errorHandle, setError] = useState('')
 
     const {removeAccount} = useAuth()
 
@@ -16,12 +17,23 @@ export default function RemoveProfile() {
         setOpen(false);
     };
 
-    const handleDelete = () => {
+
+    const handleDelete = async () => {
         console.log('Account deletion logic here');
-
-        removeAccount();
-        deleteUser();
-
+   
+        try {
+            await removeAccount();
+        } catch (error) {
+            setError(error)
+            
+        }
+        try {
+            await deleteUser();
+        } catch (error) {
+            setError(error)
+        }
+       
+    
         setOpen(false);
         handleClose();
 

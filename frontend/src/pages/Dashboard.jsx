@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import {Dialog, Typography} from '@mui/material'
+import {Dialog} from '@mui/material'
 import {Alert} from '@mui/material'
 
 import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
@@ -28,11 +28,9 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    async function getData(){
-      console.log(currentUser)
+    async function getData(){ 
       try {
        let data = await (loginProfile(currentUser, navigate))
-       console.log(data)
        return setUser(data)
        } catch (error) {
          setError('Data not found')
@@ -55,8 +53,7 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
 
   return (
 
-    <Box>
-       
+    <Box>       
          {user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>}
         <Container  sx = {{ display: 'flex', justifyContent: 'center' }}>
             {error && <Alert severity="error" fullWidth>{error}</Alert>}
@@ -72,7 +69,6 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
                      <RemoveProfile  />
                 </Dialog>
             </Box>
-
             <Button onClick = {handleLogout} color='secondary' variant="contained" sx={{ mt: 8, mb: 4}}>Logout</Button>
         </Box>
         </Container>

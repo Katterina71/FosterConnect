@@ -78,8 +78,6 @@ export function AuthProvider({ children }) {
         console.log('Login profile:');
         try {
            const data = await getUserInfo(currentUser.uid)
-           console.log(data)
-           console.log(data.shelter)
            if (data.shelter !== true && data.shelter !== false ) {
             navigate('/create-profile')
            }
@@ -110,10 +108,10 @@ export function AuthProvider({ children }) {
     
    async function removeAccount(){
         try {
-            console.log('Removing profile: ')
+            console.log('Removing profile from Firebase: ')
             const user = auth.currentUser
             await deleteUser(user);
-            console.log('User deleted');
+            console.log('User deleted from Firebase');
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
