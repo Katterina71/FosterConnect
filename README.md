@@ -2,7 +2,7 @@
 
 Welcome to Fosters Connect, a dynamic platform designed to facilitate connections between animal shelters and potential fosters, ensuring that pets find the temporary homes they need. Our service offers a comprehensive approach to foster care coordination, simplifying the process for both shelters and foster caregivers.
 
-Visit website (Fosters Connect)[https://fosterconnect.onrender.com/]
+Visit website [Fosters Connect](https://fosterconnect.onrender.com/)
 
 ## Project Goals
 
