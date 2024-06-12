@@ -101,7 +101,7 @@ const handleResetFilters = () => {
             <Container>
             <Typography variant='h2'>All Pets Profiles</Typography>
             <Box sx={{mt:6}}>
-            <Grid container spacing={{ xs: 2, md: 3}} columns={{ xs: 4, md: 12 }} alignItems="center" justifyContent='flex-center'>
+            <Grid container spacing={{ xs: 2, md: 3}} columns={{ xs: 4, md: 12 }} alignItems="center" justifyContent='flex-center' sx={{mb:6}}>
                 <Grid  xs={4} >
                 <FormControl fullWidth>
                             <InputLabel>Type</InputLabel>
@@ -109,7 +109,6 @@ const handleResetFilters = () => {
                                 <MenuItem><em>Filters</em></MenuItem>
                                 <MenuItem value="Dog">Dog</MenuItem>
                                 <MenuItem value="Cat">Cat</MenuItem>
-                                <MenuItem value="Bird">Bird</MenuItem>
                                 <MenuItem value="Other">Other</MenuItem>
                             </Select>
                 </FormControl>
@@ -137,7 +136,7 @@ const handleResetFilters = () => {
                                 <CardMedia sx={{ height: 180 }}    image={pet.img}    title={`${pet.type} ${pet.name}`}  />
                                 <Box sx={{p:2}}>   
                                 <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
-                                <Typography variant='body1'>{`Type: ${pet.type}, Age: ${pet.age_month}`}</Typography>
+                                <Typography variant='body1'>{`Type: ${pet.type}, Age (month): ${pet.age_month}`}</Typography>
                                 <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
                                 </Box>  
                             </Card>

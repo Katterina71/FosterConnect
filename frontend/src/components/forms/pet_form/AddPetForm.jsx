@@ -1,15 +1,20 @@
 import { useState } from 'react';
-import { Container, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Alert } from '@mui/material';
+import { Container, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Alert, CircularProgress } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import usePetsProfile from '../../../hooks/usePetsProfile'
 
 function AddPetForm({ onPetAdded }) {
-    const petTypes = ['Dog', 'Cat', 'Bird', 'Other'];
-    const lifeStages = ['Puppy/Kitten', 'Juvenile', 'Adult', 'Senior'];
+    const petTypes = ['Dog', 'Cat', 'Other'];
+    const lifeStages = ['Puppy/Kitten', 'Adult', 'Senior'];
     const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
     const gender = ['Male', 'Female'];
 
+
     const {postPetProfile} = usePetsProfile()
+    const [error, setError] = useState('');
+    const [message, setMessage] =useState('')
+    const [warning, setWarning] =useState('')
+    const [loading, setLoading] = useState(false)
 
 
     const [pet, setPet] = useState({
@@ -65,6 +70,7 @@ function AddPetForm({ onPetAdded }) {
         return data.secure_url; // This is the URL of the uploaded image
     } catch (error) {
         console.error('Error uploading image:', error);
+        setError('Error uploading image')
         throw error;
     }
 };
@@ -72,10 +78,11 @@ function AddPetForm({ onPetAdded }) {
   //Utilizes FormData to prepare the data for HTTP submission, which is suitable for sending files.
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true); // Start loading
 
     if (!pet.img) {
-        console.log('Please upload an image.');
+        setWarning('Please upload an image.');
+        setLoading(false);
         return;
     }
 
@@ -83,13 +90,14 @@ function AddPetForm({ onPetAdded }) {
         const uploadedImageUrl = await uploadImage(pet.img);
         const newPet = {...pet, img: uploadedImageUrl}; // Use the URL returned from Cloudinary
         await postPetProfile(newPet);
-        console.log('Pet profile successfully added!');
-        
+        console.log('Pet profile successfully added!'); 
         onPetAdded();
-        alert('Pet profile added successfully!');
+        setLoading(false); // Stop loading
+        setMessage('Pet profile added successfully!');
     } catch (error) {
-        console.error('Failed to submit the form', error);
+        setError.error('Failed to submit the form', error);
         console.log('Failed to process the form: ' + error.message);
+        setLoading(false); // Stop loading
     }
 
 };
@@ -98,7 +106,6 @@ function AddPetForm({ onPetAdded }) {
         <Container maxWidth="sm">
             <Typography variant="h4" sx={{ mb: 2 }}>Add New Pet Profile</Typography>
             <form onSubmit={handleSubmit}>
-            {alert && <Alert severity="error" fullWidth>{alert}</Alert>}
                 <FormControl fullWidth sx={{ mb: 2 }}>
                     <InputLabel>Type</InputLabel>
                     <Select  value={pet.type}  label="Type"  name="type"  onChange={handleChange}  required  >
@@ -146,7 +153,23 @@ function AddPetForm({ onPetAdded }) {
                 </FormControl>
                 <TextField  fullWidth  label="Description"  name="description"  value={pet.description}  onChange={handleChange}   multiline  rows={4} sx={{ mb: 2 }}
                 />
+                 {error && <Alert severity="error" fullWidth>{error}</Alert>}
+                 {message && <Alert severity="success" fullWidth>{message}</Alert>}
+                 {warning && <Alert severity="warning" fullWidth>{warning}</Alert>}
                 <Button type="submit" variant="contained" color="secondary" >Add New Pet</Button>
+                 {loading && (
+                        <CircularProgress
+                            size={24}
+                            sx={{
+                                color: 'secondary.main',
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                marginTop: '-12px',
+                                marginLeft: '-12px',
+                            }}
+                        />
+                    )}
             </form>
         </Container>
     );

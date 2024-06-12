@@ -2,8 +2,8 @@
 import { Box, Container, TextField, MenuItem, Typography } from '@mui/material';
 
 const PetPreferences = ({ preference, index, updatePreference }) => {
-    const petTypes = ['Dog', 'Cat', 'Bird', 'Other'];
-    const lifeStages = ['Puppy/Kitten', 'Juvenile', 'Adult', 'Senior'];
+    const petTypes = ['Dog', 'Cat', 'Other'];
+    const lifeStages = ['Puppy/Kitten', 'Adult', 'Senior'];
     const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
 
     const handleChange = (field, value) => {

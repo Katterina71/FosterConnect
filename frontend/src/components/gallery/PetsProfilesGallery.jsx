@@ -31,7 +31,7 @@ const handleRemovePet = async (petId) => {
   return (
    <Box>
     <Container>
-      <Typography variant='h2'>All pets profiles</Typography>
+      <Typography variant='h2' sx={{my:4}}>All pets profiles</Typography>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }} sx={{mt:4}}>
       {petArray.map((pet, index) => (
            <Grid item xs={4} key={index}>
