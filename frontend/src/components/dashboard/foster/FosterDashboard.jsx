@@ -15,6 +15,7 @@ import HeroImg from '../../mainPage/HeroImg';
     const {currentUser} = useAuth()
     const {updateFormData, submitForm} = useFormContext()
     
+    
  
    
     useEffect(() => {
@@ -23,7 +24,6 @@ import HeroImg from '../../mainPage/HeroImg';
       }
     }, [user.fostering_preferences]); // Dependency array includes the state variable
     
-
 
 
   const handleAddPreference = () => {

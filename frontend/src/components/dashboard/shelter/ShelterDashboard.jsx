@@ -21,10 +21,15 @@ import usePetsProfile from '../../../hooks/usePetsProfile'
     const [render, setRender] = useState(true);
 
     const fetchPets = async () => {
-      const data = await getPetsProfiles();
-      setPetArray(data);
-      console.log('Pets Data')
-      console.log(data)
+      try {
+        const data = await getPetsProfiles();
+        setPetArray(data);
+        console.log('Pets Data')
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+
   };
     
       useEffect(() => {

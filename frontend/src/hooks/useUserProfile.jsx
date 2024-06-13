@@ -53,6 +53,8 @@ export default function useUserProfile() {
         }
     }
 
+    
+
     const getUserInfo = async (uid) => {
           try {
             let response= await fetch(`${BASE_URL}/${uid}`, {
