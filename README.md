@@ -4,7 +4,7 @@ Welcome to Fosters Connect, a dynamic platform designed to facilitate connection
 
 Visit website [Fosters Connect](https://fosterconnect.onrender.com/)
 
-![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/MainPage.png)
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/Device%20Mashup.png)
 
 ## Project Goals
 
