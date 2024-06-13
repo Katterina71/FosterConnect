@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import {Box,Container, Typography, Grid, Button, CardMedia, Card, CircularProgress} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
-import useUserProfile from '../../hooks/useUserProfile'
 
 
 
@@ -9,7 +8,6 @@ export default function PetsProfilesGallery({ pets }) {
   const [petArray, setPetArray] = useState([pets])
   const {getPetsProfiles, removePetProfile} = usePetsProfile()
   const [loading, setLoading] = useState(true)
-
 
   useEffect( () =>{
     const fetchPets = async () => {
@@ -21,10 +19,10 @@ export default function PetsProfilesGallery({ pets }) {
         setLoading(false); 
         console.log(error)
       }
+
   };
   fetchPets();
 }, []); 
-
 
 
 const handleRemovePet = async (petId) => {
@@ -44,7 +42,7 @@ const handleRemovePet = async (petId) => {
     <Container>
       <Typography variant='h2' sx={{my:4}}>All pets profiles</Typography>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }} sx={{mt:4}}>
-      {loading && (  <CircularProgress  size={24}  color="secondary"/>  )}
+
       {petArray.map((pet, index) => (
            <Grid item xs={4} key={index}>
                     <Card>

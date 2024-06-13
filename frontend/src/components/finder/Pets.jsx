@@ -2,6 +2,7 @@ import {useEffect, useReducer, useState} from 'react'
 
 import {Box,Container, Button, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel, CircularProgress} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
+import useUserProfile from '../../hooks/useUserProfile';
 
 const initialState = {
     pets: [],
@@ -73,7 +74,22 @@ export default function Pets() {
 
 const [state, dispatch] = useReducer(reducer, initialState);
 const {getAllPetsProfiles} = usePetsProfile();
-const [loading, setLoading] = useState(true)
+const [loading, setLoading] = useState(true);
+const {getAllShelter} = useUserProfile()
+const [shelters, setShelters] = useState([])
+
+const fetchShelters = async () => {
+    try {
+        const data = await getAllShelter();
+        console.log(data)
+        setShelters(data);
+
+    } catch (error) {
+        console.log(error)
+        setLoading(false)
+    }
+}
+
 
 useEffect(()=>{
     const fetchData = async() =>{
@@ -86,7 +102,9 @@ useEffect(()=>{
             setLoading(false)
         }
   };
+
   fetchData()
+  fetchShelters()
  },[])
 
 
@@ -102,6 +120,11 @@ const handleFilterChange = (event) => {
 const handleResetFilters = () => {
     dispatch({ type: 'RESET_FILTERS' });
   };
+
+  const getShelterNameById = (shelterId) => {
+    const shelter = shelters.find(shelter => shelter.firebaseUid === shelterId);
+    return shelter ? shelter.shelter_name : 'Unknown Shelter';
+};
 
   return (
         <Box sx={{my:6}}>
@@ -143,9 +166,10 @@ const handleResetFilters = () => {
                             <Card>
                                 <CardMedia sx={{ height: 180 }}    image={pet.img}    title={`${pet.type} ${pet.name}`}  />
                                 <Box sx={{p:2}}>   
-                                <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
+                                <Typography variant='h6' color='green' fontWeight='800'>{`Name: ${pet.name}`}</Typography>
                                 <Typography variant='body1'>{`Type: ${pet.type}, Age (month): ${pet.age_month}`}</Typography>
                                 <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
+                                <Typography variant='h6'>{`Shelter: ${getShelterNameById(pet.shelter_id)}`}</Typography>
                                 </Box>  
                             </Card>
                     </Grid>
