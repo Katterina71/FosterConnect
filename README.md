@@ -43,7 +43,10 @@ This project is built on the MERN stack, utilizing additional technologies such 
 ## Agile methodology
 
 My project utilizes agile methodology to ensure iterative development, continuous feedback, and rapid adaptation to changes. Duration of project development: four weeks.
-![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/MainPage.png)
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/Agile.png)
+
+Sprints example: 
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/Agile-sprints.jpg)
 
 ## Features
 
