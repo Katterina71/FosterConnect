@@ -32,6 +32,32 @@ export default function usePetsProfile() {
         }
     } 
 
+    const getPetsProfilesShelter = async (user) => {
+        setError(null);
+        console.log(user.firebaseUid)
+    try {
+        let response= await fetch(`${BASE_PETS_URL}/${user.firebaseUid}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+           })
+    
+         if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            let  data = await response.json();   
+            console.log('Get success:', data);
+            return data
+  
+        } catch (error) {
+            // Handle errors here
+            console.error('Failed to get pets profiles', error);
+            setError(error.response ? error.response.data : error.message);
+        }
+    } 
+
     const postPetProfile = async(petData) => {
         console.log('Add pet profile frontend')
         setError(null);
@@ -104,5 +130,5 @@ export default function usePetsProfile() {
         }
     }
 
-    return { getPetsProfiles, postPetProfile, removePetProfile, getAllPetsProfiles, error };
+    return { getPetsProfiles, postPetProfile, removePetProfile, getAllPetsProfiles, getPetsProfilesShelter, error };
 }

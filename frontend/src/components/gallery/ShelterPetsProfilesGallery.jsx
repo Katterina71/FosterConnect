@@ -5,17 +5,12 @@ import usePetsProfile from '../../hooks/usePetsProfile'
 
 
 export default function ShelterPetsProfilesGallery({ pets }) {
-  const [petArray, setPetArray] = useState([pets])
-  const {getPetsProfiles} = usePetsProfile()
+  const [petArray, setPetArray] = useState([])
+
 
   useEffect( () =>{
-    const fetchPets = async () => {
-      const data = await getPetsProfiles(); 
-      setPetArray(data);  
-  };
-  fetchPets();
+    setPetArray(pets)
 }, []); 
-
 
 
   return (
