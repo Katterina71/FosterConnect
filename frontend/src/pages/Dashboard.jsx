@@ -1,11 +1,8 @@
 
 
 import {useEffect, useState} from 'react'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import {Dialog} from '@mui/material'
-import {Alert} from '@mui/material'
+import {Box, CircularProgress, Button, Container,Dialog, Alert } from '@mui/material';
+
 
 import ShelterDashboard from '../components/dashboard/shelter/ShelterDashboard';
 import FosterDashboard from '../components/dashboard/foster/FosterDashboard';
@@ -55,9 +52,11 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
     }
 
   return (
+  
+    <Box>    
+       {loadingData && (  <CircularProgress  size={40}  color="secondary"/>  )} 
 
-     <Box>       
-       { !loadingData && <Box>{user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>} </Box> }
+       {!loadingData && <Box>{user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>} </Box> }
         <Container  sx = {{ display: 'flex', justifyContent: 'center' }}>
             {error && <Alert severity="error" fullWidth>{error}</Alert>}
             <Box style={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -76,6 +75,7 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
         </Box>
         </Container>
     </Box>
+    
   )
 }
 
