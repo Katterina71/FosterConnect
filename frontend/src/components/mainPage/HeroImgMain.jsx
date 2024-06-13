@@ -1,7 +1,10 @@
-import {Box, Grid , Button, Container} from '@mui/material';
+import {Box, Grid , Button, Container, } from '@mui/material';
 import { Link } from 'react-router-dom';  
 
+
 export default function HeroImgMain({imgPath, imgHeight}) {
+
+
 
   return (
     <Container maxWidth="false" disableGutters> {/* Remove maxWidth constraint and disable gutters */}
