@@ -75,14 +75,14 @@ function SignUp() {
   <Box sx={{my: '80px'}}>
      <Container  sx = {{  display: 'flex',  justifyContent: 'center',  marginTop: '10vh' }}>
      <CssBaseline />
-     <Box  style={{  width: '500px',  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }}  >
+     <Box  sx={{  width: { xs: '350px', md: '500px' },  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }}  >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
             Sign up
         </Typography>
-        <Box style={{ marginTop: 3 }} >
+        <Box sx={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           {error && error.includes('Email already in use.') && (
         <Alert severity="warning" fullWidth>Warning: This email is already in use. Please use a different email or log in.</Alert>

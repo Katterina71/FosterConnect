@@ -49,14 +49,14 @@ function ForgotPassword() {
 
   return (
     <Box sx={{my: '80px'}}>
-     <Container style = {{  display: 'flex',  justifyContent: 'center',  marginTop: '10vh'
+     <Container sx = {{  display: 'flex',  justifyContent: 'center',  marginTop: '10vh'
      }}>
      <CssBaseline />
-     <Box  sx={{  width: '500px',  display: 'flex',  flexDirection: 'column',  alignItems: 'center', }}>
+     <Box  sx={{  width: { xs: '350px', md: '500px' },  display: 'flex',  flexDirection: 'column',  alignItems: 'center', }}>
         <Typography component="h1" variant="h5">
             Password Reset
         </Typography>
-        <Box style={{ marginTop: 3 }} >
+        <Box sx={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           {message && <Alert severity="success" fullWidth>{message}</Alert>}
           <Grid container spacing={2}>

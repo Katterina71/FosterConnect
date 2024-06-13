@@ -61,7 +61,7 @@ export default function ChangePassword() {
   return (
     <Box sx={{my: '80px'}}>
      <Container sx = {{ display: 'flex',  justifyContent: 'center', marginTop: '10vh' }}>
-     <Box sx={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
+     <Box sx={{ width: { xs:'200px', mb:'500px'}, display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
         <Typography component="h1" variant="h5">
             Change Password
         </Typography>

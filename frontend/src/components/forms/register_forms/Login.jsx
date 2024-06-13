@@ -51,14 +51,14 @@ function Login() {
     <Box sx={{my: '80px'}}>
      <Container  sx = {{  display: 'flex', justifyContent: 'center', marginTop: '10vh',   }}>
      <CssBaseline />
-     <Box sx={{  width: '500px',  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }} >
+     <Box sx={{ width: { xs: '350px', md: '500px' },  display: 'flex',  flexDirection: 'column',  alignItems: 'center',  }} >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
             Log In
         </Typography>
-        <Box style={{ marginTop: 3 }} >
+        <Box sx={{ marginTop: 3 }} >
           {error && <Alert severity="error" fullWidth>{error}</Alert>}
           <Grid container spacing={2}>
             <Grid item xs={12}>
