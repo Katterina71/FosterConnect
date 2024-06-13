@@ -100,8 +100,8 @@ I use MongoDB to manage our database, which is structured to handle user profile
 - **Notification System**: Automated notifications to keep users informed about important updates and actions required.
 
 ## Future Features
-** Send Application Form to Shelter:** We plan to implement a feature allowing users to send application forms directly to shelters through our website. This will streamline the process of applying to foster or adopt pets, making it more convenient for potential fosters and shelters alike.
+**Send Application Form to Shelter:** I plan to implement a feature allowing users to send application forms directly to shelters through my website. This will streamline the process of applying to foster or adopt pets, making it more convenient for potential fosters and shelters alike.
 
 **Create List of Favorite Pets:** Users will be able to create and manage a list of their favorite pets. This feature will enable users to easily keep track of the pets they are most interested in, enhancing their experience and engagement with the platform.
 
-**Connect SendGrid for Email Notifications:** We will integrate SendGrid to enable robust email notifications. This will ensure users receive timely updates and important information, such as new pet listings, application status updates, and other relevant communications from shelters.
+**Connect SendGrid for Email Notifications:** I will integrate SendGrid to enable robust email notifications. This will ensure users receive timely updates and important information, such as new pet listings, application status updates, and other relevant communications from shelters.
