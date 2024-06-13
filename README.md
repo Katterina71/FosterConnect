@@ -40,6 +40,11 @@ This project is built on the MERN stack, utilizing additional technologies such 
 2. **Profile Creation**: Facilitating seamless profile creation for both shelters and fosters, ensuring all necessary information is captured and easily manageable.
 3. **Connecting New Services**: Integrating new services such as Firebase for authentication, Cloudinary for media management, and MUI for enhancing the user interface.
 
+## Agile methodology
+
+My project utilizes agile methodology to ensure iterative development, continuous feedback, and rapid adaptation to changes. Duration of project development: four weeks.
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/MainPage.png)
+
 ## Features
 
 - **Shelter Dashboard**: A dedicated dashboard for shelters to manage their listed pets, manage automating email communication.
