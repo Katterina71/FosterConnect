@@ -54,7 +54,8 @@ I use MongoDB to manage our database, which is structured to handle user profile
 
 ![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnectDB.png)
 
-## API Endpoints example
+## Examples of API Endpoints example
+
 ### **User Management**
 
 ### **1. User Registration**
@@ -84,6 +85,7 @@ I use MongoDB to manage our database, which is structured to handle user profile
 
 ## Website structure
 
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnect-Website%20Structure.png)
 
 ## Features
 
