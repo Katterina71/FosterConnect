@@ -102,7 +102,7 @@ const handleResetFilters = () => {
             <Typography variant='h2'>All Pets Profiles</Typography>
             <Box sx={{mt:6}}>
             <Grid container spacing={{ xs: 2, md: 3}} columns={{ xs: 4, md: 12 }} alignItems="center" justifyContent='flex-center' sx={{mb:6}}>
-                <Grid  xs={4} >
+                <Grid  xs={4} sx={{}} >
                 <FormControl fullWidth>
                             <InputLabel>Type</InputLabel>
                             <Select value={state.filters.animalType}  onChange={handleFilterChange}    name="type"    label="Type" >
@@ -113,7 +113,7 @@ const handleResetFilters = () => {
                             </Select>
                 </FormControl>
                 </Grid>
-                <Grid xs={4} sx={{ml:4}} >
+                <Grid xs={4} sx={{ ml: { xs: 0, md: 4 }, mt: {xs: 2, md: 0}} } >
                     <Select value={''} displayEmpty  onChange={handleSortChange} inputProps={{ 'aria-label': 'Without label' }}>
                             <MenuItem value=""> <em>Sorting</em></MenuItem>
                             <MenuItem value="name">Sort by Name</MenuItem>
@@ -121,7 +121,7 @@ const handleResetFilters = () => {
                             <MenuItem value="size">Sort by Size</MenuItem>
                     </Select>
                 </Grid>
-                <Grid sx={{ml:4}}>
+                <Grid sx={{ ml: { xs: 0, md: 4 }} }>
                 <Button variant="contained" color="secondary" onClick={handleResetFilters} sx={{ mt: 2 }}>
                   Reset Filters
                  </Button>
