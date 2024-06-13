@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {Box,Container, Typography, Grid, CardMedia, Card} from '@mui/material'
-import usePetsProfile from '../../hooks/usePetsProfile'
+
 
 
 

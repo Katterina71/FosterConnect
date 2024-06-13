@@ -79,6 +79,7 @@ export function AuthProvider({ children }) {
         try {
            const data = await getUserInfo(currentUser.uid)
            if (data.shelter !== true && data.shelter !== false ) {
+            setLoading(false)
             navigate('/create-profile')
            }
            return data;
@@ -130,6 +131,7 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
+        loading,
         loginProfile,
         signup,
         login,

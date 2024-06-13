@@ -19,7 +19,8 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
 
     const [error, setError] = useState("")
     const [user, setUser] = useState("")
-    const {currentUser, loginProfile, logout} = useAuth()
+    const [loadingData, setLoadingData] = useState(true)
+    const {currentUser, loginProfile, logout, loading} = useAuth()
 
     const navigate = useNavigate()
 
@@ -31,6 +32,8 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
     async function getData(){ 
       try {
        let data = await (loginProfile(currentUser, navigate))
+       console.log(loading)
+       setLoadingData(loading);
        return setUser(data)
        } catch (error) {
          setError('Data not found')
@@ -53,8 +56,8 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
 
   return (
 
-    <Box>       
-         {user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>}
+     <Box>       
+       { !loadingData && <Box>{user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>} </Box> }
         <Container  sx = {{ display: 'flex', justifyContent: 'center' }}>
             {error && <Alert severity="error" fullWidth>{error}</Alert>}
             <Box style={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
