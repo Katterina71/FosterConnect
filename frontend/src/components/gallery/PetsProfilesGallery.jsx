@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react'
 import {Box,Container, Typography, Grid, Button, CardMedia, Card, CircularProgress} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
-import useUserProfile from '../../hooks/useUserProfile'
-
+import {Delete} from '@mui/icons-material';
 
 
 export default function PetsProfilesGallery({ pets }) {
@@ -53,7 +52,7 @@ const handleRemovePet = async (petId) => {
                         <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
                         <Typography variant='body1'>{`Type: ${pet.type}, Age: ${pet.age_month}`}</Typography>
                         <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
-                        <Button variant="contained" color="error" sx={{mt:3}} onClick={() => handleRemovePet(pet._id)}>Remove</Button>
+                        <Button variant="contained" color="error" sx={{mt:3}} startIcon={<Delete />} onClick={() => handleRemovePet(pet._id)}>Remove</Button>
                         </Box>  
                     </Card>
               </Grid>

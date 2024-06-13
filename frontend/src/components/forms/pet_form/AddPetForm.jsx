@@ -126,7 +126,7 @@ function AddPetForm({ onPetAdded }) {
                     {preview && <Box mt={2} sx={{ textAlign: 'center' }}><img src={preview} alt="Preview" style={{ height: '200px', borderRadius: '8px'}} /></Box>}
                 </Box>
 
-                <TextField fullWidth  label="Age (Months)"  name="age_month"  value={pet.age_month}  onChange={handleChange}  required  sx={{ mb: 2 }}  />
+                <TextField fullWidth  label="Age (Months)"  name="age_month"  value={pet.age_month}  onChange={handleChange}   sx={{ mb: 2 }}  />
                 <FormControl fullWidth sx={{ mb: 2 }}>
                     <InputLabel>Life Stage</InputLabel>
                     <Select  value={pet.life_stage}  label="Life Stage"  name="life_stage"  onChange={handleChange}  required  >

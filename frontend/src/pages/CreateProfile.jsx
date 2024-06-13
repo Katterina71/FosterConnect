@@ -58,8 +58,6 @@ export default function CreateProfile() {
             <Typography variant='h1' sx={{mb:4}}>Welcome!</Typography>
             <Typography>We&apos;re thrilled to have you join us. Whether you&apos;re looking to provide a temporary home as a foster or you&apos;re a shelter wanting to connect with potential fosters, you&apos;re in the right place. This quick registration process is the first step towards making a big difference. Let&apos;s get started!</Typography>
            
-
-            
             {/* Radio buttons for choosing Foster or Shelter */}
             <FormControl component="fieldset" sx={{ mt: 4, mb: 2 }}>
                     <Typography variant='h2'>How would you like to join us?</Typography>

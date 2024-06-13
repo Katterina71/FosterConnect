@@ -11,6 +11,9 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
 import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
 
+import {DeleteForever, Logout} from '@mui/icons-material';
+
+
 
   export default function Dashboard() {
 
@@ -29,7 +32,7 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
     async function getData(){ 
       try {
        let data = await (loginProfile(currentUser, navigate))
-       console.log(loading)
+       console.log(data.shelter)
        setLoadingData(loading);
        return setUser(data)
        } catch (error) {
@@ -54,7 +57,15 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
   return (
   
     <Box>    
-       {loadingData && (  <CircularProgress  size={40}  color="secondary"/>  )} 
+       {loadingData && (  <CircularProgress  size={40}
+       sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            marginTop: '-12px',
+            marginLeft: '-12px',
+       }}
+         color="secondary"/>  )} 
 
        {!loadingData && <Box>{user.shelter ? <ShelterDashboard user={user}/> : <FosterDashboard user={user}/>} </Box> }
         <Container  sx = {{ display: 'flex', justifyContent: 'center' }}>
@@ -64,14 +75,14 @@ import RemoveProfile from '../components/forms/register_forms/RemoveProfile';
                 <Link to="/update-profile">Update Profile</Link>
                 <Link to="/change-password">Change Password</Link>
                 {/* This button triggers the dialog */}
-               <Button color="warning" variant="contained" onClick={handleOpen}>
+               <Button color="warning" variant="contained" onClick={handleOpen} startIcon={<DeleteForever />}>
                     Remove Profile
                </Button>
                 <Dialog open={open} onClose={handleClose} color="warning" variant="contained">
                      <RemoveProfile  />
                 </Dialog>
             </Box>
-            <Button onClick = {handleLogout} color='secondary' variant="contained" sx={{ mt: 8, mb: 4}}>Logout</Button>
+            <Button onClick = {handleLogout} color='secondary' variant="contained" sx={{ mt: 8, mb: 4}} startIcon={<Logout />}>Logout</Button>
         </Box>
         </Container>
     </Box>

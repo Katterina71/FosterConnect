@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { Logout } from '@mui/icons-material';
 
 import {useAuth} from '../../context/AuthContext'
 import {Link, useNavigate} from 'react-router-dom'
@@ -152,7 +153,7 @@ export default function Header() {
                  }} 
                  sx={{mt:4}}>
                <MenuItem  onClick={() => navigate('/dashboard')}>My Profile</MenuItem>
-               <MenuItem onClick={handleLogout}>Logout</MenuItem>
+               <MenuItem onClick={handleLogout} startIcon={<Logout />} >Logout</MenuItem>
               </Menu>
     
               </>
