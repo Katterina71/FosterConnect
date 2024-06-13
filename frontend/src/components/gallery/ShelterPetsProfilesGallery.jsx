@@ -24,7 +24,7 @@ export default function ShelterPetsProfilesGallery({ pets }) {
                         <CardMedia sx={{ height: 180 }} image={pet.img}  title={`${pet.type} ${pet.name}`}  />
                         <Box sx={{p:2}}>   
                         <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
-                        <Typography variant='body1'>{`Type: ${pet.type}, Age month: ${pet.age_month}`}</Typography>
+                        <Typography variant='body1'>{`Type: ${pet.type}, Life Stage: ${pet.life_stage}`}</Typography>
                         <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
                         </Box>  
                     </Card>

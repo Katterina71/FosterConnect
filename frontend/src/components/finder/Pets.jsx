@@ -147,7 +147,7 @@ const handleResetFilters = () => {
                     <Select value={''} displayEmpty  onChange={handleSortChange} inputProps={{ 'aria-label': 'Without label' }}>
                             <MenuItem value=""> <em>Sorting</em></MenuItem>
                             <MenuItem value="name">Sort by Name</MenuItem>
-                            <MenuItem value="age">Sort by Age</MenuItem>
+                            {/* <MenuItem value="age">Sort by Age</MenuItem> */}
                             <MenuItem value="size">Sort by Size</MenuItem>
                     </Select>
                 </Grid>
@@ -167,7 +167,7 @@ const handleResetFilters = () => {
                                 <CardMedia sx={{ height: 180 }}    image={pet.img}    title={`${pet.type} ${pet.name}`}  />
                                 <Box sx={{p:2}}>   
                                 <Typography variant='h6' color='green' fontWeight='800'>{`Name: ${pet.name}`}</Typography>
-                                <Typography variant='body1'>{`Type: ${pet.type}, Age (month): ${pet.age_month}`}</Typography>
+                                <Typography variant='body1'>{`Type: ${pet.type}, Life Stage: ${pet.life_stage}`}</Typography>
                                 <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
                                 <Typography variant='h6'>{`Shelter: ${getShelterNameById(pet.shelter_id)}`}</Typography>
                                 </Box>  

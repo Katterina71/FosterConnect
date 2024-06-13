@@ -50,7 +50,7 @@ const handleRemovePet = async (petId) => {
                         <CardMedia sx={{ height: 180 }} image={pet.img}  title={`${pet.type} ${pet.name}`}  />
                         <Box sx={{p:2}}>   
                         <Typography variant='h6'>{`Name: ${pet.name}`}</Typography>
-                        <Typography variant='body1'>{`Type: ${pet.type}, Age: ${pet.age_month}`}</Typography>
+                        <Typography variant='body1'>{`Type: ${pet.type}, Life Stage: ${pet.life_stage}`}</Typography>
                         <Typography variant='body1'>{`Size: ${pet.size}, Gender: ${pet.gender}`}</Typography>
                         <Button variant="contained" color="error" sx={{mt:3}} startIcon={<Delete />} onClick={() => handleRemovePet(pet._id)}>Remove</Button>
                         </Box>  
