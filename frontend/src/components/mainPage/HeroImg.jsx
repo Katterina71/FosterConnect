@@ -9,6 +9,7 @@ export default function HeroImg({imgPath, imgHeight}) {
     <Container maxWidth="false" disableGutters> {/* Remove maxWidth constraint and disable gutters */}
       <Grid container spacing={0}> {/* Remove spacing if you want the image to stretch fully */}
         <Grid item xs={12}>
+        
         <Box
             component="img"
             sx={{
