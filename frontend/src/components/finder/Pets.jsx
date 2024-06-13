@@ -1,6 +1,6 @@
-import {useEffect, useReducer} from 'react'
+import {useEffect, useReducer, useState} from 'react'
 
-import {Box,Container, Button, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel} from '@mui/material'
+import {Box,Container, Button, Typography, Grid, CardMedia, Card, Select, MenuItem, FormControl, InputLabel, CircularProgress} from '@mui/material'
 import usePetsProfile from '../../hooks/usePetsProfile'
 
 const initialState = {
@@ -73,11 +73,18 @@ export default function Pets() {
 
 const [state, dispatch] = useReducer(reducer, initialState);
 const {getAllPetsProfiles} = usePetsProfile();
+const [loading, setLoading] = useState(true)
 
 useEffect(()=>{
     const fetchData = async() =>{
-    const data = await getAllPetsProfiles()
-    dispatch({ type: 'SET_PETS', payload: data });
+        try {
+            const data = await getAllPetsProfiles()
+            dispatch({ type: 'SET_PETS', payload: data });
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
   };
   fetchData()
  },[])
@@ -130,6 +137,7 @@ const handleResetFilters = () => {
             </Box>
             
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }} sx={{mt:4}}>
+            {loading && (  <CircularProgress  size={24}  color="secondary"/>  )}
             {state.filteredPets.map((pet, index) => (
                 <Grid item xs={4} key={index}>
                             <Card>

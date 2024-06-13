@@ -8,6 +8,7 @@ export default function ShelterPetsProfilesGallery({ pets }) {
   const [petArray, setPetArray] = useState([])
 
 
+
   useEffect( () =>{
     setPetArray(pets)
 }, []); 
