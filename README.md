@@ -48,6 +48,41 @@ My project utilizes agile methodology to ensure iterative development, continuou
 Sprints example: 
 ![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/Agile-sprints.jpg)
 
+## Database Structure
+I use MongoDB to manage our database, which is structured to handle user profiles, pet profiles, fostering preferences, and addresses efficiently. The user profiles link to pet profiles, fostering preferences, and addresses, facilitating seamless coordination between shelters and fosters.
+![https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnectDB.png]
+
+## API Endpoints example
+### **User Management**
+
+### **1. User Registration**
+
+- **Endpoint:** **`POST /api/users/`**
+- **Description:** Register a new user (either foster or shelter).
+
+### **2. Get User Profile**
+
+- **Endpoint:** **`GET /api/users/:firebaseUid`**
+- **Description:** Get the profile of the logged-in user.
+
+### **3. Update User Profile**
+
+- **Endpoint:**  **`PATCH /api/users/:firebaseUid`**
+- **Description:** Update the profile of the logged-in user.
+
+### **4. Remove User Profile**
+
+- **Endpoint:**  **`DELETE /api/users/:firebaseUid`**
+- **Description:** Remove the profile of the logged-in user.
+
+### **5. Get all Shelters Profiles**
+
+- **Endpoint:** **`GET /api/shelters`**
+- **Description:** Retrieve all shelter profiles.
+
+## Website structure
+
+
 ## Features
 
 - **Shelter Dashboard**: A dedicated dashboard for shelters to manage their listed pets, manage automating email communication.
