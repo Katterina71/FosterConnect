@@ -87,6 +87,10 @@ I use MongoDB to manage our database, which is structured to handle user profile
 
 ![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnect-Website%20Structure.png)
 
+## Wireframes examples
+
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/wireframes.jpg)
+
 ## Features
 
 - **Shelter Dashboard**: A dedicated dashboard for shelters to manage their listed pets, manage automating email communication.
