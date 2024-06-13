@@ -1,3 +1,4 @@
+import { MailOutline } from "@mui/icons-material";
 import { Box, Button, Container } from "@mui/material";
 
 const SendPetListButton = () => {
@@ -24,7 +25,7 @@ const SendPetListButton = () => {
   return (
     <Box sx={{my:4}}>
         <Container  sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Button variant="contained"  sx={{ my: 4, bgcolor: 'secondary.light'}} onClick={handleSendPetList}>Send Pet List to Fosters</Button>
+                <Button variant="contained"  sx={{ my: 4, bgcolor: 'secondary.light'}} onClick={handleSendPetList} startIcon={<MailOutline /> }>Send Pet List to Fosters</Button>
         </Container>
     </Box>
   );
