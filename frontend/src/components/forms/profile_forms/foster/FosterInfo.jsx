@@ -3,6 +3,7 @@ import {  useState } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import PetPreferences from '../foster/PetPreferences'; // Assuming this is the correct import path
 import { useFormContext } from '../../../../context/FormContext';
+import { Delete } from '@mui/icons-material';
 
 const FosterInfo = ({petArray}) => {
     const [petPreferences, setPetPreferences] = useState(petArray);
@@ -57,7 +58,7 @@ const FosterInfo = ({petArray}) => {
                 petPreferences.map((preference, index) => (
                     <Box key={index}>
                         <PetPreferences preference={preference} index={index} updatePreference={updatePreference} />
-                        <Button onClick={() => handleRemovePetPreference(index)} variant="contained" color="error" sx={{ mt: 1 }}>
+                        <Button onClick={() => handleRemovePetPreference(index)} variant="contained" color="error" sx={{ mt: 1 }} startIcon={<Delete/>}>
                             Remove
                         </Button>
                     </Box>
@@ -65,7 +66,7 @@ const FosterInfo = ({petArray}) => {
             )}
             {!submitted && (
                 <>
-                    <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2 }}>
+                    <Button onClick={handleAddPetPreference} variant="contained" color="secondary" sx={{ my: 2, bgcolor: 'secondary.light' }}>
                         Add New Pet Preference
                     </Button>
                     <Button onClick={handleSubmit} variant="contained" color="warning" sx={{ my: 2, ml: 4 }}>

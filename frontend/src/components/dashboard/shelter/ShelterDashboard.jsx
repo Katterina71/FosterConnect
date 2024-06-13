@@ -10,6 +10,7 @@ import HeroImg from '../../mainPage/HeroImg';
 import AddPetForm from '../../forms/pet_form/AddPetForm';
 import PetsProfilesGallery from '../../gallery/PetsProfilesGallery';
 import usePetsProfile from '../../../hooks/usePetsProfile'
+import SendEmailForm from '../../email/SendEmailForm';
 
 
   export default function ShelterDashboard({user}) {
@@ -49,7 +50,9 @@ import usePetsProfile from '../../../hooks/usePetsProfile'
       setRender(false);
   };
 
-  console.log(petArray)
+  const handleSendEmails = () => {
+    return <SendEmailForm />
+  }
 
   return (
 
@@ -63,6 +66,7 @@ import usePetsProfile from '../../../hooks/usePetsProfile'
            <Typography variant='h1' sx={{mb:4}}>Hi, {user.name || 'Foster'}!</Typography>
            <Typography variant='h2' sx={{mb:4}}>Welcome to Your {user.shelter_name || ''} Shelter Dashboard!</Typography>
            <Typography> Manage your profile and settings seamlessly from here. You have the ability to update your information, create listings for pets available for fostering, and customize your newsletter preferences. If you wish to take a break, you can deactivate your account to temporarily remove your shelter from our finder tool. Utilize your dashboard to maximize your shelter's outreach and engagement.</Typography>
+           <SendEmailForm />
            <Button variant="contained" color="secondary" sx={{ mt: 2 }} onClick={()=>setNewPet(true)}>Add Pet Profile</Button>
            <Box sx={{mt:4}}>
              {newPet && <AddPetForm onPetAdded={handlePetAdded} />}

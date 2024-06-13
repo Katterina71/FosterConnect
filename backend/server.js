@@ -13,6 +13,7 @@ connectToDb();
 
 import usersProfiles from "./routes/users-profiles-routes.js";
 import petsProfiles from "./routes/pets-profiles-routes.js";
+import emailRouter from './routes/emails.js';
 
 
 //middleware
@@ -24,6 +25,7 @@ app.use(express.json());
 
 app.use("/api/users", usersProfiles);
 app.use("/api/pets", petsProfiles);
+app.use('/api/email', emailRouter);
 
 
 //middleware
@@ -54,6 +56,8 @@ app.use((err, req, res, next) => {
         res.send("Seems like we messed up somewhere...");
     }
 });
+
+
 
 // listen for request & server error handling
 app.listen(PORT, () => {
