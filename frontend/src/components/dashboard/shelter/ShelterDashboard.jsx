@@ -17,21 +17,34 @@ import usePetsProfile from '../../../hooks/usePetsProfile'
 
     const [newPet, setNewPet] = useState(false)
     const [petArray, setPetArray] = useState([]);
+    const [addPet, setAddPet] = useState(false);
+    const [render, setRender] = useState(true);
 
     const fetchPets = async () => {
       const data = await getPetsProfiles();
       setPetArray(data);
+      console.log('Pets Data')
+      console.log(data)
   };
     
       useEffect(() => {
+        setAddPet(false)
         fetchPets();
-    }, []); // Initial fetch
+        setRender(true);
+    }, [addPet]); // Initial fetch
+
+
+    useEffect(()=> {
+      console.log('petArray has been updated:', petArray);
+    },[petArray])
 
     const handlePetAdded = () => {
-      fetchPets(); // Re-fetch pets after a new one is added
+      setAddPet(!addPet); // Toggle addPet to trigger fetchPets
       setNewPet(false); // Close the Add Pet Form
+      setRender(false);
   };
 
+  console.log(petArray)
 
   return (
 
@@ -49,9 +62,9 @@ import usePetsProfile from '../../../hooks/usePetsProfile'
            <Box sx={{mt:4}}>
              {newPet && <AddPetForm onPetAdded={handlePetAdded} />}
            </Box>
-           <Box sx={{mt:4}}>
+          { render && <Box sx={{mt:4}}>
               <PetsProfilesGallery pets={petArray}/>
-           </Box>
+           </Box>}
        </Container>
        </Box>
      </Box>
