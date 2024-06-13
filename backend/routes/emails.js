@@ -1,6 +1,6 @@
 // server/routes/email.js
 import express from 'express';
-import sendEmail from '../config/sendgrid'
+import sendEmail from '../config/sendgrid.js'
 const router = express.Router();
 
 router.post('/send', async (req, res) => {
