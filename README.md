@@ -43,6 +43,7 @@ This project is built on the MERN stack, utilizing additional technologies such 
 ## Agile methodology
 
 My project utilizes agile methodology to ensure iterative development, continuous feedback, and rapid adaptation to changes. Duration of project development: four weeks.
+
 ![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/Agile.png)
 
 Sprints example: 
@@ -50,7 +51,8 @@ Sprints example:
 
 ## Database Structure
 I use MongoDB to manage our database, which is structured to handle user profiles, pet profiles, fostering preferences, and addresses efficiently. The user profiles link to pet profiles, fostering preferences, and addresses, facilitating seamless coordination between shelters and fosters.
-![https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnectDB.png]
+
+![](https://github.com/Katterina71/FosterConnect/blob/main/presentation/FosterConnectDB.png)
 
 ## API Endpoints example
 ### **User Management**
