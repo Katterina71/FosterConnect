@@ -50,9 +50,7 @@ import SendEmailForm from '../../email/SendEmailForm';
       setRender(false);
   };
 
-  const handleSendEmails = () => {
-    return <SendEmailForm />
-  }
+
 
   return (
 

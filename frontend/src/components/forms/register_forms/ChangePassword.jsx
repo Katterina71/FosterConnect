@@ -21,7 +21,7 @@ export default function ChangePassword() {
   const passwordConfirmRef = useRef(null)
 
   const navigate =useNavigate()
-  const {currentUser, changeUserPassword} = useAuth()
+  const {changeUserPassword} = useAuth()
 
 
   //Validation and Handle errors

@@ -10,7 +10,8 @@ const footerStyle = {
 
 function Footer() {
   return (
-    <Box sx={footerStyle}>
+    <Box sx={footerStyle}>   
+      <p>Concept and Development by <a href="https://beviatori.com/">Ekaterina Iliushkina</a></p>
       <p>© 2024 All Rights Reserved</p>
       <Link to="/website-policy">Website Policy</Link>
 

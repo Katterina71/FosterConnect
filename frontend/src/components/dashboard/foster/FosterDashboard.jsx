@@ -13,7 +13,7 @@ import HeroImg from '../../mainPage/HeroImg';
     const [petPreferences, setPetPreferences] = useState([]);
     const [showAddPreference, setShowAddPreference] = useState(false);
     const {currentUser} = useAuth()
-    const {updateFormData, submitForm} = useFormContext()
+    const { submitForm} = useFormContext()
     
     
  
